@@ -1,440 +1,511 @@
-﻿.pageHead {
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-    margin-left: 5px;
-    align-items: center;
-    justify-content: center;
-}
-
-.searchBar {
-    width: 500px;
-    height: 50px;
-    font-size: 20px;
-    text-align: left;
-    font-size: 40px;
-    color: grey;
-    border: 0;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.searchBlock {
-    display: flex;
-    width: 550px;
-    height: 55px;
-    outline: solid 1px grey;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.homePageSearch {
-    width: 30px;
-    margin-right: 1px;
-}
-
-.homePageCart {
-    width: 30px;
-    margin-left: 200px;
-}
-
-.homePageUser {
-    width: 30px;
-    margin-left: 10px;
-}
-
-.productContainer {
-    margin-top: 10px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-}
-
-.productInfo {
-    width: 160px;
-    height: 400px;
+﻿/*.memberCenter {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
     align-content: flex-start;
-    flex-direction: column;
-    text-align: center;
-    float: left;
-    word-break: break-all;
-}
+}*/
 
-.productImg {
-    width: 180PX;
-    margin-top: 10px;
-    height: 190px;
-}
-
-.loginBlock {
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    border: solid 1px black;
-    font-size: 30px;
-    color: #26C6DA;
-    flex-direction: column;
-    width: 600px;
-    height: 600px;
-    background-color: white;
-    box-shadow: 5px 5px 10px grey;
-    align-items: stretch;
-    z-index: 2;
-}
-
-.idInputBlock {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.pwdInputBlock {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.inputIdNo {
-    width: 435px;
-    height: 30px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-}
-
-.inputPwd {
-    width: 435px;
-    height: 30px;
-    margin-left: 90px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-}
-
-.shoppingLogo {
-    width: 400px;
-    height: 100px;
-    margin-top: 30px;
-}
-
-.btnLogin {
-    width: 80px;
-    height: 30px;
-    margin-top: 20px;
-    border: solid 1px #26C6DA;
-    background-color: #E0F7FA;
-    font-size: 20px;
-    color: #0277BD;
-}
-
-.btnSignup {
-    width: 80px;
-    height: 30px;
-    margin-top: 20px;
-    border: solid 1px #26C6DA;
-    background-color: #E0F7FA;
-    font-size: 20px;
-    color: #0277BD;
-}
-
-.btnLoginBlockCancel {
-    width: 80px;
-    height: 30px;
-    margin-top: 20px;
-    border: solid 1px #26C6DA;
-    background-color: #E0F7FA;
-    font-size: 20px;
-    color: #0277BD;
-}
-
-.signUpBlock {
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    border: solid 1px black;
-    font-size: 30px;
-    color: #26C6DA;
-    flex-direction: column;
-    width: 600px;
-    height: 600px;
-    background-color: white;
-    box-shadow: 5px 5px 10px grey;
-    align-items: stretch;
-    z-index: 2;
-}
-
-.signUpInputIdNo {
-    margin-top: 10px;
-    width: 300px;
-    height: 30px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-}
-
-.signUpInputTel {
-    margin-top: 10px;
-    width: 300px;
-    height: 30px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-    margin-left: 20px;
-}
-
-.signUpInputPwd {
-    margin-top: 10px;
-    width: 300px;
-    height: 30px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-    margin-left: 60px;
-}
-
-.signUpInputLastName {
-    margin-top: 10px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-}
-
-.labelSignUpFirstName {
-    margin-left: 20px;
-}
-
-.signUpInputFirstName {
-    margin-top: 10px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-}
-
-.nameBox {
-    display: flex;
-    margin-left: 100px;
-}
-
-.firstNameBox, .lastNameBox {
-    display: flex;
-    align-items: flex-end;
-}
-
-.labFemale {
-    margin-left: 35px;
-}
-
-.signUpInputLastName, .signUpInputFirstName {
-    width: 80px;
-}
-
-.signUpInputBirth {
-    width: 300px;
-    height: 30px;
-    margin-top: 10px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-    margin-left: 60px;
-}
-
-.signUpInputMail {
-    width: 300px;
-    height: 30px;
-    margin-top: 10px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-    margin-left: 40px;
-}
-
-.signUpInputAddress {
-    width: 300px;
-    height: 30px;
-    margin-top: 10px;
-    border: none;
-    outline: solid 1px #00BCD4;
-    color: #03A9F4;
-    font-size: 20px;
-    margin-left: 60px;
-}
-
-.btnSignUpBox {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-@media(min-width: 320px) {
-    .pageHead {
-        display: flex;
-        flex-direction: row;
-        margin-top: 10px;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .searchBar {
-        width: 150px;
-    }
-
-    .searchBlock {
-        width: 180px;
-        height: 30px;
-    }
-
-    .homePageCart {
-        margin-left: 20px;
-        width: 30px;
-        height: 30px;
-    }
-
-    .homePageUser {
-        width: 30px;
-        height: 30px;
-    }
-
-    .productContainer {
-        margin-top: 10px;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-    }
-
-    .loginBlock, .signUpBlock {
-        display: flex;
-        width: 280px;
-        height: 500px;
-        align-items: center;
-        font-size: 20px;
-    }
-
-    .inputIdNo {
-        width: 140px;
-    }
-
-    .inputPwd {
-        width: 140px;
-        margin-left: 60px;
-    }
-
-    .shoppingLogo {
-        width: 250px;
-        height: 62.5px;
-        margin-top: 30px;
-    }
-}
-
-@media(min-width: 500px) {
-    .pageHead {
-        display: flex;
-        flex-direction: row;
-        margin-top: 10px;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .searchBar {
-        width: 50%;
-    }
-
-    .searchBlock {
-        width: 250px;
-    }
-
-    .homePageCart {
-        margin-left: 50px;
-        width: 50px;
-        height: 50px;
-    }
-
-    .homePageUser {
-        width: 50px;
-        height: 50px;
-    }
-
-    .loginBlock, .signUpBlock {
-        display: flex;
-        width: 480px;
-        height: 500px;
-        flex-wrap: wrap;
-        align-content: space-around;
-        align-items: center;
-    }
-
-    .inputIdNo {
-        width: 200px;
-    }
-
-    .inputPwd {
-        width: 200px;
-    }
-}
-
-
-@media(min-width: 767px) {
-    .pageHead {
-        display: flex;
-        flex-direction: row;
-        margin-top: 10px;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .searchBar {
-        width: 50%;
-    }
-
-    .searchBlock {
-        width: 50%;
-    }
-
-    .homePageCart {
-        margin-left: 100px;
-    }
-
-    .loginBlock, .signUpBlock {
-        display: flex;
-        width: 650px;
-        height: 500px;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .inputIdNo {
-        width: 435px;
-    }
-
-    .inputPwd {
-        width: 435px;
-    }
-}
-
-#overlay {
+.leaveMemberCenter {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(0,0,0,0.7);
+    width: 30px;
+    height: 30px;
+}
+
+
+.memberCenterTitle {
+    margin-top: 20px;
+}
+
+.memberCenterlogo {
+    margin-top: 130px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
+.memberCenterlogoPic {
+    width: 600px;
+    height: 150px;
+}
+
+.functionContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.setBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setBox label {
+    width: 150px;
+    float: left;
+    text-align: right;
+}
+
+.setBox input {
+    padding: 1px;
+}
+
+.accountSetting {
+    text-align: center;   
+}
+
+.setInputTel {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.setInputPwd {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;    
+}
+
+.memberCenter {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px black;
+    font-size: 30px;
+    color: #26C6DA;
+    width: 600px;
+    height: 700px;
+    background-color: white;
+    box-shadow: 5px 5px 10px grey;
+    z-index: 2;
+    align-content: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnMemberBox {
+    display: flex;
+}
+
+.btnMemberGroup {
+/*    margin-left: 10px;
+*/    width: 100px;
+    height: 30px;
+    margin-top: 20px;
+    border: solid 1px #26C6DA;
+    background-color: #E0F7FA;
+    font-size: 20px;
+    color: #0277BD;
+}
+
+.settingBlock {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;    
+}
+
+.btnModifyPwd {
+    width: 280px;
+    height: 30px;
+    border: solid 1px #26C6DA;
+    background-color: #E0F7FA;
+    font-size: 20px;
+    color: #0277BD;
+    padding: 1px;
+    margin-top: 10px;
+/*    text-align: center;
+*/}
+ 
+.setLastNameBox {
+    display: flex;
+    align-items: center;    
+}
+
+.setFirstNameBox {
+    display: flex;
+    align-items: center;
+}
+
+.setInputLastName {
+    width: 180px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.setInputFirstName {
+    width: 180px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.emailBox {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    flex-direction: row;
+}
+
+.setInputMail {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+
+.setInputAddress {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.setInputBirth {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.setGender {
+    margin-top: 10px;
+}
+
+.btnSettingGroup {
+    display: flex;
+}
+
+.btnsettingConfirm {
+    width: 80px;
+    height: 30px;
+    margin-top: 20px;
+    border: solid 1px #26C6DA;
+    background-color: #E0F7FA;
+    font-size: 20px;
+    color: #0277BD;
+}
+
+.pwdModify {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px black;
+    font-size: 30px;
+    color: #26C6DA;
+    width: 450px;
+    height: 250px;
+    background-color: white;
+    box-shadow: 5px 5px 10px grey;
+    z-index: 3;
+    align-content: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.btnCancelContent {
+    width: 80px;
+    height: 30px;
+    margin-top: 20px;
+    border: solid 1px #26C6DA;
+    background-color: #E0F7FA;
+    font-size: 20px;
+    color: #0277BD;
+    margin-left: 20px;
+}
+
+@media(min-width: 320px) {
+
+    .memberCenter {
+        width: 280px;
+    }
+
+    .btnMemberBox {
+        width: 270px;
+    }
+
+    .btnMemberGroup {
+        margin: 5px;
+        width: 100px;
+        height: 58px;
+        margin-top: 20px;
+        border: solid 1px #26C6DA;
+        background-color: #E0F7FA;
+        font-size: 20px;
+        color: #0277BD;
+    }
+
+    .memberCenterlogoPic {
+        width: 280px;
+        height: 70px;
+    }
+
+    .settingBlock {
+        margin-top: 10px;
+        width: 280px;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .setBox label {
+        width: 100px;
+        float: left;
+        text-align: right;
+        font-size: 20px;
+    }
+
+    .btnModifyPwd {
+        padding: 1px;
+        width: 170px;
+        height: 20px;
+        font-size: 18px;
+    }
+
+    .chkSetGender {
+        font-size: 20px;
+        float: left;
+        text-align: right;
+        width: 100px;
+    }
+
+    .setGenderBox {
+        display: flex;
+        width: 260px;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .setGenderInput {
+        display: flex;
+        width: 155px;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap: nowrap;
+    }
+    
+    .setBox input {
+        padding: 1px;
+        width: 170px;
+        height: 20px;
+        font-size: 18px;
+    }
+
+    .SetGender {
+        padding: 1px;
+        width: 150px;
+        height: 20px;
+        font-size: 18px;
+    }
+
+    .genderLabel {
+        width: 100px;
+        float: left;
+        text-align: right;
+        font-size: 20px;
+    }
+
+    .pwdModify {
+        width: 300px;
+        height: 250px;
+    }
+
+    .pwdModifyBox {
+        display: flex;
+        align-items: center;    
+    }
+
+   .pwdModifyBox label {
+        width: 160px;
+        float: left;
+        text-align: right;
+        font-size: 20px;
+   }
+
+  .pwdModifyBox input {
+        width: 120px;
+        border: none;
+        outline: solid 1px #00BCD4;
+  }
+}
+
+@media(min-width: 500px) {
+
+    .memberCenter {
+        width: 450px;
+    }
+
+    .btnMemberBox {
+        width: 440px;
+    }
+
+    .setBox label {
+        width: 150px;
+        float: left;
+        text-align: right;
+        font-size: 25px;
+    }
+
+    .setBox input {
+        padding: 1px;
+        width: 280px;
+        height: 25px;
+        font-size: 18px;
+    }
+
+    .btnModifyPwd {
+        padding: 1px;
+        width: 280px;
+        height: 25px;
+        font-size: 18px;
+    }
+
+    .setGenderInput {
+        padding: 1px;
+        width: 280px;
+        height: 25px;
+    }
+
+    .genderLabel {
+        width: 100px;
+        float: left;
+        text-align: right;
+        font-size: 17px;
+    }
+
+    .chkSetGender {
+        width: 150px;
+        float: left;
+        text-align: right;
+        font-size: 25px;
+    }
+
+    .setGenderBox {
+        display: flex;
+        width: 432px;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .memberCenterlogoPic {
+        width: 400px;
+        height: 100px;
+    }
+
+    .pwdModify {
+        width: 420px;
+        height: 300px;
+    }
+
+    .pwdModifyBox input {
+        width: 200px;
+        height: 25px;
+        border: none;
+        outline: solid 1px #00BCD4;
+    }
+
+    .pwdModifyBox label {
+        width: 200px;
+        float: left;
+        text-align: right;
+        font-size: 25px;
+    }
+
+    .pwdSetting {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+@media(min-width: 720px) {
+
+    .pwdModifyBox label {
+        width: 250px;
+        float: left;
+        text-align: right;
+        font-size: 30px;
+    }
+
+    .pwdModifyBox input {
+        width: 300px;
+        height: 30px;
+        border: none;
+        outline: solid 1px #00BCD4;
+    }
+
+    .pwdModify {
+        width: 600px;
+        height: 350px;
+    }
+
+    .pwdSetting {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 40px;
+    }
+
+    .btnSettingGroup {
+        margin-top: 20px;
+    }
+
+    .btnsettingConfirm {
+        width: 100px;
+        height: 50px;
+    }
+
+    .btnCancelContent {
+        margin-left: 60px;
+        width: 100px;
+        height: 50px;
+    }
 }

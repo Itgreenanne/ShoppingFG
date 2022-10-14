@@ -3,6 +3,7 @@ function SignUp() {
     var idNo = $('#signUpIdNo').val();
     var tel = $('#signUpInputTel').val();
     var pwd = $('#signUpInputPwd').val();
+    var pwdConfirm = $('#pwdConfirm').val();
     var gender = '';
     $("input[type=radio]:checked").each(function () {
         gender = $(this).val();
@@ -13,13 +14,11 @@ function SignUp() {
     var mail = $('#signUpInputMail').val();
     var address = $('#signUpInputAddress').val();
 
-    if (!idNo || !tel || !pwd || !gender || !lastName ||
-        !firstName || !birth || !mail || !address) {
+    if (!idNo || !tel || !pwd || !pwdConfirm || !gender || !lastName ||
+        !firstName || !birth || !mail) {
         alert('有輸入框未填');
     } else if (idNo.length != 10) {
         alert('身份証字號輸入長度錯誤');
-    } else if (idNo) {
-
     } else if (tel.length != 10) {
         alert('電話號碼輸入長度錯誤');
     } else if (lastName.length > 20) {
@@ -86,5 +85,56 @@ function SignUp() {
                 alert(str);
             }
         })
+    }
+}
+
+//身份証字號驗証函式
+function IdNoVerify(el) {
+    var inputText = el.value.toUpperCase();
+    console.log(inputText);
+    el.value = inputText;
+    var rightForm = /^[A-Z]{1}\d{9}$/;
+    if (!rightForm.test(inputText)) {
+         alert('身份証字號輸入錯誤或空白');
+         el.value = '';
+    }   
+}
+
+//電話是否都是數字並且等於10字元的驗証函式
+function TelVerify(el) {
+    var inputText = el.value;
+    var rightForm = /^\d{10}$/;
+    if (!rightForm.test(inputText)) {
+        alert('聯絡電話輸入錯誤');
+        el.value = '';
+    }
+}
+
+//密碼是否是英文數字混合長度8-20字元的驗証函式
+function PwdVerify(el) {
+    var inputText = el.value;
+    var rightForm = /^(?=.{8,20}$)(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)*$/;
+    if (!rightForm.test(inputText)) {
+        alert('密碼輸入必需英文數字混合且字元長度為8-20');
+        el.value = '';
+    }
+}
+
+
+function PwdConfirmVerify(el) {
+    var inputText = el.value;
+    var rightForm = $('#signUpInputPwd').val();
+    if (inputText != rightForm) {
+        alert('密碼輸入不一致');
+        el.value = '';
+    }
+}
+
+function EmailVerify(el) {
+    var inputText = el.value;
+    var emailSymbol = '@';
+    if (!inputText.includes(emailSymbol)) {
+        alert('輸入不符合email格式');
+        el.value = '';
     }
 }

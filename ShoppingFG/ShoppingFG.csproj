@@ -80,6 +80,7 @@
     <Content Include="css\SignUp.css" />
     <Content Include="js\HomePage.js" />
     <Content Include="js\Login.js" />
+    <Content Include="js\MemberCenter.js" />
     <Content Include="js\SignUp.js" />
     <Content Include="view\HomePage.aspx" />
     <Content Include="Web.config" />
@@ -113,6 +114,8 @@
     <Compile Include="ajax\AjaxMain.aspx.designer.cs">
       <DependentUpon>AjaxMain.aspx</DependentUpon>
     </Compile>
+    <Compile Include="models\InfoForHomePage.cs" />
+    <Compile Include="models\ProductDataArray.cs" />
     <Compile Include="models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="view\HomePage.aspx.cs">

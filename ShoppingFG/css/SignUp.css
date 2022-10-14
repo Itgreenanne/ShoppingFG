@@ -8,15 +8,252 @@
     color: #0277BD;
 }
 
+.signUpBlock {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px black;
+    font-size: 30px;
+    color: #26C6DA;
+    flex-direction: column;
+    width: 600px;
+    height: 600px;
+    background-color: white;
+    box-shadow: 5px 5px 10px grey;
+    align-items: center;
+    z-index: 2;
+}
+
+.regBox {
+    display: flex;
+    align-items: center;
+}
+
+.regBox label {
+    width: 150px;
+    float: left;
+    text-align: right;
+}
+
+.regBox input {
+    padding: 1px;
+}
+
+.chkGender {
+    width: 150px;
+    float: left;
+    text-align: right;
+}
+
+.regGenderBox {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.regGenderInput {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.signUpInputIdNo {
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.signUpInputTel {
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.signUpInputPwd {
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.signUpInputLastName {
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.labelSignUpFirstName {
+}
+
+.signUpInputFirstName {
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.nameBox {
+    display: flex;
+}
+
+.firstNameBox, .lastNameBox {
+    display: flex;
+    align-items: flex-end;
+}
+
+.labFemale {
+}
+
+.signUpInputLastName, .signUpInputFirstName {
+    width: 80px;
+}
+
+.signUpInputBirth {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.signUpInputMail {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.signUpInputAddress {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    outline: solid 1px #00BCD4;
+    color: #03A9F4;
+    font-size: 20px;
+}
+
+.btnSignUpBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+@media(min-width: 320px) {
+    .signUpBlock {
+        display: flex;
+        width: 310px;
+        height: 520px;
+        align-items: center;
+        font-size: 20px;
+    }
+
+    .regBox {
+        display: flex;
+        justify-content: center;
+    }
+
+    .regBox label {
+        width: 120px;
+        float: left;
+        text-align: right;
+        font-size: 20px;
+    }
+
+    .regBox input {
+        padding: 1px;
+        width: 150px;
+        height: 20px;
+        font-size: 18px;
+    }
+
+    .chkGender {
+        width: 120px;
+        float: left;
+        text-align: right;
+    }
+}
 
 @media(min-width: 500px) {
+
+    .shoppingLogo {
+        width: 380px;
+        height: 95px;
+        margin-top: 30px;
+    }
 
     .signUpBlock {
         display: flex;
         width: 480px;
-        height: 400px;
+        height: 550px;
         flex-wrap: wrap;
         align-content: space-around;
+        align-items: center;
+    }
+    .regBox input {
+        padding: 1px;
+        width: 300px;
+        height: 25px;
+        font-size: 18px;
+    }
+}
+
+@media(min-width: 720px) {
+
+    .signUpBlock {
+        display: flex;
+        width: 650px;
+        height: 630px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .regBox input {
+        padding: 1px;
+        width: 350px;
+        height: 30px;
+        font-size: 20px;
+    }
+
+    .regBox label {
+        width: 150px;
+        font-size: 25px;
+    }
+
+    .chkGender {
+        width: 150px;
+        float: left;
+        text-align: right;
+        font-size: 26px;
+    }
+
+    .regGenderInput {
+        display: flex;
+        font-size: 25px;
         align-items: center;
     }
 }

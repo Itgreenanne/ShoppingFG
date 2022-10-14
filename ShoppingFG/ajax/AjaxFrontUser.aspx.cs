@@ -91,6 +91,10 @@ namespace ShoppingFG.ajax
                     ModifyMember();
                     break;
 
+                case "Logout":
+                    Logout();
+                    break;
+
             }
         }
 
@@ -114,7 +118,7 @@ namespace ShoppingFG.ajax
                 || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(gender)
                 || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName)
                 || string.IsNullOrEmpty(birth) || string.IsNullOrEmpty(mail)
-                || string.IsNullOrEmpty(address))
+                )
             {
                 msgValue = MsgType.NullEmptyInput;
                 Response.Write((int)msgValue);
@@ -292,8 +296,7 @@ namespace ShoppingFG.ajax
             //空字串驗証
             if (string.IsNullOrEmpty(tel) || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(gender)
                 || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName)
-                || string.IsNullOrEmpty(birth) || string.IsNullOrEmpty(mail)
-                || string.IsNullOrEmpty(address))
+                || string.IsNullOrEmpty(birth) || string.IsNullOrEmpty(mail))
             {
                 msgValue = MsgType.NullEmptyInput;
                 Response.Write((int)msgValue);
@@ -380,5 +383,16 @@ namespace ShoppingFG.ajax
             }
         }
 
+        /// <summary>
+        /// 會員登出
+        /// </summary>
+        private void Logout()
+        {
+            Session.RemoveAll();
+            HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            HttpContext.Current.Response.Cache.SetNoServerCaching();
+            HttpContext.Current.Response.Cache.SetNoStore();
+         
+        }
     }
 }

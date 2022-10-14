@@ -23,13 +23,13 @@ function LoginVerify() {
                     alert('資料錯誤');
                 } else if (jsonResult.Result == 0) {
                     alert('帳號密碼正確');
-                    $('#loginBlock').hide();
-                    $('#pageHeadBefore').hide();
-                    $('#overlay').hide();
-                    $('#lastNameShown').text(jsonResult['LastName']);
-                    $('#firstNameShown').text(jsonResult['FirstName']);
-                    $('#pageHeadAfter').show();
-
+                    window.location.href = "/view/HomePage.aspx";
+                    //$('#loginBlock').hide();
+                    //$('#pageHeadBefore').hide();
+                    //$('#overlay').hide();
+                    //$('#lastNameShown').text(jsonResult['LastName']);
+                    //$('#firstNameShown').text(jsonResult['FirstName']);
+                    //$('#pageHeadAfter').show();
                 } else if (jsonResult.Result == 1) {
                     alert('請輸入帳號密碼');
                 } else if (jsonResult.Result == 2) {

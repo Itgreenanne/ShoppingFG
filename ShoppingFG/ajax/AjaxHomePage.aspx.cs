@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using ShoppingFG.models;
 
 namespace ShoppingFG.ajax
 {
@@ -66,13 +67,23 @@ namespace ShoppingFG.ajax
             string fnselected = Request.QueryString["fn"];
             switch (fnselected)
             {
-                case "GetAllProduct":
-                    GetAllProduct();
+                case "LoginVerifyAndGetAllProduct":
+                    LoginVerifyAndGetAllProduct();
                     break;
             }
         }
-        private void GetAllProduct()
+        private void LoginVerifyAndGetAllProduct()
         {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
+            InfoForHomePage infoForHomePage = new InfoForHomePage();
+            if (userInfo != null)
+            {
+                infoForHomePage.UserInfo = userInfo;
+            }
+            else
+            {
+               infoForHomePage.SessionIsNull = true;
+            }
             string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("pro_shoppingFG_getAllProduct", conn);
@@ -82,26 +93,27 @@ namespace ShoppingFG.ajax
             try
             {
                 SqlDataReader reader = cmd.ExecuteReader();
-                JArray resultArray = new JArray();
+                List<ProductDataArray> productArray = new List<ProductDataArray>();
 
                 //判斷是否有此職責存在
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        JObject productInfo = new JObject();
-                        productInfo.Add("ProductId", Convert.ToInt16(reader["f_id"]));
-                        productInfo.Add("ProductPic", reader["f_picturePath"].ToString());
-                        productInfo.Add("ProductTitle", reader["f_title"].ToString());
-                        productInfo.Add("ProductUnitPrice", Convert.ToInt16(reader["f_unitprice"]));
-                        productInfo.Add("ProductQtn", Convert.ToInt16(reader["f_quantity"]));
-                        productInfo.Add("ProductTypeId", Convert.ToInt16(reader["f_typeId"]));
-                        productInfo.Add("ProductDetail", reader["f_detail"].ToString());
-                        productInfo.Add("ProductTypeName", reader["f_name"].ToString());
-                        resultArray.Add(productInfo);
+                        ProductDataArray productInfo = new ProductDataArray();
+                        productInfo.ProductId = Convert.ToInt16(reader["f_id"]);
+                        productInfo.ProductPic = reader["f_picturePath"].ToString();
+                        productInfo.ProductTitle = reader["f_title"].ToString();
+                        productInfo.ProductUnitPrice = Convert.ToInt16(reader["f_unitprice"]);
+                        productInfo.ProductQtn = Convert.ToInt16(reader["f_quantity"]);
+                        productInfo.ProductTypeId = Convert.ToInt16(reader["f_typeId"]);
+                        productInfo.ProductDetail = reader["f_detail"].ToString();
+                        productInfo.ProductTypeName = reader["f_name"].ToString();
+                        productArray.Add(productInfo);
                     }
                 }
-                Response.Write(resultArray);
+                infoForHomePage.ProductInfo = productArray;               
+                Response.Write(JsonConvert.SerializeObject(infoForHomePage));
             }
             catch (Exception ex)
             {

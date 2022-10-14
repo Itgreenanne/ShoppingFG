@@ -1,12 +1,23 @@
 ﻿$(document).ready(function () {
     BlockClear();
     $.ajax({
-        url: '/ajax/AjaxHomePage.aspx?fn=GetAllProduct',
+        url: '/ajax/AjaxHomePage.aspx?fn=LoginVerifyAndGetAllProduct',
         type: 'POST',
         success: function (data) {
             if (data) {
                 var jsonResult = JSON.parse(data);
-                PrintProductDiv(jsonResult);
+                console.log(jsonResult);
+                sessionBool = jsonResult['SessionIsNull'];
+                memberInfo = jsonResult.UserInfo;
+
+                if (jsonResult['SessionIsNull'] == true) {
+                    PrintProductDiv(jsonResult.ProductInfo);
+                } else {
+                    console.log('HP data=', jsonResult);
+                    $('#lastNameShown').text(jsonResult.UserInfo.LastName);
+                    $('#firstNameShown').text(jsonResult.UserInfo.FirstName);
+                    PrintProductDiv(jsonResult.ProductInfo);
+                }                    
             } else {
                 alert('資料錯誤');
             }
@@ -21,15 +32,18 @@
 
 })
 
+var sessionBool;
 var productInfoGlobal;
 var memberInfo;
 
 function BlockClear() {
     $('#overlay').hide();
+    $('#overlay1').hide();
     $('#loginBlock').hide();
     $('#signUpBlock').hide();
     $('#pageHeadAfter').hide();
     $('#memberCenter').hide();
+    $('#pwdModify').hide();
 }
 
 //顯示產品
@@ -73,169 +87,33 @@ function LeaveLoginBlock() {
     $('#loginBlock').hide();
 }
 
+//開啟註冊頁面
 function OpenSignUpBlock() {
     $('#loginBlock').hide();
     $('#signUpBlock').show();
-
 }
-
 
 //開啟會員中心視窗
 function OpenMemberCenterBlock() {
     $('#overlay').show();
     $('#memberCenter').show();
     $('#functionContent').hide();
+    $('#pwdModify').hide();
 }
 
 //離開會員中心視窗
-function CancelContent() {
-    $('#overlay').hide();
-    $('#memberCenter').hide();
+function CancelContent() {    
+    $('#functionContent').hide();
+    $('#memberCenterlogo').show();
+    ResetAll();
 }
 
 //離開註冊頁面
-function LeaveSingUpBlock() {
-    $('#overlay').hide();
+function LeaveSignUpBlock() {
+    ResetAll();
+    $('#overlay').hide();    
     $('#signUpBlock').hide();
-}
-
-//開啟會員帳號設定視窗
-function OpenSettingBlock() {
-    console.log('memberid=', memberInfo.MemberId);
-    $('#memberCenterlogo').hide();
-    $('#functionContent').show();
-    $('#settingBlock').show();
-    $.ajax({
-        url: '/ajax/AjaxFrontUser.aspx?fn=GetSearchMemberById',
-        type: 'POST',
-        data: {
-            getMemberId: memberInfo.MemberId
-        },
-        success: function (data) {
-            if (data) {
-                var jsonResult = JSON.parse(data);
-                console.log(jsonResult);
-                //顯示跟選擇列資料一樣的資料                
-                $('#setInputTel').val(jsonResult.phone);
-                $('#setInputPwd').val('************************************');
-                $('#setLastName').val(jsonResult.lastname);
-                $('#setFirstName').val(jsonResult.firstname);
-                $('#setInputMail').val(jsonResult.mail);
-                $('#setInputAddress').val(jsonResult.address);
-                $('#setInputBirth').val(jsonResult.birth);
-
-                if (jsonResult.gender == 1) {
-                    $("#chkSetMale").prop('checked', true);
-                } else if (jsonResult.gender == 2) {
-                    $("#chkSetFemale").prop('checked', true);
-                } else {
-                    $("#chkSetOther").prop('checked', true);
-                }
-
-                $('#MemberLevelNo').text(jsonResult.level);
-                $('#MemberPoints').text(jsonResult.points);
-                $('#settingBlock').show();
-            } else {
-                alert('資料錯誤');
-            }
-        },
-        error: function (err) {
-            str = JSON.stringify(err, null, 2);
-            console.log('err:');
-            console.log(err);
-            alert(str);
-        }
-    })
-}
-
-function SettingConfirm() {
-    var tel = $('#setInputTel').val();
-    var pwd = $('#setInputPwd').val();
-    var lastname = $('#setLastName').val();
-    var firstname = $('#setFirstName').val();
-    var mail = $('#setInputMail').val();
-    var address = $('#setInputAddress').val();
-    var birth = $('#setInputBirth').val();
-    var gender = '';
-    $("input[type=radio]:checked").each(function () {
-        gender = $(this).val();
-    });
-    var level = $('#MemberLevelNo').text();
-    var points = $('#MemberPoints').text();
-    console.log(birth);
-    if (!tel || !pwd || !lastname || !firstname || !mail ||
-        !address || !birth || !gender) {
-        alert('有輸入框未填');    
-    } else if (tel.length != 10) {
-        alert('電話號碼輸入長度錯誤');
-    } else if (lastname.length > 20) {
-        alert('姓輸入超過20字元');
-    } else if (firstname.length > 20) {
-        alert('名輸入超過20字元');
-    } else if (mail.length > 40) {
-        alert('email輸入超過40字元');
-    } else if (pwd.length < 8 && pwd.length > 20) {
-        alert('密碼輸入要8-20字元');
-    } else {
-        $.ajax({
-            url: '/ajax/AjaxFrontUser.aspx?fn=ModifyMember',
-            type: 'POST',
-            data: {
-                getId: memberInfo.MemberId,
-                getTel: tel,
-                getPwd: pwd,
-                getGender: gender,
-                getLastName: lastname,
-                getFirstname: firstname,
-                getBirth: birth,
-                getMail: mail,
-                getAddress: address,
-                getLevel: level,
-                getPoints: points
-            },
-            success: function (data) {
-                console.log(data);
-                if (data) {
-                    switch (data) {
-                        case '0':
-                            alert("修改會員資料成功");
-                            $('#settingBlock').hide();
-                            $('#functionContent').hide();
-                            $('#memberCenterlogo').hide();
-                            break;
-                        case '1':
-                            alert('已有此人員帳號');
-                            break;
-                        case '3':
-                            alert('身份証字號輸入長度錯誤');
-                            break;
-                        case '4':
-                            alert('電話號碼輸入長度錯誤');
-                            break;
-                        case '5':
-                            alert('密碼長度不對');
-                            break;
-                        case '9':
-                            alert('姓太長');
-                            break;
-                        case '10':
-                            alert('名太長');
-                            break;
-                        case '11':
-                            alert('email長度太長');
-                    }
-                } else {
-                    alert('資料錯誤');
-                }
-            },
-            error: function (err) {
-                str = JSON.stringify(err, null, 2);
-                console.log('err:');
-                console.log(err);
-                alert(str);
-            }
-        })
-    }
+    $('#loginBlock').show();
 }
 
 
@@ -245,4 +123,22 @@ function NoSpaceKey(inputName) {
     var inputText = $(id).val();
     inputText = inputText.replace(/\s/g, '');
     $(id).val(inputText);
-}   
+}
+
+//清除所有輸入框
+function ResetAll() {
+    $("input[type='text']").val('');
+    $("input[type='password']").val('');
+    $('input[type=radio]').prop('checked', 0);
+    $("input[type='date']").val('');
+    $('textarea').val('');
+}
+
+//判斷點擊會員圖示是會開啟登入視窗還是會員中心
+function LoginOrSignUp() {
+    if (sessionBool) {
+        OpenLoginBlock();
+    } else {
+        OpenMemberCenterBlock();
+    }
+}

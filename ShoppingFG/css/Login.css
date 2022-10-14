@@ -10,14 +10,14 @@
     color: #26C6DA;
     flex-direction: column;
     width: 600px;
-    height: 600px;
+    height: 400px;
     background-color: white;
     box-shadow: 5px 5px 10px grey;
     align-items: stretch;
     z-index: 2;
 }
 
-.idInputBlock {
+.InputBlock {
     display: flex;
     align-items: center;
     margin-top: 20px;
@@ -41,7 +41,6 @@
 .inputPwd {
     width: 435px;
     height: 30px;
-    margin-left: 90px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -58,8 +57,57 @@
     color: #0277BD;
 }
 
+
+.btnLoginBlockCancel {
+    width: 80px;
+    height: 30px;
+    margin-top: 20px;
+    border: solid 1px #26C6DA;
+    background-color: #E0F7FA;
+    font-size: 20px;
+    color: #0277BD;
+}
+
+@media(min-width: 320px) {
+    .loginBlock {
+        display: flex;
+        width: 280px;
+        height: 400px;
+        align-items: center;
+        font-size: 20px;
+    }
+
+    .inputIdNo {
+        width: 140px;
+    }
+
+    .inputPwd {
+        width: 140px;
+    }
+
+    .shoppingLogo {
+        width: 250px;
+        height: 62.5px;
+        margin-top: 30px;
+    }
+
+    .inputBox {
+        margin-top: 5px;
+    }
+    .inputBox label {
+        width: 120px;
+        float: left;
+        text-align: right;
+    }
+
+    .inputBox input {
+        width: 150px;
+    }
+
+}
+
 @media(min-width: 500px) {
-     
+
     .loginBlock {
         display: flex;
         width: 480px;
@@ -67,5 +115,47 @@
         flex-wrap: wrap;
         align-content: space-around;
         align-items: center;
+    }
+
+    .inputBox {
+        margin-top: 5px;
+    }
+
+    .inputBox label {
+            width: 120px;
+            float: left;
+            text-align: right;
+    }
+
+    .inputBox input {
+            width: 280px;
+    }
+}
+
+@media(min-width: 720px) {
+    
+    .loginBlock {
+        display: flex;
+        width: 650px;
+        height: 400px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+
+    .inputBox {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;    
+    }
+
+    .inputBox label {            
+        width: 220px;
+        float: left;
+        text-align: right;
+        font-size: 30px;
+    }
+    .inputBox input {
+        width: 350px;
     }
 }

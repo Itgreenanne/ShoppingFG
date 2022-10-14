@@ -92,8 +92,13 @@ namespace ShoppingFG.ajax
                         {
                             userInfo.Result = Convert.ToInt16(reader["result"]);
                             userInfo.MemberId = Convert.ToInt16(reader["f_id"]);
+                            userInfo.IdNo = reader["f_idNumber"].ToString();
                             userInfo.FirstName = reader["f_firstname"].ToString();
                             userInfo.LastName = reader["f_lastname"].ToString();
+                            userInfo.Email = reader["f_mail"].ToString();
+                            userInfo.Phone = reader["f_phone"].ToString();
+                            userInfo.Points = Convert.ToInt16(reader["f_points"]);
+                            userInfo.Level = Convert.ToInt16(reader["f_level"]);
                         }
                         Session["userInfo"] = userInfo;
                     }
