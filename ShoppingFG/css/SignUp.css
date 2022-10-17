@@ -11,7 +11,7 @@
 .signUpBlock {
     display: flex;
     justify-content: flex-start;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     margin-right: -50%;
@@ -63,7 +63,6 @@
 }
 
 .signUpInputIdNo {
-    margin-top: 10px;
     width: 300px;
     height: 30px;
     border: none;
@@ -73,7 +72,6 @@
 }
 
 .signUpInputTel {
-    margin-top: 10px;
     width: 300px;
     height: 30px;
     border: none;
@@ -83,7 +81,6 @@
 }
 
 .signUpInputPwd {
-    margin-top: 10px;
     width: 300px;
     height: 30px;
     border: none;
@@ -93,18 +90,13 @@
 }
 
 .signUpInputLastName {
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
     font-size: 20px;
 }
 
-.labelSignUpFirstName {
-}
-
 .signUpInputFirstName {
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -130,7 +122,6 @@
 .signUpInputBirth {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -140,7 +131,6 @@
 .signUpInputMail {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -150,7 +140,6 @@
 .signUpInputAddress {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -255,5 +244,12 @@
         display: flex;
         font-size: 25px;
         align-items: center;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .signUpBlock {
+        position: absolute;
+        top: 350px;
     }
 }

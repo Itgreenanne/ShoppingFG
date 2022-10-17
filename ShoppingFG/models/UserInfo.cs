@@ -16,6 +16,10 @@ namespace ShoppingFG.models
         /// </summary>
         public string IdNo { get; set; }
         /// <summary>
+        /// 會員密碼
+        /// </summary>
+        public string Pwd { get; set; }
+        /// <summary>
         /// 會員的名
         /// </summary>
         public string FirstName { get; set; }

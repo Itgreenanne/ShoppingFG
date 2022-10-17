@@ -1,6 +1,6 @@
 ﻿.loginBlock {
     display: flex;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     margin-right: -50%;
@@ -14,7 +14,8 @@
     background-color: white;
     box-shadow: 5px 5px 10px grey;
     align-items: stretch;
-    z-index: 2;
+    z-index: 2;  
+    overflow-y: scroll;
 }
 
 .InputBlock {
@@ -77,14 +78,6 @@
         font-size: 20px;
     }
 
-    .inputIdNo {
-        width: 140px;
-    }
-
-    .inputPwd {
-        width: 140px;
-    }
-
     .shoppingLogo {
         width: 250px;
         height: 62.5px;
@@ -95,13 +88,13 @@
         margin-top: 5px;
     }
     .inputBox label {
-        width: 120px;
+        width: 90px;
         float: left;
         text-align: right;
     }
 
     .inputBox input {
-        width: 150px;
+        width: 180px;
     }
 
 }

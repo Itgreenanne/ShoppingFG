@@ -14,8 +14,8 @@
                     PrintProductDiv(jsonResult.ProductInfo);
                 } else {
                     console.log('HP data=', jsonResult);
-                    $('#lastNameShown').text(jsonResult.UserInfo.LastName);
-                    $('#firstNameShown').text(jsonResult.UserInfo.FirstName);
+                    $('#lastNameShown').text((jsonResult.UserInfo.LastName).slice(0, 3) + '..');
+                    $('#firstNameShown').text((jsonResult.UserInfo.FirstName).slice(0, 3) + '..');
                     PrintProductDiv(jsonResult.ProductInfo);
                 }                    
             } else {
@@ -31,6 +31,16 @@
     });
 
 })
+
+
+//window.addEventListener("orientationchange", toOrientation);
+
+//function toOrientation() {
+    
+//    if (window.orientation == 90 || window.orientation == -90) {       
+//        $('#memberCenter').style.height = '650px';
+//    } 
+//}
 
 var sessionBool;
 var productInfoGlobal;
@@ -56,14 +66,14 @@ function PrintProductDiv(jsonResult) {
 
     for (var i = 0; i < jsonResult.length; i++) {
         if (productTitleShown[i].ProductTitle.length > 7) {            
-            productTitleShown[i].ProductTitle = productTitleShown[i].ProductTitle.slice(0, 6)+'...';
+            productTitleShown[i].ProductTitle = productTitleShown[i].ProductTitle.slice(0, 8)+'...';
         }
         productInfo +=
             '<div class="productInfo">' +
             '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg"></div>' +
-            '<div>' + '產品名稱：' + productTitleShown[i].ProductTitle + '</div>' +
-            '<div>' + '單價：' + jsonResult[i].ProductUnitPrice + '</div>' +
-            '<div>' + '數量：'+ jsonResult[i].ProductQtn + '</div>' +          
+            '<div>' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
+            '<div>' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
+            '<div>' + '件：'+ jsonResult[i].ProductQtn + '</div>' +          
             //'<td> <button onclick="DeleteDuty(\'' + jsonResult[i].dutyId + '\')">' +
             //'刪除' + '</button>' + ' ' +
             //'<button onclick="ModifyDutyReadFront(\'' + jsonResult[i].dutyId + '\')">' + '修改(前)' + '</button>' + ' ' +
@@ -78,24 +88,31 @@ function PrintProductDiv(jsonResult) {
 //開啟登入頁面
 function OpenLoginBlock() {
     $('#overlay').show();
-    $('#loginBlock').show();
+    ResetAll();
+   //$('.loginBlock').css('overflow', 'scroll')
+    $('#loginBlock').show()
+        
 }
 
 //關閉登入div
 function LeaveLoginBlock() {
     $('#overlay').hide();
+    //$('.no-scroll').css('overflow', 'visible');
     $('#loginBlock').hide();
 }
 
 //開啟註冊頁面
 function OpenSignUpBlock() {
     $('#loginBlock').hide();
+    //$('.no-scroll').css('overflow', 'hidden');
+    //$('.signUpBlock').css('overflow', 'visible');
     $('#signUpBlock').show();
 }
 
 //開啟會員中心視窗
 function OpenMemberCenterBlock() {
     $('#overlay').show();
+    //$('.no-scroll').css('overflow', 'auto');
     $('#memberCenter').show();
     $('#functionContent').hide();
     $('#pwdModify').hide();
@@ -111,7 +128,7 @@ function CancelContent() {
 //離開註冊頁面
 function LeaveSignUpBlock() {
     ResetAll();
-    $('#overlay').hide();    
+    $('#overlay').show();    
     $('#signUpBlock').hide();
     $('#loginBlock').show();
 }

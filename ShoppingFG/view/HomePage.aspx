@@ -20,7 +20,7 @@
     <script type="text/javascript" src="/js/SignUp.js"> </script>
     <script type="text/javascript" src="/js/MemberCenter.js"> </script>
 
-<body>
+<body class="no-scroll">
     <div id="overlay"></div>
     <div id="overlay1"></div>
     <div id="content">
@@ -45,8 +45,8 @@
              <img src="/images/logo.png" class="shoppingLogo"/>
            <div class="inputBlock">
              <div class="inputBox">
-                 <label for="inputIdNo">身份証字號： </label>
-                 <input type="text" class="inputIdNo" id="inputIdNo" autocomplete="off" onchange="IdNoVerify(this)" oninput="NoSpaceKey('inputIdNo')" value=""/><br/>
+                 <label for="inputIdNo">ID： </label>
+                 <input type="text" class="inputIdNo" id="inputIdNo" autocomplete="off" placeholder="請輸入身份証字號"onchange="IdNoVerify(this)" oninput="NoSpaceKey('inputIdNo')" value=""/><br/>
              </div>
              <div class="inputBox">
                  <label for="inputPwd">密碼： </label>
@@ -63,8 +63,8 @@
             <img src="/images/logo.png" class="shoppingLogo"/>
             <div class="regIdInputBox">
                <div class="regBox">
-                <label for="signUpIdNo" class="labelSignUpIdNo">身份証字號： </label>
-                <input type="text" class="signUpInputIdNo" id="signUpIdNo" autocomplete="off" onchange="IdNoVerify(this)" oninput="NoSpaceKey('signUpIdNo')" value=""/><br/>
+                <label for="signUpIdNo" class="labelSignUpIdNo">ID： </label>
+                <input type="text" class="signUpInputIdNo" id="signUpIdNo" autocomplete="off" onchange="IdNoVerify(this)" oninput="NoSpaceKey('signUpIdNo')" placeholder="請輸入身份証字號"value=""/><br/>
                </div>
                <div class="regBox">
                 <label for="signUpInputTel" class="labelSignUpTelNo">聯絡電話： </label>
@@ -100,7 +100,7 @@
                <div class="regBox">
                    <label for="signUpBirth" class="labelSignUpBirth">生日： </label>
                    <input type="date" class="signUpInputBirth" id="signUpInputBirth"/><br/>
-                </div>
+               </div>
                <div class="regBox">
                    <label for="signUpMail" class="labelSignUpMail">E-Mail： </label>
                    <input type="text" class="signUpInputMail" id="signUpInputMail" autocomplete="off" onchange="EmailVerify(this)" oninput="NoSpaceKey('signUpInputMail')" value=""/><br/>
@@ -136,7 +136,7 @@
             <div class="settingBlock" id="settingBlock">
              <div class="setBox">
                 <label for="setInputTel" class="labelsetTelNo">聯絡電話： </label>
-                <input type="text" class="setInputTel" id="setInputTel" autocomplete="off" onchange="TelVerify(this)" oninput="NoSpaceKey('setInputTel')" value=""/><br/>
+                <input type="text" class="setInputTel" id="setInputTel" autocomplete="off" onchange="MemberCenterTelVerify(this)" oninput="NoSpaceKey('setInputTel')" value=""/><br/>
              </div>
              <div class="setBox">
                 <label for="setInputPwd" class="labelSetPwd">密碼： </label>
@@ -156,7 +156,7 @@
             </div>
             <div class="setBox">
                 <label for="setInputMail" class="labelSetMail">E-Mail： </label>
-                <input type="text" class="setInputMail" id="setInputMail" autocomplete="off" oninput="NoSpaceKey('setInputMail')" value=""/><br/>
+                <input type="text" class="setInputMail" id="setInputMail" autocomplete="off"  onchange="MemberCenterEmailVerify(this)" oninput="NoSpaceKey('setInputMail')" value=""/><br/>
             </div>
             <div class="setBox">
                 <label for="setInputAddress" class="labelSetAddress">住址： </label>
@@ -223,7 +223,6 @@
                 </div>
             </div>
 
-     </div>
-         
+     </div>       
 </body>
 </html>

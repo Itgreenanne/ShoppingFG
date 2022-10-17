@@ -1,4 +1,4 @@
-﻿var globalMemberPwd;
+﻿var globalMember;
 
 //開啟會員帳號設定視窗
 function OpenSettingBlock() {
@@ -15,10 +15,10 @@ function OpenSettingBlock() {
             if (data) {
                 var jsonResult = JSON.parse(data);
                 console.log(jsonResult);
-                //顯示跟選擇列資料一樣的資料                
+                //顯示跟選擇列資料一樣的資料
+                globalMember = jsonResult;
                 $('#setInputTel').val(jsonResult.phone);
                 $('#setInputPwd').val('*******************');
-                globalMemberPwd = jsonResult.pwd;
                 $('#setLastName').val(jsonResult.lastname);
                 $('#setFirstName').val(jsonResult.firstname);
                 $('#setInputMail').val(jsonResult.mail);
@@ -51,7 +51,7 @@ function OpenSettingBlock() {
 
 function SettingConfirm() {
     var tel = $('#setInputTel').val();
-    var pwd = globalMemberPwd;
+    var pwd = globalMember.pwd;
     console.log('pwd=', pwd);
     var lastname = $('#setLastName').val();
     var firstname = $('#setFirstName').val();
@@ -156,6 +156,9 @@ function leaveMemberCenter() {
 
 function ModifyPwdBlock() {
     $('#overlay1').show();
+    $('#inputOldPwd').val('');
+    $('#inputNewPwd').val('');
+    $('#newPwdConfirm').val('');
     $('#pwdModify').show();
 }
 
@@ -164,30 +167,47 @@ function SetModifiedPwd() {
     var newPwd = $('#inputNewPwd').val();
     var newPwdConfirm = $('#newPwdConfirm').val();
 
-    console.log('before globalMemberPwd', globalMemberPwd);
+    console.log('before globalMemberPwd', globalMember.pwd);
 
-    if (oldPwd == globalMemberPwd && newPwd == newPwdConfirm) {
+    if (oldPwd == globalMember.pwd && newPwd == newPwdConfirm) {
         alert('修改密碼成功');
-        globalMemberPwd = newPwdConfirm;
+        globalMember.pwd = newPwdConfirm;
         $('#pwdModify').hide();
         $('#overlay1').hide();
-    } else if (oldPwd != globalMemberPwd) {
+    } else if (oldPwd != globalMember.pwd) {
         alert('舊密碼輸入錯誤');
         $('#inputOldPwd').val('');
         $('#inputNewPwd').val('');
         $('#newPwdConfirm').val('');
     } else if (newPwd != newPwdConfirm) {
         alert('新密碼輸入不一致');
-        $('#inputOldPwd').val('');
+        //$('#inputOldPwd').val('');
         $('#inputNewPwd').val('');
         $('#newPwdConfirm').val('');
     }
     console.log(oldPwd);
-    console.log('after globalMemberPwd', globalMemberPwd);  
-
+    console.log('after globalMemberPwd', globalMember.pwd);
 }
 
 function LeavePwdBlock() {
     $('#pwdModify').hide();
     $('#overlay1').hide();
+}
+
+function MemberCenterEmailVerify(el) {
+    var inputText = el.value;
+    var emailSymbol = '@';
+    if (!inputText.includes(emailSymbol)) {
+        alert('輸入不符合email格式');
+        $('#setInputMail').val(globalMember.mail);
+    }
+}
+
+function MemberCenterTelVerify(el) {
+    var inputText = el.value;
+    var rightForm = /^\d{10}$/;
+    if (!rightForm.test(inputText)) {
+        alert('聯絡電話輸入錯誤');
+        $('#setInputTel').val(globalMember.phone);
+    }
 }

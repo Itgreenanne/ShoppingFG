@@ -1,6 +1,6 @@
 ﻿
 //登入驗証功能
-function LoginVerify() {
+function LoginVerify() {  
     var loginIdInput = $('#inputIdNo').val();
     var loginPwdInput = $('#inputPwd').val();
 

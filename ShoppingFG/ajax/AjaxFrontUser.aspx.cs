@@ -9,10 +9,12 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using ShoppingFG.models;
+using ShoppingFG.appCode;
 
 namespace ShoppingFG.ajax
 {
-    public partial class AjaxFrontUser : System.Web.UI.Page
+    public partial class AjaxFrontUser : IsPwdChangeVerify
     {
         public enum MsgType
         {

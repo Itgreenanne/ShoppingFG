@@ -9,10 +9,12 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using ShoppingFG.models;
 using Newtonsoft.Json;
+using ShoppingFG.appCode;
+
 
 namespace ShoppingFG.ajax
 {
-    public partial class AjaxLogin : System.Web.UI.Page
+    public partial class AjaxLogin : IsPwdChangeVerify
     {
         public enum MsgType
         {
@@ -93,6 +95,7 @@ namespace ShoppingFG.ajax
                             userInfo.Result = Convert.ToInt16(reader["result"]);
                             userInfo.MemberId = Convert.ToInt16(reader["f_id"]);
                             userInfo.IdNo = reader["f_idNumber"].ToString();
+                            userInfo.Pwd = reader["f_pwd"].ToString();
                             userInfo.FirstName = reader["f_firstname"].ToString();
                             userInfo.LastName = reader["f_lastname"].ToString();
                             userInfo.Email = reader["f_mail"].ToString();

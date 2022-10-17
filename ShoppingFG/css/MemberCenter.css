@@ -45,6 +45,7 @@
 }
 
 .setBox {
+    height: 34px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,7 +68,6 @@
 .setInputTel {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -77,7 +77,6 @@
 .setInputPwd {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -86,7 +85,7 @@
 
 .memberCenter {
     display: flex;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     margin-right: -50%;
@@ -95,7 +94,7 @@
     font-size: 30px;
     color: #26C6DA;
     width: 600px;
-    height: 700px;
+    height: 650px;
     background-color: white;
     box-shadow: 5px 5px 10px grey;
     z-index: 2;
@@ -138,9 +137,7 @@
     font-size: 20px;
     color: #0277BD;
     padding: 1px;
-    margin-top: 10px;
-/*    text-align: center;
-*/}
+}
  
 .setLastNameBox {
     display: flex;
@@ -155,7 +152,6 @@
 .setInputLastName {
     width: 180px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -165,7 +161,6 @@
 .setInputFirstName {
     width: 180px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -182,7 +177,6 @@
 .setInputMail {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -193,7 +187,6 @@
 .setInputAddress {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -203,7 +196,6 @@
 .setInputBirth {
     width: 300px;
     height: 30px;
-    margin-top: 10px;
     border: none;
     outline: solid 1px #00BCD4;
     color: #03A9F4;
@@ -211,8 +203,8 @@
 }
 
 .setGender {
-    margin-top: 10px;
-}
+/*    margin-top: 10px;
+*/}
 
 .btnSettingGroup {
     display: flex;
@@ -468,6 +460,9 @@
 }
 
 @media(min-width: 720px) {
+    .memberCenter {
+        height: 750px;
+    }
 
     .pwdModifyBox label {
         width: 250px;
@@ -507,5 +502,15 @@
         margin-left: 60px;
         width: 100px;
         height: 50px;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .memberCenter {
+        position: absolute;
+        top: 400px;        
+    }
+    .loginBlock {
+        position: absolute;
     }
 }

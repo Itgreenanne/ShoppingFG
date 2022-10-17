@@ -51,7 +51,7 @@ function SignUp() {
                         case '0':
                             alert("新增人員成功");
                             $('#signUpBlock').hide();
-                            $('#loginBlock').show();
+                            $('#overlay').hide();
                             break;
                         case '1':
                             alert('已有此人員帳號');
