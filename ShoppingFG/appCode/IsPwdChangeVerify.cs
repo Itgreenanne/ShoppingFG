@@ -33,6 +33,7 @@ namespace ShoppingFG.appCode
             if (Session["userInfo"] == null)
             {
                 JObject msgReturn = new JObject();
+                msgReturn.Add("SessionIsNull", true);
                 msgReturn.Add("result", Convert.ToInt16(ResultMsg.SessionIsNull));
                 Response.Write(msgReturn);
                 Response.End();
@@ -49,7 +50,7 @@ namespace ShoppingFG.appCode
             {
                 cmd.Parameters.Add(new SqlParameter("@memberId", userInfo.MemberId));
                 SqlDataReader reader = cmd.ExecuteReader();
-                string memberPwdCompare;
+                string memberPwdCompare = "";
 
                 if (reader.HasRows)
                 {
@@ -60,13 +61,15 @@ namespace ShoppingFG.appCode
                     }
                 }
 
-                //if (memberPwdCompare != userInfo.Pwd)
-                //{
-                //    JObject msgReturn = new JObject();
-                //    msgReturn.Add("result", Convert.ToInt16(ResultMsg.PwdIsChanged));
-                //    Response.Write(msgReturn);
-                //    Response.End();
-                //}
+                if (memberPwdCompare != userInfo.Pwd)
+                {
+                    Session.RemoveAll();
+                    JObject msgReturn = new JObject();
+                    msgReturn.Add("SessionIsNull", true);
+                    msgReturn.Add("result", Convert.ToInt16(ResultMsg.PwdIsChanged));
+                    Response.Write(msgReturn);
+                    Response.End();
+                }
             }
             catch (Exception ex)
             {

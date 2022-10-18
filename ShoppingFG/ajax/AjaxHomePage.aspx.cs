@@ -10,13 +10,11 @@ using System.Web.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ShoppingFG.models;
-using ShoppingFG.appCode;
-
 
 
 namespace ShoppingFG.ajax
 {
-    public partial class AjaxHomePage : IsPwdChangeVerify
+    public partial class AjaxHomePage : System.Web.UI.Page
     { 
 
         public enum ProductMsg

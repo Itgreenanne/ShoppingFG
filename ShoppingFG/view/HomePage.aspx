@@ -46,7 +46,7 @@
            <div class="inputBlock">
              <div class="inputBox">
                  <label for="inputIdNo">ID： </label>
-                 <input type="text" class="inputIdNo" id="inputIdNo" autocomplete="off" placeholder="請輸入身份証字號"onchange="IdNoVerify(this)" oninput="NoSpaceKey('inputIdNo')" value=""/><br/>
+                 <input type="text" class="inputIdNo" id="inputIdNo" autocomplete="off" placeholder="請輸入身份証字號" oninput="NoSpaceKey('inputIdNo')" value=""/><br/>
              </div>
              <div class="inputBox">
                  <label for="inputPwd">密碼： </label>

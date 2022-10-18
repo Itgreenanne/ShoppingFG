@@ -19,9 +19,9 @@ namespace ShoppingFG.ajax
         public enum MsgType
         {
             /// <summary>
-            /// 新增人員成功
+            /// 修改人員成功
             /// </summary>
-            WellAdded,
+            WellModified,
             /// <summary>
             /// 此人員已存在
             /// </summary>
@@ -81,10 +81,6 @@ namespace ShoppingFG.ajax
             string fnSelected = Request.QueryString["fn"];
             switch (fnSelected)
             {
-                case "AddMember":
-                    AddMember();
-                    break;
-
                 case "GetSearchMemberById":
                     GetSearchMemberById();
                     break;
@@ -98,116 +94,7 @@ namespace ShoppingFG.ajax
                     break;
 
             }
-        }
-
-        /// <summary>
-        /// 新增會員
-        /// </summary>
-        private void AddMember() {            
-            MsgType msgValue = MsgType.WrongConnection;
-            string idNo = Request.Form["getidNo"];
-            string tel = Request.Form["getTel"];
-            string pwd = Request.Form["getPwd"];
-            string gender = Request.Form["getGender"];
-            string lastName = Request.Form["getLastName"];
-            string firstName = Request.Form["getFirstname"];
-            string birth = Request.Form["getBirth"];
-            string mail = Request.Form["getMail"];
-            string address = Request.Form["getAddress"];
-            
-            //空字串驗証
-            if (string.IsNullOrEmpty(idNo) || string.IsNullOrEmpty(tel)
-                || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(gender)
-                || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName)
-                || string.IsNullOrEmpty(birth) || string.IsNullOrEmpty(mail)
-                )
-            {
-                msgValue = MsgType.NullEmptyInput;
-                Response.Write((int)msgValue);
-                //字串長度驗証
-            }
-            else if (idNo.Length != 10)
-            {
-                msgValue = MsgType.IdLengthIsNotRight;
-                Response.Write((int)msgValue);
-            }
-            else if (tel.Length != 10)
-            {
-                msgValue = MsgType.TelLengthIsNotRight;
-                Response.Write((int)msgValue);
-            }
-            else if (pwd.Length < 8 && pwd.Length > 20)
-            {
-                msgValue = MsgType.PwdLengthIsNotRight;
-                Response.Write((int)msgValue);
-            }
-            else if (lastName.Length > 20 )
-            {
-                msgValue = MsgType.LastNameTooLong;
-                Response.Write((int)msgValue);
-            }
-            else if (firstName.Length > 20){
-                msgValue = MsgType.FirstNameTooLong;
-                Response.Write((int)msgValue);
-            }
-            else if (mail.Length > 40)
-            {
-                msgValue = MsgType.MailTooLong;
-                Response.Write((int)msgValue);
-            }
-            else
-            {
-                string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
-                SqlConnection conn = new SqlConnection(strConnString);
-                SqlCommand cmd = new SqlCommand("pro_shoppingFG_addMember", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                conn.Open();
-
-                try
-                {
-                    cmd.Parameters.Add(new SqlParameter("@idNo", idNo));
-                    cmd.Parameters.Add(new SqlParameter("@tel", tel));
-                    cmd.Parameters.Add(new SqlParameter("@pwd", pwd));
-                    cmd.Parameters.Add(new SqlParameter("@gender", gender));
-                    cmd.Parameters.Add(new SqlParameter("@lastName", lastName));
-                    cmd.Parameters.Add(new SqlParameter("@firstName", firstName));
-                    cmd.Parameters.Add(new SqlParameter("@birth", birth));
-                    cmd.Parameters.Add(new SqlParameter("@mail", mail));
-                    cmd.Parameters.Add(new SqlParameter("@address", address));
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    //判斷是否有此會員帳號存在
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            int result = Convert.ToInt16(reader["result"]);
-                            if (result == 0)
-                            {
-                                msgValue = MsgType.MemberExisted;
-                                break;
-                            }
-                            else
-                            {
-                                msgValue = MsgType.WellAdded;
-                            }
-                        }
-                    }
-
-                    Response.Write((int)msgValue);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);                
-                    throw ex.GetBaseException();
-                }
-                finally
-                {
-                    conn.Close();
-                    conn.Dispose();
-                }
-            }
-        }
+        }       
 
         /// <summary>
         /// 會員修改視窗中用來搜尋選中會員的資料
@@ -250,7 +137,7 @@ namespace ShoppingFG.ajax
                             memberInfo.Add("mail", reader["f_mail"].ToString());
                             memberInfo.Add("phone", reader["f_phone"].ToString());
                             memberInfo.Add("address", reader["f_address"].ToString());
-                            memberInfo.Add("points", Convert.ToInt16(reader["f_points"]));
+                            memberInfo.Add("points", Convert.ToInt32(reader["f_points"]));
                             memberInfo.Add("level", Convert.ToInt16(reader["f_level"]));
                         }
                         Response.Write(memberInfo);
@@ -302,7 +189,6 @@ namespace ShoppingFG.ajax
             {
                 msgValue = MsgType.NullEmptyInput;
                 Response.Write((int)msgValue);
-                //字串長度驗証
             }          
             else if (tel.Length != 10)
             {
@@ -352,7 +238,6 @@ namespace ShoppingFG.ajax
                     cmd.Parameters.Add(new SqlParameter("@points", apiPoints));
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    //判斷是否有此會員帳號存在
                     if (reader.HasRows)
                     {
                         while (reader.Read())
@@ -365,7 +250,7 @@ namespace ShoppingFG.ajax
                             }
                             else
                             {
-                                msgValue = MsgType.WellAdded;
+                                msgValue = MsgType.WellModified;
                             }
                         }
                     }

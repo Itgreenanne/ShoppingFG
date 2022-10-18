@@ -9,8 +9,9 @@
                 console.log(jsonResult);
                 sessionBool = jsonResult['SessionIsNull'];
                 memberInfo = jsonResult.UserInfo;
-
                 if (jsonResult['SessionIsNull'] == true) {
+                    $('#lastNameShown').text('');
+                    $('#firstNameShown').text('');
                     PrintProductDiv(jsonResult.ProductInfo);
                 } else {
                     console.log('HP data=', jsonResult);
@@ -32,6 +33,15 @@
 
 })
 
+//重覆的東西
+function RepeatedStuff(data) {
+    if (data && data['result'] == 0 || data && data['result'] == 1) {
+        alert('即將被登出');
+        window.location.href = "/view/HomePage.aspx";
+        return true;
+    }
+    return false;
+}
 
 //window.addEventListener("orientationchange", toOrientation);
 
@@ -89,7 +99,7 @@ function PrintProductDiv(jsonResult) {
 function OpenLoginBlock() {
     $('#overlay').show();
     ResetAll();
-   //$('.loginBlock').css('overflow', 'scroll')
+    $('.no-scroll').css('overflow', 'hidden');
     $('#loginBlock').show()
         
 }
@@ -97,22 +107,21 @@ function OpenLoginBlock() {
 //關閉登入div
 function LeaveLoginBlock() {
     $('#overlay').hide();
-    //$('.no-scroll').css('overflow', 'visible');
+    $('.no-scroll').css('overflow', 'auto');
     $('#loginBlock').hide();
 }
 
 //開啟註冊頁面
 function OpenSignUpBlock() {
     $('#loginBlock').hide();
-    //$('.no-scroll').css('overflow', 'hidden');
-    //$('.signUpBlock').css('overflow', 'visible');
+    $('.no-scroll').css('overflow', 'hidden');
     $('#signUpBlock').show();
 }
 
 //開啟會員中心視窗
 function OpenMemberCenterBlock() {
     $('#overlay').show();
-    //$('.no-scroll').css('overflow', 'auto');
+    $('.no-scroll').css('overflow', 'hidden');
     $('#memberCenter').show();
     $('#functionContent').hide();
     $('#pwdModify').hide();
@@ -125,12 +134,20 @@ function CancelContent() {
     ResetAll();
 }
 
+function LeaveMemberCenter() {
+    $('#memberCenter').hide();
+    $('#overlay').hide();
+    $('.no-scroll').css('overflow', 'auto');
+    ResetAll()
+}
+
 //離開註冊頁面
 function LeaveSignUpBlock() {
     ResetAll();
     $('#overlay').show();    
     $('#signUpBlock').hide();
     $('#loginBlock').show();
+    $('.no-scroll').css('overflow', 'auto');
 }
 
 
@@ -151,7 +168,7 @@ function ResetAll() {
     $('textarea').val('');
 }
 
-//判斷點擊會員圖示是會開啟登入視窗還是會員中心
+//判斷點擊會員圖示是會開啟登入視窗還是會員中心,false就開啟login視窗，true就開啟會員中心視窗
 function LoginOrSignUp() {
     if (sessionBool) {
         OpenLoginBlock();
@@ -159,3 +176,9 @@ function LoginOrSignUp() {
         OpenMemberCenterBlock();
     }
 }
+
+
+$('#productInfo').click(function (event) {
+    window.location.href = '/view/ProductPage.aspx';
+
+})

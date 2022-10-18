@@ -31,7 +31,7 @@ function SignUp() {
         alert('密碼輸入要8-20字元');
     } else {
         $.ajax({
-            url: '/ajax/AjaxFrontUser.aspx?fn=AddMember',
+            url: '/ajax/AjaxLogin.aspx?fn=AddMember',
             type: 'POST',
             data: {
                 getidNo: idNo,
@@ -48,31 +48,29 @@ function SignUp() {
                 console.log(data);
                 if (data) {
                     switch (data) {
-                        case '0':
-                            alert("新增人員成功");
+                        case '11':
+                            alert('會員資料新增成功');
                             $('#signUpBlock').hide();
                             $('#overlay').hide();
                             break;
-                        case '1':
-                            alert('已有此人員帳號');
-                            break;
                         case '3':
-                            alert('身份証字號輸入長度錯誤');
-                            break;
-                        case '4':
+                            alert('身份証字號輸入錯誤');
+                        case '6':
                             alert('電話號碼輸入長度錯誤');
                             break;
-                        case '5':
+                        case '4':
                             alert('密碼長度不對');
                             break;
-                        case '9':
+                        case '7':
                             alert('姓太長');
                             break;
-                        case '10':
+                        case '8':
                             alert('名太長');
                             break;
-                        case '11':
+                        case '9':
                             alert('email長度太長');
+                        default:
+                            alert('資料錯誤');
                     }
                 } else {
                     alert('資料錯誤');
@@ -90,22 +88,24 @@ function SignUp() {
 
 //身份証字號驗証函式
 function IdNoVerify(el) {
-    var inputText = el.value.toUpperCase();
-    console.log(inputText);
-    el.value = inputText;
-    var rightForm = /^[A-Z]{1}\d{9}$/;
-    if (!rightForm.test(inputText)) {
-         alert('身份証字號輸入錯誤或空白');
-         el.value = '';
-    }   
-}
+    if (el && el.value) {
+        var inputText = el.value.toUpperCase();
+        console.log(inputText);
+        el.value = inputText;
+        var rightForm = /^[A-Z]{1}\d{9}$/;
 
+        if (!rightForm.test(inputText)) {
+            alert('身份証字號輸入錯誤');
+            el.value = '';
+        }
+    }
+}
 //電話是否都是數字並且等於10字元的驗証函式
 function TelVerify(el) {
     var inputText = el.value;
     var rightForm = /^\d{10}$/;
     if (!rightForm.test(inputText)) {
-        alert('聯絡電話輸入錯誤');
+        alert('聯絡電話輸入錯誤或空白');
         el.value = '';
     }
 }
@@ -134,7 +134,7 @@ function EmailVerify(el) {
     var inputText = el.value;
     var emailSymbol = '@';
     if (!inputText.includes(emailSymbol)) {
-        alert('輸入不符合email格式');
+        alert('輸入不符合email格式或空白');
         el.value = '';
     }
 }

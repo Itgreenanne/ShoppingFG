@@ -21,12 +21,24 @@
     color: #26C6DA;
     flex-direction: column;
     width: 600px;
-    height: 600px;
+    max-height: 100%;
     background-color: white;
     box-shadow: 5px 5px 10px grey;
+    box-sizing: border-box;
     align-items: center;
+    flex-wrap: nowrap;
+    overflow: auto;
     z-index: 2;
 }
+
+/*.signUpBlock {
+    display: flex;
+    overflow-y: auto;
+    height: inherit;
+    max-height: 100%;
+    align-items: center;
+    ;
+}*/
 
 .regBox {
     display: flex;
@@ -149,14 +161,14 @@
 .btnSignUpBox {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-evenly;    
 }
 
 @media(min-width: 320px) {
     .signUpBlock {
         display: flex;
         width: 310px;
-        height: 520px;
+        height: 450px;
         align-items: center;
         font-size: 20px;
     }
@@ -187,13 +199,7 @@
     }
 }
 
-@media(min-width: 500px) {
-
-    .shoppingLogo {
-        width: 380px;
-        height: 95px;
-        margin-top: 30px;
-    }
+@media(min-width: 500px) { 
 
     .signUpBlock {
         display: flex;
@@ -250,6 +256,10 @@
 @media screen and (orientation: landscape) {
     .signUpBlock {
         position: absolute;
-        top: 350px;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    .btnSignUpBox {
+        margin-bottom: 30px;
     }
 }

@@ -22,7 +22,6 @@
 }
 
 .memberCenterlogo {
-    margin-top: 130px;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -94,7 +93,8 @@
     font-size: 30px;
     color: #26C6DA;
     width: 600px;
-    height: 650px;
+    max-height: 100%;
+    overflow: auto;
     background-color: white;
     box-shadow: 5px 5px 10px grey;
     z-index: 2;
@@ -208,6 +208,7 @@
 
 .btnSettingGroup {
     display: flex;
+    margin-bottom: 20px;
 }
 
 .btnsettingConfirm {
@@ -461,7 +462,7 @@
 
 @media(min-width: 720px) {
     .memberCenter {
-        height: 750px;
+     /*   height: 750px;*/
     }
 
     .pwdModifyBox label {
@@ -507,10 +508,6 @@
 
 @media screen and (orientation: landscape) {
     .memberCenter {
-        position: absolute;
-        top: 400px;        
-    }
-    .loginBlock {
-        position: absolute;
-    }
+        position: fixed;
+    }    
 }

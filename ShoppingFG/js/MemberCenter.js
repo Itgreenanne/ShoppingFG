@@ -14,28 +14,32 @@ function OpenSettingBlock() {
         success: function (data) {
             if (data) {
                 var jsonResult = JSON.parse(data);
-                console.log(jsonResult);
-                //顯示跟選擇列資料一樣的資料
-                globalMember = jsonResult;
-                $('#setInputTel').val(jsonResult.phone);
-                $('#setInputPwd').val('*******************');
-                $('#setLastName').val(jsonResult.lastname);
-                $('#setFirstName').val(jsonResult.firstname);
-                $('#setInputMail').val(jsonResult.mail);
-                $('#setInputAddress').val(jsonResult.address);
-                $('#setInputBirth').val(jsonResult.birth);
-
-                if (jsonResult.gender == 1) {
-                    $("#chkSetMale").prop('checked', true);
-                } else if (jsonResult.gender == 2) {
-                    $("#chkSetFemale").prop('checked', true);
+                if (RepeatedStuff(jsonResult)) {
+                    return;
                 } else {
-                    $("#chkSetOther").prop('checked', true);
-                }
+                    console.log(jsonResult);
+                    //顯示跟選擇列資料一樣的資料
+                    globalMember = jsonResult;
+                    $('#setInputTel').val(jsonResult.phone);
+                    $('#setInputPwd').val('*******************');
+                    $('#setLastName').val(jsonResult.lastname);
+                    $('#setFirstName').val(jsonResult.firstname);
+                    $('#setInputMail').val(jsonResult.mail);
+                    $('#setInputAddress').val(jsonResult.address);
+                    $('#setInputBirth').val(jsonResult.birth);
 
-                $('#MemberLevelNo').text(jsonResult.level);
-                $('#MemberPoints').text(jsonResult.points);
-                $('#settingBlock').show();
+                    if (jsonResult.gender == 1) {
+                        $("#chkSetMale").prop('checked', true);
+                    } else if (jsonResult.gender == 2) {
+                        $("#chkSetFemale").prop('checked', true);
+                    } else {
+                        $("#chkSetOther").prop('checked', true);
+                    }
+
+                    $('#MemberLevelNo').text(jsonResult.level);
+                    $('#MemberPoints').text(jsonResult.points);
+                    $('#settingBlock').show();
+                }
             } else {
                 alert('資料錯誤');
             }
@@ -97,33 +101,40 @@ function SettingConfirm() {
             success: function (data) {
                 console.log(data);
                 if (data) {
-                    switch (data) {
-                        case '0':
-                            alert("修改會員資料成功");
-                            $('#settingBlock').hide();
-                            $('#functionContent').hide();
-                            $('#memberCenterlogo').hide();
-                            break;
-                        case '1':
-                            alert('已有此人員帳號');
-                            break;
-                        case '3':
-                            alert('身份証字號輸入長度錯誤');
-                            break;
-                        case '4':
-                            alert('電話號碼輸入長度錯誤');
-                            break;
-                        case '5':
-                            alert('密碼長度不對');
-                            break;
-                        case '9':
-                            alert('姓太長');
-                            break;
-                        case '10':
-                            alert('名太長');
-                            break;
-                        case '11':
-                            alert('email長度太長');
+                    var jsonResult = JSON.parse(data);
+                    if (RepeatedStuff(jsonResult)) {
+                        return;
+                    } else {
+                        switch (data) {
+                            case '0':
+                                alert("修改會員資料成功");
+                                $('#settingBlock').hide();
+                                $('#functionContent').hide();
+                                $('#memberCenterlogo').show();
+                                break;
+                            case '1':
+                                alert('已有此人員帳號');
+                                break;
+                            case '3':
+                                alert('身份証字號輸入長度錯誤');
+                                break;
+                            case '4':
+                                alert('電話號碼輸入長度錯誤');
+                                break;
+                            case '5':
+                                alert('密碼長度不對');
+                                break;
+                            case '9':
+                                alert('姓太長');
+                                break;
+                            case '10':
+                                alert('名太長');
+                                break;
+                            case '11':
+                                alert('email長度太長');
+                            default:
+                                alert('資料錯誤');
+                        }
                     }
                 } else {
                     alert('資料錯誤');
@@ -148,12 +159,6 @@ function Logout() {
     window.location.href = '/view/HomePage.aspx';
 }
 
-function leaveMemberCenter() {
-    $('#memberCenter').hide();
-    $('#overlay').hide();
-    ResetAll()
-}
-
 function ModifyPwdBlock() {
     $('#overlay1').show();
     $('#inputOldPwd').val('');
@@ -162,6 +167,7 @@ function ModifyPwdBlock() {
     $('#pwdModify').show();
 }
 
+//會員中心中的密碼設定
 function SetModifiedPwd() {
     var oldPwd = $('#inputOldPwd').val();
     var newPwd = $('#inputNewPwd').val();
@@ -198,7 +204,7 @@ function MemberCenterEmailVerify(el) {
     var inputText = el.value;
     var emailSymbol = '@';
     if (!inputText.includes(emailSymbol)) {
-        alert('輸入不符合email格式');
+        alert('輸入不符合email格式或空白');
         $('#setInputMail').val(globalMember.mail);
     }
 }
@@ -207,7 +213,7 @@ function MemberCenterTelVerify(el) {
     var inputText = el.value;
     var rightForm = /^\d{10}$/;
     if (!rightForm.test(inputText)) {
-        alert('聯絡電話輸入錯誤');
+        alert('聯絡電話輸入錯誤或空白');
         $('#setInputTel').val(globalMember.phone);
     }
 }

@@ -1,7 +1,6 @@
-﻿/*.no-scroll {
-    position: fixed;
-    width: 100%;
-}*/
+﻿body {
+    height: 100%;
+}
 
 .pageHead {
     display: flex;
@@ -20,7 +19,7 @@
     height: 50px;
     font-size: 20px;
     text-align: left;
-    font-size: 40px;
+    font-size: 20px;
     color: grey;
     border: 0;
     outline: none;
@@ -59,7 +58,7 @@
 
 .productInfo {
     width: 160px;
-    height: 400px;
+    max-height: 100%;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -82,7 +81,6 @@
 .shoppingLogo {
     width: 400px;
     height: 100px;
-    margin-top: 30px;
 }
 
 
@@ -102,7 +100,7 @@
     }
 
     .searchBlock {     
-        width: 180px;
+        width: 185px;
         height: 30px;
     }
 
@@ -118,12 +116,12 @@
     }
 
     .homePageCart {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
     .homePageUser {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
 
     .productContainer {

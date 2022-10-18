@@ -21,23 +21,15 @@ function LoginVerify() {
                 console.log(jsonResult);
                 if (!jsonResult) {
                     alert('資料錯誤');
-                } else if (jsonResult.Result == 0) {
+                } else if (jsonResult.Result == 1) {
                     alert('帳號密碼正確');
                     window.location.href = "/view/HomePage.aspx";
-                    //$('#loginBlock').hide();
-                    //$('#pageHeadBefore').hide();
-                    //$('#overlay').hide();
-                    //$('#lastNameShown').text(jsonResult['LastName']);
-                    //$('#firstNameShown').text(jsonResult['FirstName']);
-                    //$('#pageHeadAfter').show();
-                } else if (jsonResult.Result == 1) {
-                    alert('請輸入帳號密碼');
                 } else if (jsonResult.Result == 2) {
                     alert('請輸入帳號密碼');
-                } else if (jsonResult.Result == 3) {
-                    alert('身份証字號輸入長度錯誤');
-                } else if (jsonResult.Result == 4) {
-                    alert('密碼輸入長度錯誤');
+                } else {
+                    alert("帳號或密碼錯誤");
+                    $('#inputIdNo').val('');
+                    $('#inputPwd').val('');
                 }
             },
             error: function (err) {
