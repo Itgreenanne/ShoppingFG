@@ -15,8 +15,8 @@
                     PrintProductDiv(jsonResult.ProductInfo);
                 } else {
                     console.log('HP data=', jsonResult);
-                    $('#lastNameShown').text((jsonResult.UserInfo.LastName).slice(0, 3) + '..');
-                    $('#firstNameShown').text((jsonResult.UserInfo.FirstName).slice(0, 3) + '..');
+                    $('#lastNameShown').text(jsonResult.UserInfo.LastName);
+                    $('#firstNameShown').text(jsonResult.UserInfo.FirstName);
                     PrintProductDiv(jsonResult.ProductInfo);
                 }                    
             } else {
@@ -33,7 +33,42 @@
 
 })
 
-//重覆的東西
+var sessionBool;
+var productInfoGlobal;
+var memberInfo;
+
+setInterval('StatusVerify()', 3000);
+
+//讀取DB資玖比較密碼是否被改變，是的話就強制會員登出
+function StatusVerify() {
+    if (!sessionBool) {
+        $.ajax({
+            url: '/ajax/AjaDbDataChangVerify.aspx',
+            type: 'POST',
+            success: function (data) {
+                if (data) {
+                    var jsonResult = JSON.parse(data);
+                    console.log(jsonResult);
+                    if (RepeatedStuff(jsonResult)) {
+                        return;
+                    }
+                }
+            },
+            error: function (err) {
+                str = JSON.stringify(err, null, 2);
+                console.log('err:');
+                console.log(err);
+                alert(str);
+            }
+        });
+    } else { return; }
+   /* else {        */
+    //    $('#lastNameShown').text('');
+    //    $('#firstNameShown').text('');
+    //}
+}
+
+//根據父頁的回傳訊息強制會員登出
 function RepeatedStuff(data) {
     if (data && data['result'] == 0 || data && data['result'] == 1) {
         alert('即將被登出');
@@ -52,9 +87,7 @@ function RepeatedStuff(data) {
 //    } 
 //}
 
-var sessionBool;
-var productInfoGlobal;
-var memberInfo;
+
 
 function BlockClear() {
     $('#overlay').hide();
@@ -75,15 +108,12 @@ function PrintProductDiv(jsonResult) {
     var productInfo = '';    
 
     for (var i = 0; i < jsonResult.length; i++) {
-        if (productTitleShown[i].ProductTitle.length > 7) {            
-            productTitleShown[i].ProductTitle = productTitleShown[i].ProductTitle.slice(0, 8)+'...';
-        }
         productInfo +=
             '<div class="productInfo">' +
             '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg"></div>' +
-            '<div>' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
-            '<div>' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
-            '<div>' + '件：'+ jsonResult[i].ProductQtn + '</div>' +          
+            '<div class="productTitle">' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
+            '<div class="priceStyle">' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
+            '<div><img src="/images/Qtn1.png" class="qtnImg">' + jsonResult[i].ProductQtn + '</div >'+
             //'<td> <button onclick="DeleteDuty(\'' + jsonResult[i].dutyId + '\')">' +
             //'刪除' + '</button>' + ' ' +
             //'<button onclick="ModifyDutyReadFront(\'' + jsonResult[i].dutyId + '\')">' + '修改(前)' + '</button>' + ' ' +

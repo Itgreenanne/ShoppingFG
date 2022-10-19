@@ -2,6 +2,7 @@
 
 //開啟會員帳號設定視窗
 function OpenSettingBlock() {
+    //$('#setting').css('background-color', '#FFE4E1');
     $('#memberCenterlogo').hide();
     $('#functionContent').show();
     $('#settingBlock').show();

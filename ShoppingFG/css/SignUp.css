@@ -168,7 +168,7 @@
     .signUpBlock {
         display: flex;
         width: 310px;
-        height: 450px;
+        height: 400px;
         align-items: center;
         font-size: 20px;
     }
@@ -179,7 +179,7 @@
     }
 
     .regBox label {
-        width: 120px;
+        width: 100px;
         float: left;
         text-align: right;
         font-size: 20px;
@@ -193,7 +193,7 @@
     }
 
     .chkGender {
-        width: 120px;
+        width: 100px;
         float: left;
         text-align: right;
     }
@@ -204,7 +204,7 @@
     .signUpBlock {
         display: flex;
         width: 480px;
-        height: 550px;
+        height: 450px;
         flex-wrap: wrap;
         align-content: space-around;
         align-items: center;
@@ -221,8 +221,8 @@
 
     .signUpBlock {
         display: flex;
-        width: 650px;
-        height: 630px;
+        width: 550px;
+        height: 520px;
         align-items: center;
         justify-content: flex-start;
     }
@@ -235,7 +235,7 @@
     }
 
     .regBox label {
-        width: 150px;
+        width: 125px;
         font-size: 25px;
     }
 

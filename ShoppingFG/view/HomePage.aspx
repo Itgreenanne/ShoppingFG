@@ -119,90 +119,81 @@
 
 
         <div class="memberCenter" id="memberCenter">
-         <img src="/images/leave.png" class="leaveMemberCenter" id="leaveMemberCenter" onclick="leaveMemberCenter()"/>
-         <span class="memberCenterTitle">會員中心</span>
-           <div class="btnMemberBox">
-            <button class="btnMemberGroup" id="setting" onclick="OpenSettingBlock()">帳號設定</button>
-            <button class="btnMemberGroup" id="cart" onclick="OpenCartBlock()">購物車</button>
-            <button class="btnMemberGroup" id="myOrder" onclick="OpenMyOrder()">我的訂單</button>
-            <button class="btnMemberGroup" id="logout" onclick="Logout()">登出</button>            
-           </div>
-           <div class="memberCenterlogo" id="memberCenterlogo">
+            <img src="/images/leave.png" class="leaveMemberCenter" id="leaveMemberCenter" onclick="LeaveMemberCenter()"/>
+            <span class="memberCenterTitle">會員中心</span>
+            <div class="btnMemberBox">
+                <button class="btnMemberGroup" id="setting" onclick="OpenSettingBlock()">帳號設定</button>
+                <button class="btnMemberGroup" id="cart" onclick="OpenCartBlock()">購物車</button>
+                <button class="btnMemberGroup" id="myOrder" onclick="OpenMyOrder()">我的訂單</button>
+                <button class="btnMemberGroup" id="logout" onclick="Logout()">登出</button>            
+            </div>
+            <div class="memberCenterlogo" id="memberCenterlogo">
                 <img src="/images/logo.png" class="memberCenterlogoPic"/>  
-           </div>
+            </div>
         
-           <div class="functionContent" id="functionContent">
-            <span class="accountSetting">帳戶設定</span>
-            <div class="settingBlock" id="settingBlock">
-             <div class="setBox">
-                <label for="setInputTel" class="labelsetTelNo">聯絡電話： </label>
-                <input type="text" class="setInputTel" id="setInputTel" autocomplete="off" onchange="MemberCenterTelVerify(this)" oninput="NoSpaceKey('setInputTel')" value=""/><br/>
-             </div>
-             <div class="setBox">
-                <label for="setInputPwd" class="labelSetPwd">密碼： </label>
-                <div class="btnModifyPwd" id="btnModifyPwd" onclick="ModifyPwdBlock()">修改密碼請按這裡</div>
-<%--                <button class="btnModifyPwd" id="btnModifyPwd" onclick="ModifyPwdBlock()">修改</button>--%>
-               <%-- <input type="text" class="setInputPwd" id="setInputPwd" placeholder="8-20字元" autocomplete="off" onchange="PwdVerify(this)"oninput="PwdModificationVerify()" value=""/>--%>
-            </div>
-              
-            <div class="setBox">
-                <label for="setLastName" class="labelSetLastName">姓：</label>
-                <input type="text" class="setInputLastName" id="setLastName" autocomplete="off" oninput="NoSpaceKey('setLastName')" value=""/>
-            </div>
-               
-            <div class="setBox">
-                <label for="setFirstName" class="labelSetFirstName">名：</label>
-                <input type="text" class="setInputFirstName" id="setFirstName" autocomplete="off" oninput="NoSpaceKey('setFirstName')" value=""/>
-            </div>
-            <div class="setBox">
-                <label for="setInputMail" class="labelSetMail">E-Mail： </label>
-                <input type="text" class="setInputMail" id="setInputMail" autocomplete="off"  onchange="MemberCenterEmailVerify(this)" oninput="NoSpaceKey('setInputMail')" value=""/><br/>
-            </div>
-            <div class="setBox">
-                <label for="setInputAddress" class="labelSetAddress">住址： </label>
-                <input type="text" class="setInputAddress" id="setInputAddress" autocomplete="off" oninput="NoSpaceKey('setInputAddress')" value=""/><br/>
-            </div>
-            <div class="setBox">
-                <label for="setInputBirth" class="labelSetBirth">生日： </label>
-                <input type="date" class="signUpInputBirth" id="setInputBirth"/><br/>
-            </div>
-            <div class="setGenderBox">
-              <label class="chkSetGender">性別：</label>
-              <div class="setGenderInput">
-                <span class="genderLabel">女</span>
-                <input name="chkSetGender"type="radio" class="SetGender" id="chkSetFemale" value="2"/>
-                <span class="genderLabel">男</span>
-                <input name="chkSetGender"type="radio" class="SetGender" id="chkSetMale" value="1"/>
-                <span class="genderLabel">其他</span>
-                <input name="chkSetGender"type="radio" class="SetGender" id="chkSetOther" value="3"/><br/>
-             </div>
-            </div>
-            <div class="memberLevel">
-                <label for="memberlevel" class="labelMemberLevel">會員等級： </label>
-                <span class="MemberLevelNo" id="MemberLevelNo"></span><br/>
-            </div>
-            <div class="memberPoints">
-                <label for="memberPoints" class="labelMemberPoints">會員點數： </label>
-                <span class="MemberPoints" id="MemberPoints"></span><br/>
-            </div>
-                   
-            <div class="btnSettingGroup">
-                <button class="btnsettingConfirm" id="btnsettingConfirm" onclick="SettingConfirm()">確定</button>
-                <button class="btnCancelContent" id="btnCancelContent" onclick="CancelContent()">取消</button>
-            </div>
-          </div>  
-        </div>
-       
-
+            <div class="functionContent" id="functionContent">
+                <span class="accountSetting">帳戶設定</span>
+                <div class="settingBlock" id="settingBlock">
+                    <div class="setBox">
+                        <label for="setInputTel" class="labelsetTelNo">聯絡電話： </label>
+                        <input type="text" class="setInputTel" id="setInputTel" autocomplete="off" onchange="MemberCenterTelVerify(this)" oninput="NoSpaceKey('setInputTel')" value=""/><br/>
+                    </div>
+                    <div class="setBox">
+                        <label for="setInputPwd" class="labelSetPwd">密碼： </label>
+                        <div class="btnModifyPwd" id="btnModifyPwd" onclick="ModifyPwdBlock()">修改密碼請按這裡</div>               
+                    </div>              
+                    <div class="setBox">
+                        <label for="setLastName" class="labelSetLastName">姓：</label>
+                        <input type="text" class="setInputLastName" id="setLastName" autocomplete="off" oninput="NoSpaceKey('setLastName')" value=""/>
+                    </div>               
+                    <div class="setBox">
+                        <label for="setFirstName" class="labelSetFirstName">名：</label>
+                        <input type="text" class="setInputFirstName" id="setFirstName" autocomplete="off" oninput="NoSpaceKey('setFirstName')" value=""/>
+                    </div>
+                    <div class="setGenderBox">
+                        <label class="chkSetGender">性別：</label>
+                        <div class="setGenderInput">
+                            <span class="genderLabel">女</span>
+                            <input name="chkSetGender"type="radio" class="SetGender" id="chkSetFemale" value="2"/>
+                            <span class="genderLabel">男</span>
+                            <input name="chkSetGender"type="radio" class="SetGender" id="chkSetMale" value="1"/>
+                            <span class="genderLabel">其他</span>
+                            <input name="chkSetGender"type="radio" class="SetGender" id="chkSetOther" value="3"/><br/>
+                        </div>
+                    </div>
+                    <div class="setBox">
+                        <label for="setInputMail" class="labelSetMail">E-Mail： </label>
+                        <input type="text" class="setInputMail" id="setInputMail" autocomplete="off"  onchange="MemberCenterEmailVerify(this)" oninput="NoSpaceKey('setInputMail')" value=""/><br/>
+                    </div>
+                    <div class="setBox">
+                        <label for="setInputAddress" class="labelSetAddress">住址： </label>
+                        <input type="text" class="setInputAddress" id="setInputAddress" autocomplete="off" oninput="NoSpaceKey('setInputAddress')" value=""/><br/>
+                    </div>
+                    <div class="setBox">
+                        <label for="setInputBirth" class="labelSetBirth">生日： </label>
+                        <input type="date" class="signUpInputBirth" id="setInputBirth"/><br/>
+                    </div>          
+                    <div class="memberLevel">
+                        <label for="memberlevel" class="labelMemberLevel">會員等級： </label>
+                        <span class="MemberLevelNo" id="MemberLevelNo"></span><br/>
+                    </div>
+                    <div class="memberPoints">
+                        <label for="memberPoints" class="labelMemberPoints">會員點數： </label>
+                        <span class="MemberPoints" id="MemberPoints"></span><br/>
+                    </div>                   
+                    <div class="btnSettingGroup">
+                        <button class="btnsettingConfirm" id="btnsettingConfirm" onclick="SettingConfirm()">確定</button>
+                        <button class="btnCancelContent" id="btnCancelContent" onclick="CancelContent()">取消</button>
+                    </div>
+                </div>  
+         
             <div class="cartBlock" id="cartBlock">
             </div>
             <div class="myOrderBlock" id="myOrderBlock">
-            </div>
-
-           
-        
+            </div>       
         </div>
 
+         </div>
          <div class="pwdModify" id="pwdModify">
               <span class="pwdSetting">修改密碼</span>
                  <div class="pwdModifyBox">
@@ -223,6 +214,7 @@
                 </div>
             </div>
 
-     </div>       
+     
+   </div>
 </body>
 </html>

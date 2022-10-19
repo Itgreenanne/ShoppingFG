@@ -7,4 +7,3 @@ D:\anne\ShoppingFG\ShoppingFG\bin\Newtonsoft.Json.xml
 D:\anne\ShoppingFG\ShoppingFG\obj\Debug\ShoppingFG.csproj.CopyComplete
 D:\anne\ShoppingFG\ShoppingFG\obj\Debug\`.dll
 D:\anne\ShoppingFG\ShoppingFG\obj\Debug\`.pdb
-D:\anne\ShoppingFG\ShoppingFG\obj\Debug\ShoppingFG.csprojAssemblyReference.cache

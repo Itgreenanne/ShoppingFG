@@ -11,7 +11,16 @@
 }
 
 .lastNameShown {
-    margin-left: 10px;
+    margin-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.firstNameShown {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .searchBar {
@@ -42,10 +51,10 @@
 
 .homePageCart {
     width: 30px;
-/*    margin-left: 200px;
-*/}
+}
 
 .homePageUser {
+    margin-right: 7px;
     width: 30px;
 }
 
@@ -72,6 +81,13 @@
     color: grey;
 }
 
+.productTitle {
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .productImg {
     width: 180PX;
     margin-top: 10px;
@@ -83,6 +99,16 @@
     height: 100px;
 }
 
+/*產品庫存數量示意圖片*/
+.qtnImg {
+width: 10px;
+height: 10px;
+}
+
+/*設定價格字體粗體*/
+.priceStyle {
+    font-weight: bold;
+}
 
 
 /*給最小寬度320px*/
@@ -107,13 +133,7 @@
     .cartAndUserPic {
         display: flex;
         justify-content: flex-end;
-    }
-
-    .memberName {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-around;
-    }
+    }   
 
     .homePageCart {
         width: 25px;
@@ -122,6 +142,13 @@
     .homePageUser {
         width: 25px;
         height: 25px;
+    }
+
+    .memberName {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        width: 85px;
     }
 
     .productContainer {
@@ -156,7 +183,7 @@
     
     .homePageUser {
         width: 50px;
-        height: 50px;
+        height: 50px;        
     }
 }
 
@@ -168,7 +195,7 @@
         flex-direction: row;
         margin-top: 10px;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;    
     }
     .searchBar {
         width: 50%;

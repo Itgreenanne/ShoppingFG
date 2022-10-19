@@ -67,6 +67,7 @@
     <Content Include="ajax\AjaxHomePage.aspx" />
     <Content Include="ajax\AjaxLogin.aspx" />
     <Content Include="ajax\AjaxFrontUser.aspx" />
+    <Content Include="ajax\AjaDbDataChangVerify.aspx" />
     <Content Include="css\HomePage.css" />
     <Content Include="css\Login.css" />
     <Content Include="css\MemberCenter.css" />
@@ -100,6 +101,13 @@
     </Compile>
     <Compile Include="ajax\AjaxFrontUser.aspx.designer.cs">
       <DependentUpon>AjaxFrontUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ajax\AjaDbDataChangVerify.aspx.cs">
+      <DependentUpon>AjaDbDataChangVerify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ajax\AjaDbDataChangVerify.aspx.designer.cs">
+      <DependentUpon>AjaDbDataChangVerify.aspx</DependentUpon>
     </Compile>
     <Compile Include="appCode\IsPwdChangeVerify.cs">
       <SubType>ASPXCodeBehind</SubType>

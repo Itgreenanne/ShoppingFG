@@ -1,12 +1,4 @@
-﻿/*.memberCenter {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: flex-start;
-}*/
-
-.leaveMemberCenter {
+﻿.leaveMemberCenter {
     position: fixed;
     top: 0;
     right: 0;
@@ -15,7 +7,6 @@
     width: 30px;
     height: 30px;
 }
-
 
 .memberCenterTitle {
     margin-top: 20px;
@@ -109,14 +100,25 @@
 }
 
 .btnMemberGroup {
-/*    margin-left: 10px;
-*/    width: 100px;
+    width: 100px;
     height: 30px;
     margin-top: 20px;
     border: solid 1px #26C6DA;
     background-color: #E0F7FA;
     font-size: 20px;
     color: #0277BD;
+}
+
+.btnMemberGroup:active {
+    background-color: #87CEFA;
+    color: white;
+    font-weight: bold;
+}
+
+.btnMemberGroup:focus {
+    background-color: #87CEFA;
+    color: white;
+    font-weight: bold;
 }
 
 .settingBlock {
@@ -167,6 +169,14 @@
     font-size: 20px;
 }
 
+.setGenderInput {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    font-size: 20px;
+}
+
 .emailBox {
     display: flex;
     flex-wrap: nowrap;
@@ -202,10 +212,6 @@
     font-size: 20px;
 }
 
-.setGender {
-/*    margin-top: 10px;
-*/}
-
 .btnSettingGroup {
     display: flex;
     margin-bottom: 20px;
@@ -235,7 +241,7 @@
     height: 250px;
     background-color: white;
     box-shadow: 5px 5px 10px grey;
-    z-index: 3;
+    z-index: 4;
     align-content: center;
     justify-content: flex-start;
     flex-direction: column;
@@ -257,7 +263,7 @@
 @media(min-width: 320px) {
 
     .memberCenter {
-        width: 280px;
+        width: 300px;
     }
 
     .btnMemberBox {
@@ -309,22 +315,14 @@
         font-size: 20px;
         float: left;
         text-align: right;
-        width: 100px;
+        width: 90px;
     }
 
     .setGenderBox {
         display: flex;
-        width: 260px;
+        width: 272px;
         justify-content: space-around;
         align-items: center;
-    }
-
-    .setGenderInput {
-        display: flex;
-        width: 155px;
-        align-items: center;
-        justify-content: space-evenly;
-        flex-wrap: nowrap;
     }
     
     .setBox input {
@@ -332,20 +330,6 @@
         width: 170px;
         height: 20px;
         font-size: 18px;
-    }
-
-    .SetGender {
-        padding: 1px;
-        width: 150px;
-        height: 20px;
-        font-size: 18px;
-    }
-
-    .genderLabel {
-        width: 100px;
-        float: left;
-        text-align: right;
-        font-size: 20px;
     }
 
     .pwdModify {
@@ -407,13 +391,7 @@
         padding: 1px;
         width: 280px;
         height: 25px;
-    }
-
-    .genderLabel {
-        width: 100px;
-        float: left;
-        text-align: right;
-        font-size: 17px;
+        font-size: 25px;
     }
 
     .chkSetGender {
