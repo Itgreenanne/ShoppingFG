@@ -2,7 +2,9 @@
 
 //開啟會員帳號設定視窗
 function OpenSettingBlock() {
-    //$('#setting').css('background-color', '#FFE4E1');
+    $('#setting').css('background-color', '#87CEFA');
+    $('#setting').css('color', 'white');
+    $('#setting').css('font-weight', 'bold');
     $('#memberCenterlogo').hide();
     $('#functionContent').show();
     $('#settingBlock').show();
@@ -112,6 +114,8 @@ function SettingConfirm() {
                                 $('#settingBlock').hide();
                                 $('#functionContent').hide();
                                 $('#memberCenterlogo').show();
+                                $('#lastNameShown').text(lastname);
+                                $('#firstNameShown').text(firstname);
                                 break;
                             case '1':
                                 alert('已有此人員帳號');
@@ -218,3 +222,18 @@ function MemberCenterTelVerify(el) {
         $('#setInputTel').val(globalMember.phone);
     }
 }
+
+//const button = document.querySelector('.btnMemberGroup');
+
+//button.addEventListener('click', (e) => {
+//    const isButton = e.target.nodeName === 'BUTTON';
+//    if (!isButton) {
+//        return;
+//    }
+//    e.target.style.background = '#87CEFA';
+// });
+
+$('#setting').on('click', function () {
+    $('#setting').removeClass('selected');
+    $(this).addClass('.btnMemberGroup ');
+});

@@ -72,6 +72,9 @@ namespace ShoppingFG.ajax
                 case "LoginVerifyAndGetAllProduct":
                     LoginVerifyAndGetAllProduct();
                     break;
+                case "GetSearchProduct":
+                    GetSearchProduct();
+                    break;
             }
         }
         private void LoginVerifyAndGetAllProduct()
@@ -126,6 +129,75 @@ namespace ShoppingFG.ajax
             {
                 conn.Close();
                 conn.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// 用關鍵字模糊搜尋產品標題符合的產品
+        /// </summary>
+        private void GetSearchProduct()
+        {
+            ProductMsg msgValue = ProductMsg.WrongConnection;
+            string apiProductTitle = Request.Form["getProductTitle"];
+
+            if (string.IsNullOrEmpty(apiProductTitle))
+            {
+                msgValue = ProductMsg.NullEmptyInput;
+                Response.Write((int)msgValue);
+            }
+            else if (apiProductTitle.Length > 100)
+            {
+                msgValue = ProductMsg.TitleToolongString;
+                Response.Write((int)msgValue);
+            }       
+            else
+            {
+                string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
+                SqlConnection conn = new SqlConnection(strConnString);
+                SqlCommand cmd = new SqlCommand("pro_shoppingFG_getSearchProduct", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                try
+                {
+                    //if(!string.IsNullOrEmpty(apiUserAccount) && apiDutyId != 0)
+                    cmd.Parameters.Add(new SqlParameter("@productTitle", apiProductTitle));
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    JArray resultArray = new JArray();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            JObject productInfo = new JObject();
+                            productInfo.Add("ProductId", Convert.ToInt16(reader["f_id"]));
+                            productInfo.Add("ProductPic", reader["f_picturePath"].ToString());
+                            productInfo.Add("ProductTitle", reader["f_title"].ToString());
+                            productInfo.Add("ProductUnitPrice", Convert.ToInt16(reader["f_unitprice"]));
+                            productInfo.Add("ProductQtn", Convert.ToInt16(reader["f_quantity"]));
+                            productInfo.Add("ProductTypeId", Convert.ToInt16(reader["f_typeId"]));
+                            productInfo.Add("ProductDetail", reader["f_detail"].ToString());
+                            productInfo.Add("ProductTypeName", reader["f_name"].ToString());
+                            resultArray.Add(productInfo);
+                        }
+                        Response.Write(resultArray);
+                    }
+                    else
+                    {
+                        msgValue = ProductMsg.ProductNotExisted;
+                        Response.Write((int)msgValue);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    throw ex.GetBaseException();
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
             }
         }
     }

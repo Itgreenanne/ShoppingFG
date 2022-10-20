@@ -1,5 +1,5 @@
 ﻿.leaveMemberCenter {
-    position: fixed;
+    position: inherit;
     top: 0;
     right: 0;
     bottom: 0;
@@ -75,11 +75,11 @@
 
 .memberCenter {
     display: flex;
-    position: fixed;
-    top: 50%;
+    position: absolute;
+    top: 0;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
     border: solid 1px black;
     font-size: 30px;
     color: #26C6DA;
@@ -109,13 +109,19 @@
     color: #0277BD;
 }
 
-.btnMemberGroup:active {
+/*/*#setting:active, active {
     background-color: #87CEFA;
     color: white;
     font-weight: bold;
 }
 
-.btnMemberGroup:focus {
+#setting:focus {
+    background-color: #87CEFA;
+    color: white;
+    font-weight: bold;
+}*/
+
+.btnMemberGroup selected {
     background-color: #87CEFA;
     color: white;
     font-weight: bold;
@@ -128,7 +134,7 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    align-items: flex-start;    
+    align-items: flex-start;
 }
 
 .btnModifyPwd {
@@ -343,7 +349,7 @@
     }
 
    .pwdModifyBox label {
-        width: 160px;
+        width: 140px;
         float: left;
         text-align: right;
         font-size: 20px;
@@ -367,7 +373,7 @@
     }
 
     .setBox label {
-        width: 150px;
+        width: 130px;
         float: left;
         text-align: right;
         font-size: 25px;
@@ -395,7 +401,7 @@
     }
 
     .chkSetGender {
-        width: 150px;
+        width: 130px;
         float: left;
         text-align: right;
         font-size: 25px;
@@ -403,7 +409,7 @@
 
     .setGenderBox {
         display: flex;
-        width: 432px;
+        width: 412px;
         justify-content: space-around;
         align-items: center;
     }
@@ -415,7 +421,7 @@
 
     .pwdModify {
         width: 420px;
-        height: 300px;
+        height: 250px;
     }
 
     .pwdModifyBox input {
@@ -426,7 +432,7 @@
     }
 
     .pwdModifyBox label {
-        width: 200px;
+        width: 195px;
         float: left;
         text-align: right;
         font-size: 25px;

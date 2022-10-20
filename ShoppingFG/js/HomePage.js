@@ -1,5 +1,11 @@
 ﻿$(document).ready(function () {
     BlockClear();
+    GetAllProduct();
+
+})
+
+//讀取所有產品資訊並列印在產品div
+function GetAllProduct() {
     $.ajax({
         url: '/ajax/AjaxHomePage.aspx?fn=LoginVerifyAndGetAllProduct',
         type: 'POST',
@@ -18,7 +24,7 @@
                     $('#lastNameShown').text(jsonResult.UserInfo.LastName);
                     $('#firstNameShown').text(jsonResult.UserInfo.FirstName);
                     PrintProductDiv(jsonResult.ProductInfo);
-                }                    
+                }
             } else {
                 alert('資料錯誤');
             }
@@ -30,8 +36,52 @@
             alert(str);
         }
     });
+}
 
-})
+//用關鍵字模糊搜尋標題裡有同樣字的產品
+function SortProduct() {
+    var keyWord = $('#searchBar').val();
+    console.log("keyWord=", keyWord);
+    if (!keyWord) {
+        GetAllProduct();
+    } else if (keyWord.length > 100) {
+        alert('標題輸入超過100字元');
+    } else {
+        $.ajax({
+            url: '/ajax/AjaxHomePage.aspx?fn=GetSearchProduct',
+            type: 'POST',
+            data: {
+                getProductTitle: keyWord,
+            },
+            success: function (data) {
+                if (data) {
+                    console.log(data);
+                    var jsonResult = JSON.parse(data);
+                    if (RepeatedStuff(jsonResult)) {
+                        return;
+                    } else if (jsonResult == 1) {
+                        alert('空字串');
+                    } else if (jsonResult == 2) {
+                        alert('標題輸入超過100字元');
+                    } else if (jsonResult == 9) {                        
+                        $('#noProductMessage').text('無此產品，請重新搜尋');
+                        $('#productContainer').html('');
+                    } else {
+                        PrintProductDiv(jsonResult);
+                    }
+                } else {
+                    alert('資料錯誤');
+                }
+            },
+            error: function (err) {
+                str = JSON.stringify(err, null, 2);
+                console.log('err:');
+                console.log(err);
+                alert(str);
+            }
+        })
+    }
+}
 
 var sessionBool;
 var productInfoGlobal;
@@ -70,24 +120,18 @@ function StatusVerify() {
 
 //根據父頁的回傳訊息強制會員登出
 function RepeatedStuff(data) {
-    if (data && data['result'] == 0 || data && data['result'] == 1) {
-        alert('即將被登出');
-        window.location.href = "/view/HomePage.aspx";
-        return true;
+    //用來判斷是否已經進入下面被登出的條件式
+    var count = 0;
+    if (count == 0) {
+        if (data && data['result'] == 0 || data && data['result'] == 1) {
+            alert('即將被登出');
+            window.location.href = "/view/HomePage.aspx";
+            count++;
+            return true;
+        }
     }
     return false;
 }
-
-//window.addEventListener("orientationchange", toOrientation);
-
-//function toOrientation() {
-    
-//    if (window.orientation == 90 || window.orientation == -90) {       
-//        $('#memberCenter').style.height = '650px';
-//    } 
-//}
-
-
 
 function BlockClear() {
     $('#overlay').hide();
@@ -113,11 +157,7 @@ function PrintProductDiv(jsonResult) {
             '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg"></div>' +
             '<div class="productTitle">' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
             '<div class="priceStyle">' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
-            '<div><img src="/images/Qtn1.png" class="qtnImg">' + jsonResult[i].ProductQtn + '</div >'+
-            //'<td> <button onclick="DeleteDuty(\'' + jsonResult[i].dutyId + '\')">' +
-            //'刪除' + '</button>' + ' ' +
-            //'<button onclick="ModifyDutyReadFront(\'' + jsonResult[i].dutyId + '\')">' + '修改(前)' + '</button>' + ' ' +
-            //'<button onclick="ModifyDutyReadBack(\'' + jsonResult[i].dutyId + '\')">' + '修改(後)' + '</button>' + '</td>' +
+            '<div><img src="/images/Qtn1.png" class="qtnImg">' + jsonResult[i].ProductQtn + '</div >'+          
             '</div>';            
     }
 
@@ -152,18 +192,20 @@ function OpenSignUpBlock() {
 function OpenMemberCenterBlock() {
     $('#overlay').show();
     $('.no-scroll').css('overflow', 'hidden');
+    $('#memberCenterlogo').show();
     $('#memberCenter').show();
     $('#functionContent').hide();
     $('#pwdModify').hide();
 }
 
-//離開會員中心視窗
+//關閉帳號設定視窗
 function CancelContent() {    
     $('#functionContent').hide();
     $('#memberCenterlogo').show();
     ResetAll();
 }
 
+//關閉會員中心視客
 function LeaveMemberCenter() {
     $('#memberCenter').hide();
     $('#overlay').hide();
@@ -179,7 +221,6 @@ function LeaveSignUpBlock() {
     $('#loginBlock').show();
     $('.no-scroll').css('overflow', 'auto');
 }
-
 
 //不能輸入空白鍵
 function NoSpaceKey(inputName) {
@@ -206,6 +247,8 @@ function LoginOrSignUp() {
         OpenMemberCenterBlock();
     }
 }
+
+
 
 
 $('#productInfo').click(function (event) {

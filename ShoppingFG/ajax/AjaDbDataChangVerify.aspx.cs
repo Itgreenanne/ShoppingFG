@@ -76,9 +76,8 @@ namespace ShoppingFG.ajax
                     Response.Write(msgReturn);
                     Response.End();
                 }
-                else if (memberLastNameCompare != userInfo.LastName || memberFirstNameCompare != userInfo.FirstName) {
-                    //Session["userInfo.LastName"] = memberLastNameCompare;
-                    //Session["userInfo.FirstName "]= memberFirstNameCompare;
+                else if (memberLastNameCompare != userInfo.LastName || memberFirstNameCompare != userInfo.FirstName) 
+                {
                     userInfo.LastName = memberLastNameCompare;
                     userInfo.FirstName = memberFirstNameCompare;
                     Session["userInfo"] = userInfo;

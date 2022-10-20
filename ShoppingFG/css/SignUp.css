@@ -72,6 +72,8 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: space-between;
+    width: 300px;
 }
 
 .signUpInputIdNo {
@@ -197,6 +199,13 @@
         float: left;
         text-align: right;
     }
+
+    .regGenderInput {
+        width: 150px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 }
 
 @media(min-width: 500px) { 
@@ -214,6 +223,13 @@
         width: 300px;
         height: 25px;
         font-size: 18px;
+    }
+
+    .regGenderInput {
+        width: 300px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
 }
 
@@ -240,7 +256,7 @@
     }
 
     .chkGender {
-        width: 150px;
+        width: 125px;
         float: left;
         text-align: right;
         font-size: 26px;
@@ -249,7 +265,9 @@
     .regGenderInput {
         display: flex;
         font-size: 25px;
+        width: 350px;
         align-items: center;
+        justify-content: space-around;
     }
 }
 

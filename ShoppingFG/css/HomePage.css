@@ -2,6 +2,13 @@
     height: 100%;
 }
 
+.homePageLogo {
+    display: block;
+    width: 300px;
+    height: 75px;
+    margin: auto;
+}
+
 .pageHead {
     display: flex;
     flex-direction: row;
@@ -14,13 +21,13 @@
     margin-left: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap;   
 }
 
 .firstNameShown {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap;  
 }
 
 .searchBar {
@@ -130,6 +137,13 @@ height: 10px;
         height: 30px;
     }
 
+    .firstNameShown {
+        width: 55px;
+    }
+
+    .lastNameShown {
+        width: 55px;
+    }
     .cartAndUserPic {
         display: flex;
         justify-content: flex-end;
@@ -148,7 +162,7 @@ height: 10px;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-around;
-        width: 85px;
+        width: 120px;
     }
 
     .productContainer {
@@ -169,7 +183,7 @@ height: 10px;
         justify-content: space-evenly;
     }
     .searchBar {
-        width: 50%;
+        width: 300px;
     }
 
     .searchBlock {
@@ -187,7 +201,6 @@ height: 10px;
     }
 }
 
-
 @media(min-width: 720px) {
 
     .pageHead {
@@ -195,10 +208,11 @@ height: 10px;
         flex-direction: row;
         margin-top: 10px;
         align-items: center;
-        justify-content: space-around;    
+        justify-content: space-around;
     }
+
     .searchBar {
-        width: 50%;
+        width: 450px;
     }
 
     .searchBlock {
@@ -211,6 +225,18 @@ height: 10px;
         flex-flow: row wrap;
         justify-content: flex-start;
         flex-wrap: wrap;
+    }
+
+    .memberName {
+        width: 250px;
+    }
+
+    .firstNameShown {
+        width: 110px;
+    }
+
+    .lastNameShown {
+        width: 110px;
     }
 }
 

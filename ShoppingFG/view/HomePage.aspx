@@ -23,10 +23,11 @@
 <body class="no-scroll">
     <div id="overlay"></div>
     <div id="overlay1"></div>
-    <div id="content">
+    <div class="content" id="content">
+        <img src="/images/logo.png" class="homePageLogo" id="homePageLogo" onclick="GetAllProduct()"/>
         <div class="pageHead" id="pageHeadBefore">
           <div class="searchBlock">
-            <input type="text" class="searchBar" id="searchBarBefore"oninput="NoSpaceKey()" value=""/>
+            <input type="text" class="searchBar" id="searchBar" oninput="NoSpaceKey('searchBar')" value=""/>
             <img src="/images/graysearch.png" class="homePageSearch" onclick = "SortProduct()"/>
           </div>
           <div class="memberName">
@@ -39,7 +40,9 @@
           </div>
         </div>     
         
-        <div class="productContainer" id="productContainer"></div>
+        <span class="noProductMessage" id="noProductMessage"></span>
+        <div class="productContainer" id="productContainer">            
+        </div>
 
         <div class="loginBlock" id="loginBlock">
              <img src="/images/logo.png" class="shoppingLogo"/>
@@ -194,8 +197,9 @@
         </div>
 
          </div>
-         <div class="pwdModify" id="pwdModify">
+           <div class="pwdModify" id="pwdModify">
               <span class="pwdSetting">修改密碼</span>
+               <div class="pwdModifyBlock">
                  <div class="pwdModifyBox">
                     <label for="inputOldPwd">請輸入舊密碼： </label>
                     <input type="password" class="inputOldPwd" id="inputOldPwd" autocomplete="off" onchange="PwdVerify(this)" value=""/><br/>
@@ -208,6 +212,7 @@
                     <label for="newPwdConfirm">請再重覆一次： </label>
                     <input type="password" class="newPwdConfirm" id="newPwdConfirm" autocomplete="off" onchange="PwdVerify(this)" value=""/><br/>
                 </div>
+           </div>
                 <div class="btnSettingGroup">
                   <button class="btnsettingConfirm" id="btnPwdConfirm" onclick="SetModifiedPwd()">確定</button>
                   <button class="btnCancelContent" id="btnleavePwdBlock" onclick="LeavePwdBlock()">取消</button>
