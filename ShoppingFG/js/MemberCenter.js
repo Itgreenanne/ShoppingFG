@@ -2,9 +2,9 @@
 
 //開啟會員帳號設定視窗
 function OpenSettingBlock() {
-    $('#setting').css('background-color', '#87CEFA');
-    $('#setting').css('color', 'white');
-    $('#setting').css('font-weight', 'bold');
+    //$('#setting').css('background-color', '#87CEFA');
+    //$('#setting').css('color', 'white');
+    //$('#setting').css('font-weight', 'bold');
     $('#memberCenterlogo').hide();
     $('#functionContent').show();
     $('#settingBlock').show();
@@ -223,7 +223,7 @@ function MemberCenterTelVerify(el) {
     }
 }
 
-//const button = document.querySelector('.btnMemberGroup');
+//const button = $('.btnMemberGroup');
 
 //button.addEventListener('click', (e) => {
 //    const isButton = e.target.nodeName === 'BUTTON';
@@ -234,6 +234,29 @@ function MemberCenterTelVerify(el) {
 // });
 
 $('#setting').on('click', function () {
-    $('#setting').removeClass('selected');
-    $(this).addClass('.btnMemberGroup ');
+    $('#cart').removeClass('.btnMemberGroup');
+    $('#myOrder').removeClass('.btnMemberGroup');
+    $('#logout').removeClass('.btnMemberGroup');    
+    $(this).addClass('.btnMemberGroupPressed');
+});
+
+$('#cart').on('click', function () {
+    $('#setting').removeClass('.btnMemberGroup');
+    $('#myOrder').removeClass('.btnMemberGroup');
+    $('#logout').removeClass('.btnMemberGroup');
+    $(this).addClass('.btnMemberGroupPressed');
+});
+
+$('#myOrder').on('click', function () {
+    $('#cart').removeClass('.btnMemberGroup');
+    $('#setting').removeClass('.btnMemberGroup');
+    $('#logout').removeClass('.btnMemberGroup');
+    $(this).addClass('.btnMemberGroupPressed');
+});
+
+$('#logout').on('click', function () {
+    $('#cart').removeClass('.btnMemberGroup');
+    $('#myOrder').removeClass('.btnMemberGroup');
+    $('#setting').removeClass('.btnMemberGroup');
+    $(this).addClass('.btnMemberGroupPressed');
 });

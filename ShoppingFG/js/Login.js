@@ -3,6 +3,7 @@
 function LoginVerify() {  
     var loginIdInput = $('#inputIdNo').val();
     var loginPwdInput = $('#inputPwd').val();
+    console.log('login.js',productInfoGlobal);
 
     if (!loginIdInput || !loginPwdInput) {
         alert('請輸入帳號密碼');

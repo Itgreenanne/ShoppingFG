@@ -71,11 +71,14 @@
     <Content Include="css\HomePage.css" />
     <Content Include="css\Login.css" />
     <Content Include="css\MemberCenter.css" />
+    <Content Include="css\ProductPage.css" />
     <Content Include="css\SignUp.css" />
     <Content Include="js\HomePage.js" />
     <Content Include="js\Login.js" />
     <Content Include="js\MemberCenter.js" />
+    <Content Include="js\ProductPage.js" />
     <Content Include="js\SignUp.js" />
+    <Content Include="js\StartHomePage.js" />
     <Content Include="view\HomePage.aspx" />
     <Content Include="view\ProductPage.aspx" />
     <Content Include="Web.config" />

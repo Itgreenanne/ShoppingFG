@@ -109,19 +109,7 @@
     color: #0277BD;
 }
 
-/*/*#setting:active, active {
-    background-color: #87CEFA;
-    color: white;
-    font-weight: bold;
-}
-
-#setting:focus {
-    background-color: #87CEFA;
-    color: white;
-    font-weight: bold;
-}*/
-
-.btnMemberGroup selected {
+.btnMemberGroupPressed {
     background-color: #87CEFA;
     color: white;
     font-weight: bold;

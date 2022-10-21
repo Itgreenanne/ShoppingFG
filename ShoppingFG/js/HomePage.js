@@ -1,8 +1,6 @@
-﻿$(document).ready(function () {
-    BlockClear();
-    GetAllProduct();
-
-})
+﻿var sessionBool = true;
+var productInfoGlobal;
+var memberInfo;
 
 //讀取所有產品資訊並列印在產品div
 function GetAllProduct() {
@@ -12,7 +10,8 @@ function GetAllProduct() {
         success: function (data) {
             if (data) {
                 var jsonResult = JSON.parse(data);
-                console.log(jsonResult);
+                productInfoGlobal = jsonResult;
+                console.log('data from getallproduct', productInfoGlobal);
                 sessionBool = jsonResult['SessionIsNull'];
                 memberInfo = jsonResult.UserInfo;
                 if (jsonResult['SessionIsNull'] == true) {
@@ -40,6 +39,7 @@ function GetAllProduct() {
 
 //用關鍵字模糊搜尋標題裡有同樣字的產品
 function SortProduct() {
+    $('#noProductMessage').html('');
     var keyWord = $('#searchBar').val();
     console.log("keyWord=", keyWord);
     if (!keyWord) {
@@ -83,15 +83,12 @@ function SortProduct() {
     }
 }
 
-var sessionBool;
-var productInfoGlobal;
-var memberInfo;
-
 setInterval('StatusVerify()', 3000);
 
 //讀取DB資玖比較密碼是否被改變，是的話就強制會員登出
 function StatusVerify() {
     if (!sessionBool) {
+        console.log('seesionBool',sessionBool);
         $.ajax({
             url: '/ajax/AjaDbDataChangVerify.aspx',
             type: 'POST',
@@ -147,14 +144,12 @@ function BlockClear() {
 function PrintProductDiv(jsonResult) {
     $('#productContainer').html('');
     var productTitleShown = jsonResult;
-    //將區域變數值傳給全域變數
-    productInfoGlobal = jsonResult;
     var productInfo = '';    
 
     for (var i = 0; i < jsonResult.length; i++) {
         productInfo +=
             '<div class="productInfo">' +
-            '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg"></div>' +
+            '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg" id = "productImg" onclick = " window.location.href = \'/view/ProductPage.aspx\'" target = "_self" /></div > ' +
             '<div class="productTitle">' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
             '<div class="priceStyle">' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
             '<div><img src="/images/Qtn1.png" class="qtnImg">' + jsonResult[i].ProductQtn + '</div >'+          
@@ -251,7 +246,12 @@ function LoginOrSignUp() {
 
 
 
-$('#productInfo').click(function (event) {
-    window.location.href = '/view/ProductPage.aspx';
+//$('#productImg').click(function (event) {
+//    window.location.href = '/view/ProductPage.aspx';
+//})
 
-})
+//var productImgForEvent = $('#productImg');
+
+//productImgForEvent.addEventListener('click', (e) => {
+//    window.location.href = '/view/ProductPage.aspx';
+// })

@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.homePageLogo {
+.homePageLogo {  
     display: block;
     width: 300px;
     height: 75px;
@@ -32,13 +32,13 @@
     margin-left: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;   
+    white-space: nowrap;
 }
 
 .firstNameShown {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;  
+    white-space: nowrap;
 }
 
 .searchBar {
@@ -81,57 +81,79 @@
     color: grey;
 }
 
-.productContainer {
-    margin-top: 10px;
+.productInfoBlock {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-}
-
-.productInfo {
-    width: 160px;
-    max-height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
     flex-direction: column;
-    text-align: center;
-    float: left;
-    word-break: break-all;
-    margin-right: 10px;
-    margin-left: 20px;
     align-items: center;
-    color: grey;
+    justify-content: flex-start;
+    font-size: 40px;
+    color: grey;   
 }
 
-.productTitle {
-    width: 160px;
+.productImgInProductPage {
+    width: 675px;
+    height: 800px;
+}
+
+.productImgDiv {
+    width: 675px;
+    height: 800px;
+}
+
+.ProductInfoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 675px;
+}
+
+.productTitleInProductPage {
+    width: 675px;
+    height: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.productImg {
-    width: 180PX;
-    margin-top: 10px;
-    height: 190px;
-}
-
-.shoppingLogo {
-    width: 400px;
-    height: 100px;
-}
-
-/*產品庫存數量示意圖片*/
-.qtnImg {
-width: 10px;
-height: 10px;
-}
-
-/*設定價格字體粗體*/
-.priceStyle {
+    font-size: 50px;
     font-weight: bold;
 }
+
+.productPriceInProductPage {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.productQtnInProductPage {
+    display: flex;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.productDetailInProductPage {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.unitPricePic {
+    width: 50px;
+    height: 50px;
+}
+
+.qtnPic {
+    width: 50px;
+    height: 50px;
+}
+
+.btnAddToCart {
+    width: 300px;
+    height: 100px;
+    margin-top: 50px;
+    border: solid 1px #26C6DA;
+    background-color: #E0F7FA;
+    font-size: 50px;
+    color: #0277BD;
+    transform: translate(50%);
+}
+
 
 /*給最小寬度320px*/
 @media(min-width: 320px) {
@@ -147,7 +169,7 @@ height: 10px;
         width: 150px;
     }
 
-    .searchBlock {     
+    .searchBlock {
         width: 185px;
         height: 30px;
     }
@@ -159,15 +181,17 @@ height: 10px;
     .lastNameShown {
         width: 55px;
     }
+
     .cartAndUserPic {
         display: flex;
         justify-content: flex-end;
-    }   
+    }
 
     .homePageCart {
         width: 25px;
         height: 25px;
     }
+
     .homePageUser {
         width: 25px;
         height: 25px;
@@ -179,14 +203,6 @@ height: 10px;
         justify-content: space-around;
         width: 120px;
     }
-
-    .productContainer {
-        margin-top: 10px;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
 }
 
 @media(min-width: 500px) {
@@ -197,6 +213,7 @@ height: 10px;
         align-items: center;
         justify-content: space-evenly;
     }
+
     .searchBar {
         width: 300px;
     }
@@ -209,10 +226,10 @@ height: 10px;
         width: 50px;
         height: 50px;
     }
-    
+
     .homePageUser {
         width: 50px;
-        height: 50px;        
+        height: 50px;
     }
 }
 
@@ -234,14 +251,6 @@ height: 10px;
         width: 380px;
     }
 
-    .productContainer {
-        margin-top: 10px;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-    }
-
     .memberName {
         width: 250px;
     }
@@ -254,32 +263,4 @@ height: 10px;
         width: 110px;
     }
 }
-
-
-#overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(0,0,0,0.7);
-}
-
-#overlay1 {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-    background-color: rgba(0,0,0,0.7);
-}
-
-
-
 
