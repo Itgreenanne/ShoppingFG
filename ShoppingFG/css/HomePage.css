@@ -31,14 +31,16 @@
 .lastNameShown {
     margin-left: 5px;
     overflow: hidden;
+    word-wrap: break-word;
     text-overflow: ellipsis;
-    white-space: nowrap;   
+    white-space: nowrap;
 }
 
 .firstNameShown {
     overflow: hidden;
+    word-wrap: break-word;
     text-overflow: ellipsis;
-    white-space: nowrap;  
+    white-space: nowrap;
 }
 
 .searchBar {
@@ -76,9 +78,10 @@
     width: 30px;
 }
 
-.noProductMessage {
+.productMessage {
     margin-top: 10px;
     color: grey;
+    font-size: 30px;
 }
 
 .productContainer {

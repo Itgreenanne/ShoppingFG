@@ -39,7 +39,7 @@ function GetAllProduct() {
 
 //用關鍵字模糊搜尋標題裡有同樣字的產品
 function SortProduct() {
-    $('#noProductMessage').html('');
+    $('#productMessage').text('');
     var keyWord = $('#searchBar').val();
     console.log("keyWord=", keyWord);
     if (!keyWord) {
@@ -64,7 +64,7 @@ function SortProduct() {
                     } else if (jsonResult == 2) {
                         alert('標題輸入超過100字元');
                     } else if (jsonResult == 9) {                        
-                        $('#noProductMessage').text('無此產品，請重新搜尋');
+                        $('#productMessage').text('無此產品，請重新搜尋');
                         $('#productContainer').html('');
                     } else {
                         PrintProductDiv(jsonResult);
@@ -83,7 +83,7 @@ function SortProduct() {
     }
 }
 
-setInterval('StatusVerify()', 3000);
+//setInterval('StatusVerify()', 3000);
 
 //讀取DB資玖比較密碼是否被改變，是的話就強制會員登出
 function StatusVerify() {
@@ -149,7 +149,7 @@ function PrintProductDiv(jsonResult) {
     for (var i = 0; i < jsonResult.length; i++) {
         productInfo +=
             '<div class="productInfo">' +
-            '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg" id = "productImg" onclick = " window.location.href = \'/view/ProductPage.aspx\'" target = "_self" /></div > ' +
+        '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg" id = "productImg" onclick = " window.location.href = \'/view/ProductPage.aspx?id='+ jsonResult[i].ProductId +'\'" target = "_self" /></div > ' +
             '<div class="productTitle">' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
             '<div class="priceStyle">' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
             '<div><img src="/images/Qtn1.png" class="qtnImg">' + jsonResult[i].ProductQtn + '</div >'+          
@@ -165,8 +165,7 @@ function OpenLoginBlock() {
     $('#overlay').show();
     ResetAll();
     $('.no-scroll').css('overflow', 'hidden');
-    $('#loginBlock').show()
-        
+    $('#loginBlock').show();        
 }
 
 //關閉登入div
@@ -194,7 +193,8 @@ function OpenMemberCenterBlock() {
 }
 
 //關閉帳號設定視窗
-function CancelContent() {    
+function CancelContent() {
+    $('#setting').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
     $('#functionContent').hide();
     $('#memberCenterlogo').show();
     ResetAll();
@@ -215,6 +215,10 @@ function LeaveSignUpBlock() {
     $('#signUpBlock').hide();
     $('#loginBlock').show();
     $('.no-scroll').css('overflow', 'auto');
+}
+
+function OpenCart() {
+
 }
 
 //不能輸入空白鍵

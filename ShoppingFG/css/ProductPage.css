@@ -1,84 +1,8 @@
-﻿body {
-    height: 100%;
-}
-
-.content {
-    display: flex;
-    flex-wrap: nowrap;
-    max-width: 100%;
-    flex-direction: column;
-    align-items: center;
-    align-content: space-between;
-    justify-content: center;
-}
-
-.homePageLogo {  
+﻿.homePageLogo {
     display: block;
     width: 300px;
     height: 75px;
     margin: auto;
-}
-
-.pageHead {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-}
-
-.lastNameShown {
-    margin-left: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.firstNameShown {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.searchBar {
-    width: 500px;
-    height: 50px;
-    font-size: 20px;
-    text-align: left;
-    font-size: 20px;
-    color: grey;
-    border: 0;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.searchBlock {
-    display: flex;
-    width: 550px;
-    height: 55px;
-    outline: solid 1px grey;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.homePageSearch {
-    width: 30px;
-    margin-right: 1px;
-}
-
-.homePageCart {
-    width: 30px;
-}
-
-.homePageUser {
-    margin-right: 7px;
-    width: 30px;
-}
-
-.noProductMessage {
-    margin-top: 10px;
-    color: grey;
 }
 
 .productInfoBlock {
@@ -109,9 +33,9 @@
 
 .productTitleInProductPage {
     width: 675px;
-    height: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-wrap: break-word;
     font-size: 50px;
     font-weight: bold;
 }
@@ -141,6 +65,15 @@
 .qtnPic {
     width: 50px;
     height: 50px;
+}
+
+.detailContent {
+    width: 675px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 50px;
+    font-weight: bold;
+    word-wrap: break-word;
 }
 
 .btnAddToCart {

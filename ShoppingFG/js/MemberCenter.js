@@ -1,10 +1,8 @@
 ﻿var globalMember;
 
 //開啟會員帳號設定視窗
-function OpenSettingBlock() {
-    //$('#setting').css('background-color', '#87CEFA');
-    //$('#setting').css('color', 'white');
-    //$('#setting').css('font-weight', 'bold');
+function OpenSettingBlock() {    
+    $('#setting').removeClass('btnMemberGroup').addClass('btnMemberGroupPressed');
     $('#memberCenterlogo').hide();
     $('#functionContent').show();
     $('#settingBlock').show();
@@ -233,30 +231,28 @@ function MemberCenterTelVerify(el) {
 //    e.target.style.background = '#87CEFA';
 // });
 
-$('#setting').on('click', function () {
-    $('#cart').removeClass('.btnMemberGroup');
-    $('#myOrder').removeClass('.btnMemberGroup');
-    $('#logout').removeClass('.btnMemberGroup');    
-    $(this).addClass('.btnMemberGroupPressed');
+$(this).on('click', function() {
+ /*   $('.btnMemberBox button').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');  */ 
+    $(this).addClass('btnMemberGroupPressed');
 });
 
-$('#cart').on('click', function () {
-    $('#setting').removeClass('.btnMemberGroup');
-    $('#myOrder').removeClass('.btnMemberGroup');
-    $('#logout').removeClass('.btnMemberGroup');
-    $(this).addClass('.btnMemberGroupPressed');
-});
+//$('#cart').on('click', function () {
+//    $('#setting').removeClass('.btnMemberGroup');
+//    $('#myOrder').removeClass('.btnMemberGroup');
+//    $('#logout').removeClass('.btnMemberGroup');
+//    $(this).addClass('.btnMemberGroupPressed');
+//});
 
-$('#myOrder').on('click', function () {
-    $('#cart').removeClass('.btnMemberGroup');
-    $('#setting').removeClass('.btnMemberGroup');
-    $('#logout').removeClass('.btnMemberGroup');
-    $(this).addClass('.btnMemberGroupPressed');
-});
+//$('#myOrder').on('click', function () {
+//    $('#cart').removeClass('.btnMemberGroup');
+//    $('#setting').removeClass('.btnMemberGroup');
+//    $('#logout').removeClass('.btnMemberGroup');
+//    $(this).addClass('.btnMemberGroupPressed');
+//});
 
-$('#logout').on('click', function () {
-    $('#cart').removeClass('.btnMemberGroup');
-    $('#myOrder').removeClass('.btnMemberGroup');
-    $('#setting').removeClass('.btnMemberGroup');
-    $(this).addClass('.btnMemberGroupPressed');
-});
+//$('#logout').on('click', function () {
+//    $('#cart').removeClass('.btnMemberGroup');
+//    $('#myOrder').removeClass('.btnMemberGroup');
+//    $('#setting').removeClass('.btnMemberGroup');
+//    $(this).addClass('.btnMemberGroupPressed');
+//});

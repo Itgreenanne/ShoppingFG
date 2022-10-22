@@ -39,7 +39,7 @@
           </div>
         </div>     
         
-        <div class="noProductMessage" id="noProductMessage"></div>
+        <div class="productMessage" id="productMessage"></div>
         <div class="productContainer" id="productContainer">            
         </div>
 
@@ -124,10 +124,10 @@
             <img src="/images/leave.png" class="leaveMemberCenter" id="leaveMemberCenter" onclick="LeaveMemberCenter()"/>
             <span class="memberCenterTitle">會員中心</span>
             <div class="btnMemberBox">
-                <button class="btnMemberGroup btnMemberGroupPressed" id="setting" onclick="OpenSettingBlock()">帳號設定</button>
-                <button class="btnMemberGroup btnMemberGroupPressed" id="cart" onclick="OpenCartBlock()">購物車</button>
-                <button class="btnMemberGroup btnMemberGroupPressed" id="myOrder" onclick="OpenMyOrder()">我的訂單</button>
-                <button class="btnMemberGroup btnMemberGroupPressed" id="logout" onclick="Logout()">登出</button>            
+                <button class="btnMemberGroup" id="setting" onclick="OpenSettingBlock()">帳號設定</button>
+                <button class="btnMemberGroup" id="cart" onclick="OpenCartBlock()">購物車</button>
+                <button class="btnMemberGroup" id="myOrder" onclick="OpenMyOrder()">我的訂單</button>
+                <button class="btnMemberGroup" id="logout" onclick="Logout()">登出</button>            
             </div>
             <div class="memberCenterlogo" id="memberCenterlogo">
                 <img src="/images/logo.png" class="memberCenterlogoPic"/>  

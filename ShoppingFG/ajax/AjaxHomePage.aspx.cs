@@ -100,7 +100,6 @@ namespace ShoppingFG.ajax
                 SqlDataReader reader = cmd.ExecuteReader();
                 List<ProductDataArray> productArray = new List<ProductDataArray>();
 
-                //判斷是否有此職責存在
                 if (reader.HasRows)
                 {
                     while (reader.Read())
