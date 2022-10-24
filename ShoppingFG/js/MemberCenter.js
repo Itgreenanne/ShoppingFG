@@ -159,6 +159,7 @@ function Logout() {
         url: '/ajax/AjaxFrontUser.aspx?fn=Logout',
         type: 'POST',       
     });
+    localStorage.removeItem('cartItem');
     window.location.href = '/view/HomePage.aspx';
 }
 
@@ -231,10 +232,10 @@ function MemberCenterTelVerify(el) {
 //    e.target.style.background = '#87CEFA';
 // });
 
-$(this).on('click', function() {
- /*   $('.btnMemberBox button').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');  */ 
-    $(this).addClass('btnMemberGroupPressed');
-});
+//$(this).on('click', function() {
+// /*   $('.btnMemberBox button').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');  */ 
+//    $(this).addClass('btnMemberGroupPressed');
+//});
 
 //$('#cart').on('click', function () {
 //    $('#setting').removeClass('.btnMemberGroup');

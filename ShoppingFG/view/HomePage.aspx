@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="/css/Login.css"/>
     <link rel="stylesheet" href="/css/SignUp.css"/>
     <link rel="stylesheet" href="/css/MemberCenter.css"/>
+    <link rel="stylesheet" href="/css/Cart.css"/>
+    <link rel="stylesheet" href="/css/Order.css"/>
+
+
 
 </head>
     <script src="/js/jquery-2.1.4.js"></script>
@@ -18,6 +22,8 @@
     <script type="text/javascript" src="/js/Login.js"> </script>
     <script type="text/javascript" src="/js/SignUp.js"> </script>
     <script type="text/javascript" src="/js/MemberCenter.js"> </script>
+    <script type="text/javascript" src="/js/Cart.js"> </script>
+    <script type="text/javascript" src="/js/Order.js"> </script>
 
 <body class="no-scroll">
     <div id="overlay"></div>
@@ -40,8 +46,8 @@
         </div>     
         
         <div class="productMessage" id="productMessage"></div>
-        <div class="productContainer" id="productContainer">            
-        </div>
+        <div class="productContainer" id="productContainer"></div>    
+        
 
         <div class="loginBlock" id="loginBlock">
              <img src="/images/logo.png" class="shoppingLogo"/>
@@ -189,13 +195,14 @@
                     </div>
                 </div>  
          
-            <div class="cartBlock" id="cartBlock">
+              <div class="cartBlock" id="cartBlock">
+              </div>
+              <div class="myOrderBlock" id="myOrderBlock">
+              </div>       
             </div>
-            <div class="myOrderBlock" id="myOrderBlock">
-            </div>       
-        </div>
 
          </div>
+
            <div class="pwdModify" id="pwdModify">
               <span class="pwdSetting">修改密碼</span>
                <div class="pwdModifyBlock">
@@ -211,14 +218,50 @@
                     <label for="newPwdConfirm">請再重覆一次： </label>
                     <input type="password" class="newPwdConfirm" id="newPwdConfirm" autocomplete="off" onchange="PwdVerify(this)" value=""/><br/>
                 </div>
-           </div>
+               </div>
                 <div class="btnSettingGroup">
                   <button class="btnsettingConfirm" id="btnPwdConfirm" onclick="SetModifiedPwd()">確定</button>
                   <button class="btnCancelContent" id="btnleavePwdBlock" onclick="LeavePwdBlock()">取消</button>
                 </div>
+           </div>
+
+
+            <div class="cartAtHomePage" id="cartAtHomePage">
+              <img src="/images/logo.png" class="shoppingLogo"/>
+              <span class="myCartTitle">我的購物車</span>
+              <div class="productList" id="productList">
+                 <table class="productTable" id="productTable"></table>
+                 <div class="labelInCart">總額：</div>
+                 <div class="labelInCart" id="totalInCart"></div><br/>
+                 <div class="pointInputBlock">
+                       <label for="inputPoint" class="labelInCart">請輸入折抵點數： </label>
+                       <input type="number" class="inputPoint" id="inputPoint" autocomplete="off" onchange="PointVerify(this)" value=""/><br/>
+                       <div  class="labelInCart">目前擁有點數：</div>
+                       <div class="labelInCart" id="pointOwned"></div>     
+                 </div>
+                 <button class="btnCart" id="btnCheckOut" onclick ="CheckOut()">結帳</button>
+              </div>
+              <button class="btnCart" id="btnKeepShopping" onclick="LeaveCartBlock()">繼續購物</button>
             </div>
 
+
+      <%--      <div class="orderBlock" id="orderBlock">
+              <img src="/images/logo.png" class="shoppingLogo"/>
+              <span class="myOrderTitle">我的訂單</span>
+              <div class="orderList" id="orderList">
+                 <table class="orderTable" id="orderTable"></table>
+                
+              </div>
+              <button class="btnOrder" id="btnOrderComfirm" onclick ="OrderConfirm()">確定</button>
+              <button class="btnOrder" id="btnBacktoCart" onclick="OpenCart()">回購物車</button>
+            </div>--%>
+
+    </div>
+
+
+
+
      
-   </div>
+  
 </body>
 </html>

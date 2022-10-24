@@ -138,6 +138,8 @@ function BlockClear() {
     $('#pageHeadAfter').hide();
     $('#memberCenter').hide();
     $('#pwdModify').hide();
+    $('#cartAtHomePage').hide();
+    $('#orderBlock').hide();
 }
 
 //顯示產品
@@ -217,8 +219,26 @@ function LeaveSignUpBlock() {
     $('.no-scroll').css('overflow', 'auto');
 }
 
+//彈跳出我的購物車div
 function OpenCart() {
+    console.log('session=', sessionBool);
+    $('#overlay').show();
+    $('#cartAtHomePage').show();
+    if (sessionBool || localStorage.length == 0) {
+        localStorage.removeItem('cartItem');
+        localStorage.clear();
+        $('#productList').html('');
 
+    } else {
+        PrintAllItem();
+    }
+}
+
+//離開我的購物車div
+function LeaveCartBlock() {
+    $('#overlay').hide();
+    $('#cartAtHomePage').hide();
+    localStorage.setItem('cartItem', JSON.stringify(productInfoInCart));
 }
 
 //不能輸入空白鍵

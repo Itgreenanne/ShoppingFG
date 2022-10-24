@@ -30,7 +30,7 @@ function ReadProductInfo(productId) {
                     var jsonResult = JSON.parse(data);
                     productInfo = jsonResult.ProductInfo[0];
                     sessionIsNull = jsonResult.SessionIsNull;
-                    ShoProductInfo(productInfo);
+                    ShowProductInfo(productInfo);
                 }
             } else {
                 alert('資料錯誤');
@@ -46,7 +46,7 @@ function ReadProductInfo(productId) {
 }
 
 //把從db讀到的產品資料顯示在產品div
-function ShoProductInfo() {
+function ShowProductInfo() {
     $('#productImgDiv').html('');
     var img = $('<img class="productImgInProductPage" id="productImgInProductPage">');
     img.attr('src', '/images/' + productInfo.ProductPic+'');
@@ -62,16 +62,45 @@ function AddToCart() {
     if (sessionIsNull) {
         OpenLoginBlock();
     } else {
-        var productToCartString = JSON.stringify(productInfo);
-        localStorage.setItem('cartItem', productToCartString); 
-        //var i;
-        //console.log("local storage");
-        //for (i = 0; i < localStorage.length; i++) {
-        //    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
-        //}
+        var myCart = localStorage.getItem('cartItem');
+        console.log('myCart=', myCart);
+        //判斷購物車裡是否已有產品，如果已有產品
+        if (myCart) {
+            myCart = JSON.parse(myCart);
+            var key = false;
+
+            //判斷購物車是否有相同產品
+            myCart.forEach(p => {
+                if (p.ProductId == productInfo.ProductId) {
+                    $('#productMessage').text('此產品已在購物車裡');
+                    key = true;
+                }
+            });
+
+            //購物車裡無此項產品
+            if (!key) {
+                myCart.push(productInfo);
+                localStorage.setItem('cartItem', JSON.stringify(myCart));
+                $('#productMessage').text('加入購物車成功');
+            }
+
+            //購物車裡無產品
+        } else {
+            var goods = productInfo;
+            var goodArray = [goods];
+            localStorage.setItem('cartItem', JSON.stringify(goodArray));
+            $('#productMessage').text('加入購物車成功');
+        }
+
+        var i;
+        console.log("local storage");
+        for (i = 0; i < localStorage.length; i++) {
+
+            console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
+        }
+        console.log(localStorage.length);
 
         $('#productInfoBlock').html('');
-        $('#productMessage').text('加入購物車成功');
     }
 }
 
