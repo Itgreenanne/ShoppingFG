@@ -13,7 +13,7 @@ using ShoppingFG.models;
 
 namespace ShoppingFG.ajax
 {
-    public partial class AjaProductPage : System.Web.UI.Page
+    public partial class AjaxProductPage : System.Web.UI.Page
     {
         public enum ProductMsg {
             /// <summary>
@@ -35,6 +35,10 @@ namespace ShoppingFG.ajax
             switch (fnselected) {
                 case "SearchProductByIdAndLoginVerify":
                     SearchProductByIdAndLoginVerify();
+                    break;
+
+                case "SearchProductByIdForCart":
+                    SearchProductByIdForCart();
                     break;
             }
         }
@@ -111,6 +115,16 @@ namespace ShoppingFG.ajax
                     conn.Dispose();
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 購物車用產品id從DB讀取產品資訊
+        /// </summary>
+        private void SearchProductByIdForCart()
+        {
+            string cartItem = Request.Form["getIdArray"];
+            JArray ItemId = JArray.Parse(cartItem);
         }
     }
 }

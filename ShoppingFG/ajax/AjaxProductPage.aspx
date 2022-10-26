@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AjaxProductPage.aspx.cs" Inherits="ShoppingFG.ajax.AjaxProductPage" %>

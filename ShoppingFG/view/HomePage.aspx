@@ -4,13 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <meta name="browsermode" content="application" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>歡迎來到Shopping</title>
     <link rel="stylesheet" href="/css/HomePage.css"/>
     <link rel="stylesheet" href="/css/Login.css"/>
     <link rel="stylesheet" href="/css/SignUp.css"/>
     <link rel="stylesheet" href="/css/MemberCenter.css"/>
-    <link rel="stylesheet" href="/css/Cart.css"/>
     <link rel="stylesheet" href="/css/Order.css"/>
 
 
@@ -132,7 +132,7 @@
             <div class="btnMemberBox">
                 <button class="btnMemberGroup" id="setting" onclick="OpenSettingBlock()">帳號設定</button>
                 <button class="btnMemberGroup" id="cart" onclick="OpenCartBlock()">購物車</button>
-                <button class="btnMemberGroup" id="myOrder" onclick="OpenMyOrder()">我的訂單</button>
+                <button class="btnMemberGroup" id="myOrder" onclick="OpenMyOrder()">訂單</button>
                 <button class="btnMemberGroup" id="logout" onclick="Logout()">登出</button>            
             </div>
             <div class="memberCenterlogo" id="memberCenterlogo">
@@ -140,8 +140,9 @@
             </div>
         
             <div class="functionContent" id="functionContent">
-                <span class="accountSetting">帳戶設定</span>
+
                 <div class="settingBlock" id="settingBlock">
+                    <span class="accountSetting">帳戶設定</span>
                     <div class="setBox">
                         <label for="setInputTel" class="labelsetTelNo">聯絡電話： </label>
                         <input type="text" class="setInputTel" id="setInputTel" autocomplete="off" onchange="MemberCenterTelVerify(this)" oninput="NoSpaceKey('setInputTel')" value=""/><br/>
@@ -195,8 +196,33 @@
                     </div>
                 </div>  
          
-              <div class="cartBlock" id="cartBlock">
+               <div class="cartBlock" id="cartBlock">
+                 <span class="myCartTitle">購物車</span>
+                 <span class="myCartTitle" id="cartMessage"></span>
+                 <div class="productList" id="productList">
+                    <table class="productTable" id="productTable"></table>
+                    <div class="balanceBlock">
+                        <div class="totalBlock">
+                        <div class="labelInCart">總額：</div>
+                        <div class="labelInCartShown" id="totalInCart"></div><br/>
+                    </div>
+                    <div class="pointInputBlock">
+                        <label for="inputPoint" class="labelInCart">請輸入折抵點數： </label>
+                        <input type="number" class="inputPoint" id="inputPoint" autocomplete="off" onchange="PointVerify(this)" value=""/><br/>
+                    </div>
+                    <div class="pointsBlock">
+                        <div  class="labelInCart">目前擁有點數：</div>
+                        <div class="labelInCartShown" id="pointOwned"></div>     
+                    </div>
+                 </div>
+                 <button class="btnCart" id="btnCheckOut" onclick ="CheckOut()">結帳</button>
+                 </div>
+                 <button class="btnCart" id="btnKeepShopping" onclick="CancelContent()">確定</button>
               </div>
+
+
+
+
               <div class="myOrderBlock" id="myOrderBlock">
               </div>       
             </div>
@@ -226,42 +252,17 @@
            </div>
 
 
-            <div class="cartAtHomePage" id="cartAtHomePage">
-              <img src="/images/logo.png" class="shoppingLogo"/>
-              <span class="myCartTitle">我的購物車</span>
-              <div class="productList" id="productList">
-                 <table class="productTable" id="productTable"></table>
-                 <div class="labelInCart">總額：</div>
-                 <div class="labelInCart" id="totalInCart"></div><br/>
-                 <div class="pointInputBlock">
-                       <label for="inputPoint" class="labelInCart">請輸入折抵點數： </label>
-                       <input type="number" class="inputPoint" id="inputPoint" autocomplete="off" onchange="PointVerify(this)" value=""/><br/>
-                       <div  class="labelInCart">目前擁有點數：</div>
-                       <div class="labelInCart" id="pointOwned"></div>     
-                 </div>
-                 <button class="btnCart" id="btnCheckOut" onclick ="CheckOut()">結帳</button>
-              </div>
-              <button class="btnCart" id="btnKeepShopping" onclick="LeaveCartBlock()">繼續購物</button>
-            </div>
 
-
-      <%--      <div class="orderBlock" id="orderBlock">
-              <img src="/images/logo.png" class="shoppingLogo"/>
-              <span class="myOrderTitle">我的訂單</span>
-              <div class="orderList" id="orderList">
-                 <table class="orderTable" id="orderTable"></table>
-                
+          <div class="orderBlock" id="orderBlock">
+             <img src="/images/logo.png" class="shoppingLogo" />
+             <span class="myOrderTitle">訂單</span>
+             <div class="orderList" id="orderList">
+                 <table class="orderTable" id="orderTable"></table>                
               </div>
               <button class="btnOrder" id="btnOrderComfirm" onclick ="OrderConfirm()">確定</button>
               <button class="btnOrder" id="btnBacktoCart" onclick="OpenCart()">回購物車</button>
-            </div>--%>
-
+            </div>
     </div>
-
-
-
-
-     
   
 </body>
 </html>

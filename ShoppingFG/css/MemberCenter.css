@@ -261,10 +261,93 @@
     margin-left: 20px;
 }
 
+.productTable {
+    font-size: 16px;
+    width: 300px;
+}
+
+.productList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+    .productList td {
+        align-items: center;
+    }
+
+.productTitleInCart {
+    max-width: 100px;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.productTable th {
+    width: 100px;
+}
+
+.itemQtnInCart {
+    width: 20px;
+}
+
+.trashCanImg {
+    width: 40%;
+}
+
+.totalBlock {
+    display: flex;
+}
+
+.pointInputBlock {
+    display: flex;
+    align-items: center;
+}
+
+.pointsBlock {
+    display: flex;
+    align-items: center;
+}
+
+.inputPoint {
+    width: 50px;
+}
+
+.balanceBlock {
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.labelInCart {
+    width: 160px;
+    text-align: left;
+}
+
+.labelInCartShown {
+    width: 58px;
+}
+
+.btnCart {
+    margin-top: 10px;
+    width: 80px;
+    height: 30px;
+    margin-top: 20px;
+    border: solid 1px #26C6DA;
+    background-color: #E0F7FA;
+    font-size: 15px;
+    color: #0277BD;
+}
+
 @media(min-width: 320px) {
 
     .memberCenter {
-        width: 300px;
+        width: 340px;
     }
 
     .btnMemberBox {
@@ -354,6 +437,26 @@
         border: none;
         outline: solid 1px #00BCD4;
   }
+
+  .cartBlock {
+        margin-top: 10px;
+        width: 280px;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+  }
+
+  .shoppingLogo {
+        width: 250px;
+        height: 62.5px;
+  }
+
+  .productTable {
+        width: 340px;
+  }
 }
 
 @media(min-width: 500px) {
@@ -436,6 +539,18 @@
         text-align: center;
         margin-bottom: 20px;
     }
+
+    .cartBlock {
+    }
+
+    .shoppingLogo {
+        width: 380px;
+        height: 95px;
+    }
+
+    .productTable {
+        width: 300px;
+    } 
 }
 
 @media(min-width: 720px) {
@@ -481,6 +596,12 @@
         margin-left: 60px;
         width: 100px;
         height: 50px;
+    }
+    .cartBlock {
+    }
+
+    .productTable {
+        width: 490px;
     }
 }
 

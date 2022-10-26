@@ -68,8 +68,7 @@
     <Content Include="ajax\AjaxLogin.aspx" />
     <Content Include="ajax\AjaxFrontUser.aspx" />
     <Content Include="ajax\AjaDbDataChangVerify.aspx" />
-    <Content Include="ajax\AjaProductPage.aspx" />
-    <Content Include="css\Cart.css" />
+    <Content Include="ajax\AjaxProductPage.aspx" />
     <Content Include="css\HomePage.css" />
     <Content Include="css\Login.css" />
     <Content Include="css\MemberCenter.css" />
@@ -117,12 +116,12 @@
     <Compile Include="ajax\AjaDbDataChangVerify.aspx.designer.cs">
       <DependentUpon>AjaDbDataChangVerify.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ajax\AjaProductPage.aspx.cs">
-      <DependentUpon>AjaProductPage.aspx</DependentUpon>
+    <Compile Include="ajax\AjaxProductPage.aspx.cs">
+      <DependentUpon>AjaxProductPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ajax\AjaProductPage.aspx.designer.cs">
-      <DependentUpon>AjaProductPage.aspx</DependentUpon>
+    <Compile Include="ajax\AjaxProductPage.aspx.designer.cs">
+      <DependentUpon>AjaxProductPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="appCode\IsPwdChangeVerify.cs">
       <SubType>ASPXCodeBehind</SubType>

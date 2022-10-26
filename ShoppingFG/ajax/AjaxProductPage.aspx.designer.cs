@@ -11,7 +11,7 @@ namespace ShoppingFG.ajax
 {
 
 
-    public partial class AjaProductPage
+    public partial class AjaxProductPage
     {
     }
 }

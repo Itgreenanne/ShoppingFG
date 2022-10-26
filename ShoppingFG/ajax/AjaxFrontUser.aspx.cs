@@ -91,8 +91,7 @@ namespace ShoppingFG.ajax
 
                 case "Logout":
                     Logout();
-                    break;
-
+                    break;              
             }
         }       
 
@@ -280,6 +279,6 @@ namespace ShoppingFG.ajax
             HttpContext.Current.Response.Cache.SetNoServerCaching();
             HttpContext.Current.Response.Cache.SetNoStore();
          
-        }
+        }       
     }
 }

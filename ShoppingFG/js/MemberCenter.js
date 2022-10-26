@@ -1,11 +1,19 @@
 ﻿var globalMember;
 
+//會員中心四個按鍵的增加移除樣式設定
+function ClassSet() {
+    $('#setting').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
+    $('#cart').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
+    $('#order').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
+}
+
+
 //開啟會員帳號設定視窗
-function OpenSettingBlock() {    
+function OpenSettingBlock() {
+    ClassSet();
+    ClearMemberCenterAllBlock();
     $('#setting').removeClass('btnMemberGroup').addClass('btnMemberGroupPressed');
     $('#memberCenterlogo').hide();
-    $('#functionContent').show();
-    $('#settingBlock').show();
     $.ajax({
         url: '/ajax/AjaxFrontUser.aspx?fn=GetSearchMemberById',
         type: 'POST',
@@ -110,7 +118,6 @@ function SettingConfirm() {
                             case '0':
                                 alert("修改會員資料成功");
                                 $('#settingBlock').hide();
-                                $('#functionContent').hide();
                                 $('#memberCenterlogo').show();
                                 $('#lastNameShown').text(lastname);
                                 $('#firstNameShown').text(firstname);
@@ -153,13 +160,42 @@ function SettingConfirm() {
     }
 }
 
+//開啟會員中心中的購物車div
+function OpenCartBlock() {
+    ClassSet();
+    ClearMemberCenterAllBlock();
+    $('#cart').removeClass('btnMemberGroup').addClass('btnMemberGroupPressed');
+    $('#memberCenterlogo').hide();
+    //console.log('cartlength', JSON.parse(localStorage.getItem('cartItem')).length );
+
+    if (sessionBool) {
+        localStorage.clear();
+        OpenLoginBlock();
+
+    } else if (localStorage.getItem('cartItem') == null || JSON.parse(localStorage.getItem('cartItem')).length == 0) {
+        $('#cartMessage').text('購物車尚無產品');
+        $('#productList').hide();       
+        $('#cartBlock').show();
+
+    } else {
+        myCartItem = JSON.parse(localStorage.getItem('cartItem'));
+        console.log('myCartItem', myCartItem);
+        $('#cartBlock').show();
+        ReadProductInfoFromDB(myCartItem);
+        PrintAllItem();
+    }
+}
+
+
+
+
 //登出
 function Logout() {
     $.ajax({
         url: '/ajax/AjaxFrontUser.aspx?fn=Logout',
-        type: 'POST',       
+        type: 'POST',
     });
-    localStorage.removeItem('cartItem');
+    localStorage.clear();
     window.location.href = '/view/HomePage.aspx';
 }
 
