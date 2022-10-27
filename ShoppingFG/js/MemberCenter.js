@@ -108,7 +108,6 @@ function SettingConfirm() {
                 getPoints: points
             },
             success: function (data) {
-                console.log(data);
                 if (data) {
                     var jsonResult = JSON.parse(data);
                     if (RepeatedStuff(jsonResult)) {
@@ -173,13 +172,12 @@ function OpenCartBlock() {
         OpenLoginBlock();
 
     } else if (localStorage.getItem('cartItem') == null || JSON.parse(localStorage.getItem('cartItem')).length == 0) {
-        $('#cartMessage').text('購物車尚無產品');
+        $('#cartMessage').text('尚無產品');
         $('#productList').hide();       
         $('#cartBlock').show();
 
     } else {
-        myCartItem = JSON.parse(localStorage.getItem('cartItem'));
-        console.log('myCartItem', myCartItem);
+        myCartItem = localStorage.getItem('cartItem');
         $('#cartBlock').show();
         ReadProductInfoFromDB(myCartItem);
         PrintAllItem();

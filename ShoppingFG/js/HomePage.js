@@ -44,7 +44,7 @@ function GetAllProduct() {
     });
 }
 
-//在product的物件資料中加入new key 購買數量 QtnForBuy，預設值為1
+//在product的物件資料中加入new key 
 function addKeyValue(obj, key, data) {
     obj[key] = data;
 }
@@ -95,7 +95,7 @@ function SortProduct() {
     }
 }
 
-//setInterval('StatusVerify()', 3000);
+setInterval(StatusVerify, 3000);
 
 //讀取DB資玖比較密碼是否被改變，是的話就強制會員登出
 function StatusVerify() {

@@ -74,6 +74,8 @@ function AddToCart() {
         var myCart = localStorage.getItem('cartItem');
         myCart = JSON.parse(myCart);
         console.log('myCart=', myCart);
+        console.log('productInfo=', productInfo );
+
         //判斷購物車裡是否已有產品，如果已有產品        
         if (myCart) {
             if (myCart.length < 5) {
@@ -81,7 +83,7 @@ function AddToCart() {
 
                 //判斷購物車是否有相同產品
                 myCart.forEach(p => {
-                    if (p.ProductId == productInfo.ProductId) {
+                    if (p == productInfo.ProductId) {
                         $('#messageBoxInProductPage').show();
                         $('#MessageInProductPage').text('此產品已在購物車裡');
                         key = true;
@@ -89,8 +91,8 @@ function AddToCart() {
                 });
 
                 //購物車裡無此項產品
-                if (!key) {
-                    myCart.push(productInfo.ProductId);
+                if (!key) {                    
+                    myCart.push({ 'id': productInfo.ProductId, 'qtn': 1 });
                     localStorage.setItem('cartItem', JSON.stringify(myCart));
                     $('#messageBoxInProductPage').show();
                     $('#MessageInProductPage').text('加入購物車成功');
@@ -102,8 +104,11 @@ function AddToCart() {
 
             //購物車裡無產品
         } else {
-            var goods = productInfo.ProductId;
+            var goods = { 'id': productInfo.ProductId, 'qtn': 1 };
             var goodArray = [goods];
+            //var goods = productInfo.ProductId;
+            //var goodArray = [goods];
+            
             localStorage.setItem('cartItem', JSON.stringify(goodArray));
             $('#messageBoxInProductPage').show();
             $('#MessageInProductPage').text('加入購物車成功');
@@ -120,6 +125,69 @@ function AddToCart() {
         $('#productInfoBlock').hide();
     }
 }
+
+
+
+////將產品加到購物車
+//function AddToCart() {
+//    if (sessionBool) {
+//        OpenLoginBlock();
+//    } else {
+//        var myCart = localStorage.getItem('cartItem');
+//        myCart = JSON.parse(myCart);
+//        console.log('myCart=', myCart);
+//        console.log('productInfo=', productInfo);
+
+//        //判斷購物車裡是否已有產品，如果已有產品        
+//        if (myCart) {
+//            if (myCart.length < 5) {
+//                var key = false;
+
+//                //判斷購物車是否有相同產品
+//                myCart.forEach(p => {
+//                    if (p.ProductId == productInfo.ProductId) {
+//                        $('#messageBoxInProductPage').show();
+//                        $('#MessageInProductPage').text('此產品已在購物車裡');
+//                        key = true;
+//                    }
+//                });
+
+//                //購物車裡無此項產品
+//                if (!key) {
+//                    var good = {};
+//                    good['ProductId'] = productInfo.ProductId;
+//                    myCart.push(good);
+//                    localStorage.setItem('cartItem', JSON.stringify(myCart));
+//                    $('#messageBoxInProductPage').show();
+//                    $('#MessageInProductPage').text('加入購物車成功');
+//                }
+//            } else {
+//                $('#messageBoxInProductPage').show();
+//                $('#MessageInProductPage').text('購物車已滿');
+//            }
+
+//            //購物車裡無產品
+//        } else {
+//            var goods = {};
+//            goods['ProductId'] = productInfo.ProductId;
+//            var goodArray = [goods];
+//            localStorage.setItem('cartItem', JSON.stringify(goodArray));
+//            $('#messageBoxInProductPage').show();
+//            $('#MessageInProductPage').text('加入購物車成功');
+//        }
+
+//        //console.log('mycartlength', myCart.length);
+//        var i;
+//        console.log('local storage');
+//        for (i = 0; i < localStorage.length; i++) {
+
+//            console.log(localStorage.key(i) + '=[' + localStorage.getItem(localStorage.key(i)) + ']');
+//        }
+//        console.log(localStorage.length);
+//        $('#productInfoBlock').hide();
+//    }
+//}
+
 
 ////將產品加到購物車
 //function AddToCart() {
