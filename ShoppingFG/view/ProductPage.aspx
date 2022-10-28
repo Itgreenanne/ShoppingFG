@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/Login.css"/>
     <link rel="stylesheet" href="/css/SignUp.css"/>
     <link rel="stylesheet" href="/css/MemberCenter.css"/>
+    <link rel="stylesheet" href="/css/Order.css"/>
+
 
 </head>
      <script src="/js/jquery-2.1.4.js"></script>
@@ -22,7 +24,7 @@
      <script type="text/javascript" src="/js/SignUp.js"> </script>
      <script type="text/javascript" src="/js/MemberCenter.js"> </script>
      <script type="text/javascript" src="/js/Cart.js"> </script>
-
+     <script type="text/javascript" src="/js/Order.js"> </script>
      
 <body class="no-scroll">
     <div id="overlay"></div>
@@ -229,7 +231,7 @@
                         <div class="labelInCartShown" id="pointOwned"></div>     
                     </div>
                  </div>
-                 <button class="btnCart" id="btnCheckOut" onclick ="CheckOut()">結帳</button>
+                 <button class="btnCart" id="btnCheckOut" onclick ="OrderPreview()">結帳</button>
                  </div>
                  <button class="btnCart" id="btnKeepShopping" onclick="CancelContent()">確定</button>
               </div>
@@ -265,13 +267,23 @@
            </div>
 
             <div class="orderBlock" id="orderBlock">
-              <img src="/images/logo.png" class="shoppingLogo" />
-              <span class="myOrderTitle">訂單</span>
-              <div class="orderList" id="orderList">
-                 <table class="orderTable" id="orderTable"></table>                
-              </div>
-              <button class="btnOrder" id="btnOrderComfirm" onclick ="OrderConfirm()">確定</button>
-              <button class="btnOrder" id="btnBacktoCart" onclick="OpenCart()">回購物車</button>
+                <span class="myOrderTitle">訂單</span>
+                <div class="productList" id="orderList">
+                    <table class="productTable" id="orderTable"></table>                
+                </div>
+                <span class="messageInPreviewOrder" id="messageInPreviewOrder"></span>
+                <div class="balanceBlock">
+                        <div class="totalBlock">
+                            <div class="labelInPreviewOrder">總額：</div>
+                            <div class="resultInPreviewOrder" id="totalInOrderPreview"></div><br/>
+                        </div>
+                </div>
+                <div class="pointsBlock">
+                        <div  class="labelInPreviewOrder">目前擁有點數：</div>
+                        <div class="resultInPreviewOrder" id="pointInPreviewOrder"></div>     
+                </div>
+                <button class="btnCart" id="btnOrderComfirm" onclick ="OrderConfirm()">確定</button>
+                <button class="btnCart" id="btnBacktoCart" onclick="OpenCart()">回購物車</button>
             </div>
 
 

@@ -15,11 +15,21 @@
     box-shadow: 5px 5px 10px grey;
     align-items: center;
     flex-wrap: nowrap;
-    z-index: 2;
+    z-index: 4;
     overflow: auto;
 }
 
+.labelInPreviewOrder {
+    font-size: 20px;
+    width: 160px;
+    text-align: left;
+}
 
+.resultInPreviewOrder {
+    text-align: right;
+    font-size: 20px;
+    width: 56px;
+}
 
 .btnOrder {
     margin-top: 10px;
@@ -30,3 +40,4 @@
     background-color: #E0F7FA;
     font-size: 15px;
     color: #0277BD;
+}

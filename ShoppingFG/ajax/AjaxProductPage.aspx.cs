@@ -27,7 +27,19 @@ namespace ShoppingFG.ajax
             /// <summary>
             /// 產品不存在
             /// </summary>
-            ProductNotExisted
+            ProductNotExisted,
+            /// <summary>
+            /// 身份証字號是空字串或字串太長
+            /// </summary>
+            IdNoStringIsNullOrTooLong,
+            /// <summary>
+            /// 購買數量不是數字
+            /// </summary>
+            QtnIsNotInt,
+            /// <summary>
+            /// 價錢不是數字
+            /// </summary>
+            PriceIsNotInt
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,6 +51,10 @@ namespace ShoppingFG.ajax
 
                 case "SearchProductByIdForCart":
                     SearchProductByIdForCart();
+                    break;
+
+                case "AddOrder":
+                    AddOrder();
                     break;
             }
         }
@@ -199,5 +215,70 @@ namespace ShoppingFG.ajax
             }
 
         }
+
+        /// <summary>
+        /// 新增訂單
+        /// </summary>
+        private void AddOrder() 
+        {
+            string orderItem = Request.Form["getItemArray"];
+            JArray itemArray = JArray.Parse(orderItem);
+            ProductMsg msgValue = ProductMsg.WrongConnection;
+            string tempIdNo, tempIdString, tempQtnString, tempPriceString;
+            int tempProductId;
+            int tempQtnForBuy;
+            int tempUnitPrice;
+            bool productIdIsInt, qtnIsInt, priceIsInt;
+
+            ///驗証前端資料是否為正確格式
+            foreach (JObject singleItem in itemArray)
+            {
+                tempIdNo = singleItem.GetValue("MemberIdNo").ToString();
+                tempIdString = singleItem.GetValue("ProductId").ToString();
+                tempQtnString = singleItem.GetValue("QtnForBuy").ToString();
+                tempPriceString = singleItem.GetValue("UnitPrice").ToString();
+                productIdIsInt = int.TryParse(tempIdString, out tempProductId);
+                qtnIsInt = int.TryParse(tempQtnString, out tempQtnForBuy);
+                priceIsInt = int.TryParse(tempPriceString, out tempUnitPrice);
+
+                if (string.IsNullOrEmpty(tempIdNo) || tempIdNo.Length > 10) {
+                    msgValue = ProductMsg.IdNoStringIsNullOrTooLong;
+                    Response.Write((int)msgValue);
+                    Response.End();
+                }
+                else if (!productIdIsInt)
+                {
+                    msgValue = ProductMsg.IdIsNotInt;
+                    Response.Write((int)msgValue);
+                    Response.End();
+                }
+                else if (!qtnIsInt)
+                {
+                    msgValue = ProductMsg.IdIsNotInt;
+                    Response.Write((int)msgValue);
+                    Response.End();
+                }
+                else if (!priceIsInt)
+                {
+                    msgValue = ProductMsg.PriceIsNotInt;
+                    Response.Write((int)msgValue);
+                    Response.End();
+                }
+
+                DataTable items = new DataTable();
+                items.Columns.Add(new DataColumn("ProductId", typeof(int)));
+                items.Columns.Add(new DataColumn("QtnForBuy", typeof(int)));
+                items.Columns.Add(new DataColumn("UnitPrice", typeof(int)));
+                items.Columns.Add(new DataColumn("MemberIdNo", typeof(string)));
+
+                for(int i = 0; i < itemArray.Count; i++ )
+                {
+                    items.Rows.Add(singleItem);
+                }
+
+            }
+
+        }
+
     }
 }

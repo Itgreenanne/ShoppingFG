@@ -22,8 +22,7 @@ function LoginVerify() {
                 if (!jsonResult) {
                     alert('資料錯誤');
                 } else if (jsonResult.Result == 1) {
-                    alert('帳號密碼正確');                  
-                    memberInfo = jsonResult;
+                    alert('帳號密碼正確');
                     //清除之前購物車資料
                     localStorage.clear();
                     window.location.href = "/view/HomePage.aspx";

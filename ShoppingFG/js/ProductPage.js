@@ -23,8 +23,8 @@ function ReadProductInfo(productId) {
             if (data) {
                 var jsonResult = JSON.parse(data);
                 productInfo = jsonResult.ProductInfo[0];
-                productInfo['QtnForBuy'] = '1';
-                productInfo['SubTotal'] = productInfo.ProductUnitPrice;
+                //productInfo['QtnForBuy'] = '1';
+                //productInfo['SubTotal'] = productInfo.ProductUnitPrice;
                 sessionBool = jsonResult.SessionIsNull;
                 memberInfo = jsonResult.UserInfo;
                 ShowProductInfo(productInfo);
@@ -83,7 +83,7 @@ function AddToCart() {
 
                 //判斷購物車是否有相同產品
                 myCart.forEach(p => {
-                    if (p == productInfo.ProductId) {
+                    if (p.ProductId == productInfo.ProductId) {
                         $('#messageBoxInProductPage').show();
                         $('#MessageInProductPage').text('此產品已在購物車裡');
                         key = true;
@@ -92,8 +92,10 @@ function AddToCart() {
 
                 //購物車裡無此項產品
                 if (!key) {                    
-                    myCart.push({ 'id': productInfo.ProductId, 'qtn': 1 });
+                    myCart.push({ 'ProductId': productInfo.ProductId, 'QtnForBuy': 1 });
                     localStorage.setItem('cartItem', JSON.stringify(myCart));
+                    console.log('購物車有產品，carItem在加入購物車操作', myCart);
+
                     $('#messageBoxInProductPage').show();
                     $('#MessageInProductPage').text('加入購物車成功');
                 }
@@ -104,12 +106,13 @@ function AddToCart() {
 
             //購物車裡無產品
         } else {
-            var goods = { 'id': productInfo.ProductId, 'qtn': 1 };
+            var goods = { 'ProductId': productInfo.ProductId, 'QtnForBuy': 1 };
             var goodArray = [goods];
             //var goods = productInfo.ProductId;
             //var goodArray = [goods];
             
             localStorage.setItem('cartItem', JSON.stringify(goodArray));
+            console.log('購物車裡無產品，carItem在加入購物車操作', goodArray);
             $('#messageBoxInProductPage').show();
             $('#MessageInProductPage').text('加入購物車成功');
         }
@@ -125,7 +128,6 @@ function AddToCart() {
         $('#productInfoBlock').hide();
     }
 }
-
 
 
 ////將產品加到購物車

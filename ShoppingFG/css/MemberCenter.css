@@ -274,9 +274,9 @@
     text-align: center;
 }
 
-    .productList td {
-        align-items: center;
-    }
+.productList td {
+    align-items: center;
+}
 
 .productTitleInCart {
     max-width: 100px;
@@ -292,7 +292,7 @@
 }
 
 .itemQtnInCart {
-    width: 20px;
+    width: 50px;
 }
 
 .trashCanImg {

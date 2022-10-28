@@ -10,15 +10,7 @@ function GetAllProduct() {
         success: function (data) {
             if (data) {
                 var jsonResult = JSON.parse(data);
-                console.log(jsonResult);
-                //在產品資料物件裡多加了購買數量與小計的欄位
-                var productAddKey = jsonResult.ProductInfo;
-                productAddKey.map(function (productAddKey) {
-                    return addKeyValue(productAddKey, 'QtnForBuy', 1);
-                });
-                productAddKey.map(function (productAddKey) {
-                    return addKeyValue(productAddKey, 'SubTotal', productAddKey.ProductUnitPrice);
-                });              
+                console.log(jsonResult);                
                 productInfoGlobal = jsonResult;
                 sessionBool = jsonResult['SessionIsNull'];
                 memberInfo = jsonResult.UserInfo;
@@ -100,7 +92,6 @@ setInterval(StatusVerify, 3000);
 //讀取DB資玖比較密碼是否被改變，是的話就強制會員登出
 function StatusVerify() {
     if (!sessionBool) {
-        console.log('seesionBool',sessionBool);
         $.ajax({
             url: '/ajax/AjaDbDataChangVerify.aspx',
             type: 'POST',
@@ -210,6 +201,7 @@ function OpenMemberCenterBlock() {
     $('#memberCenter').show();
     $('#memberCenterlogo').show();
     $('#pwdModify').hide();
+    $('#orderBlock').hide();
     ClassSet();
 }
 
@@ -244,6 +236,8 @@ function OpenCart() {
     if (sessionBool) {
         OpenLoginBlock();
     } else {
+        $('#overlay1').hide();
+        $('#orderBlock').hide();
         OpenMemberCenterBlock();
         OpenCartBlock();
     }
