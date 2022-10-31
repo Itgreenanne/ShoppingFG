@@ -39,8 +39,17 @@ namespace ShoppingFG.ajax
             /// <summary>
             /// 價錢不是數字
             /// </summary>
-            PriceIsNotInt
+            PriceIsNotInt,
+            /// <summary>
+            /// 訂單建立成功
+            /// </summary>
+            OrderCreated,
+            /// <summary>
+            /// 訂單沒有建立成功
+            /// </summary>
+            OrderNotCreated
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string fnselected = Request.QueryString["fn"];
@@ -219,34 +228,47 @@ namespace ShoppingFG.ajax
         /// <summary>
         /// 新增訂單
         /// </summary>
-        private void AddOrder() 
+        private void AddOrder()
         {
+            string idNo = Request.Form["getMemberIdNo"];
             string orderItem = Request.Form["getItemArray"];
             JArray itemArray = JArray.Parse(orderItem);
             ProductMsg msgValue = ProductMsg.WrongConnection;
-            string tempIdNo, tempIdString, tempQtnString, tempPriceString;
+            string tempIdString = "";
+            string tempQtnString = "";
+            string tempPriceString = "";
             int tempProductId;
             int tempQtnForBuy;
             int tempUnitPrice;
+            int subTotal = 0, total = 0;
             bool productIdIsInt, qtnIsInt, priceIsInt;
 
-            ///驗証前端資料是否為正確格式
-            foreach (JObject singleItem in itemArray)
+
+            if (string.IsNullOrEmpty(idNo) || idNo.Length > 10)
             {
-                tempIdNo = singleItem.GetValue("MemberIdNo").ToString();
+                msgValue = ProductMsg.IdNoStringIsNullOrTooLong;
+                Response.Write((int)msgValue);
+                Response.End();
+            }
+            ///將從前端收到的資料建立成表單
+            DataTable items = new DataTable();
+            items.Columns.Add(new DataColumn("ProductId", typeof(int)));
+            items.Columns.Add(new DataColumn("QtnForBuy", typeof(int)));
+            items.Columns.Add(new DataColumn("UnitPrice", typeof(int)));
+
+            ///驗証前端資料是否為正確格式
+            foreach (JObject singleItem in itemArray.Children<JObject>())
+            {
+                DataRow itemRow = items.NewRow();
                 tempIdString = singleItem.GetValue("ProductId").ToString();
                 tempQtnString = singleItem.GetValue("QtnForBuy").ToString();
                 tempPriceString = singleItem.GetValue("UnitPrice").ToString();
+
                 productIdIsInt = int.TryParse(tempIdString, out tempProductId);
                 qtnIsInt = int.TryParse(tempQtnString, out tempQtnForBuy);
                 priceIsInt = int.TryParse(tempPriceString, out tempUnitPrice);
-
-                if (string.IsNullOrEmpty(tempIdNo) || tempIdNo.Length > 10) {
-                    msgValue = ProductMsg.IdNoStringIsNullOrTooLong;
-                    Response.Write((int)msgValue);
-                    Response.End();
-                }
-                else if (!productIdIsInt)
+             
+                if (!productIdIsInt)
                 {
                     msgValue = ProductMsg.IdIsNotInt;
                     Response.Write((int)msgValue);
@@ -264,21 +286,77 @@ namespace ShoppingFG.ajax
                     Response.Write((int)msgValue);
                     Response.End();
                 }
-
-                DataTable items = new DataTable();
-                items.Columns.Add(new DataColumn("ProductId", typeof(int)));
-                items.Columns.Add(new DataColumn("QtnForBuy", typeof(int)));
-                items.Columns.Add(new DataColumn("UnitPrice", typeof(int)));
-                items.Columns.Add(new DataColumn("MemberIdNo", typeof(string)));
-
-                for(int i = 0; i < itemArray.Count; i++ )
-                {
-                    items.Rows.Add(singleItem);
-                }
-
+                subTotal = tempQtnForBuy * tempUnitPrice;
+                total += subTotal;
+                itemRow["ProductId"] = tempProductId;
+                itemRow["QtnForBuy"] = tempQtnForBuy;
+                itemRow["UnitPrice"] = tempUnitPrice;
+                items.Rows.Add(itemRow);
             }
 
+            ///產生訂單代號
+            Random rnd = new Random();
+            string rn = rnd.Next(99 + 1).ToString().PadLeft(2, '0');
+            string dt = DateTime.Now.ToString("yyMMddHHmmss");
+            string idNostring = idNo;
+
+            if (idNostring.Length >= 6)
+            {
+                idNostring = idNostring.Substring(idNostring.Length - 6, 6);
+            }
+            else
+            {
+                idNostring = idNostring.PadLeft(6, '0');
+            }
+
+            string orderNumber = dt + idNostring + rn;
+            string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("pro_shoppingFG_addOrder", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+
+            try
+            {
+                cmd.Parameters.Add(new SqlParameter("@MemberIdNo", idNo));
+                cmd.Parameters.Add(new SqlParameter("@totalPrice", total));
+                cmd.Parameters.Add(new SqlParameter("@orderNo", orderNumber));
+                SqlParameter listParam = cmd.Parameters.AddWithValue("@items", items);
+                listParam.Direction = ParameterDirection.Input;
+                SqlDataReader reader = cmd.ExecuteReader();           
+
+                //if (reader.HasRows)
+                //{
+                //    while (reader.Read())
+                //    {
+                //        int result = Convert.ToInt16(reader["result"]);
+                //        if (result ==1)
+                //        {
+                //            msgValue = ProductMsg.OrderCreated;
+                //            break;
+                //        }
+                //        else
+                //        {
+                //            msgValue = ProductMsg.OrderNotCreated;
+                //        }
+                //    }
+                //}
+
+                Response.Write((int)msgValue);
+              
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw ex.GetBaseException();
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
         }
+        
 
     }
 }

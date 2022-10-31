@@ -36,45 +36,48 @@ function PrintOrder() {
 
 function OrderConfirm() {
 
-    console.log('全域變數在order頁', productInfoFromDB.length);    
+    console.log('全域變數在order頁', productInfoFromDB);    
     var orderItemArray = [];
+    var total = 0;
     for (var i = 0; i < productInfoFromDB.length; i++) {
         var orderItem = {};
         orderItem['ProductId'] = productInfoFromDB[i].ProductId;
         orderItem['QtnForBuy'] = productInfoFromDB[i].QtnForBuy;
         orderItem['UnitPrice'] = productInfoFromDB[i].ProductUnitPrice;
-        orderItem['MemberIdNo'] = memberInfo.IdNo;
         orderItemArray.push(orderItem);
+        total += productInfoFromDB[i].QtnForBuy * productInfoFromDB[i].ProductUnitPrice;
     }
 
-    console.log('要打ajax的資料', orderItemArray);
+    if (memberInfo.Points < total) {
+        alert('點數不夠');
+        OpenCart();
+    } else {
+        console.log('要打ajax的資料', orderItemArray);
 
-    $.ajax({
-        url: '/ajax/AjaxProductPage.aspx?fn=AddOrder',
-        type: 'POST',
-        data: {
-            getItemArray: JSON.stringify(orderItemArray)
-        },
-        success: function (data) {
-            if (data) {
-            } else if (data == 1) {
-                alert('資料錯誤');
-            } else if (data == 3) {
-                alert('資料錯誤');
-            } else if (data == 4) {
-                alert('資料錯誤');
-            } else if (data == 5) {
-                alert('資料錯誤');
+        $.ajax({
+            url: '/ajax/AjaxProductPage.aspx?fn=AddOrder',
+            type: 'POST',
+            data: {
+                getMemberIdNo: memberInfo.IdNo,
+                getItemArray: JSON.stringify(orderItemArray)
+            },
+            success: function (data) {
+                console.log(data);
+                if (data) {
+                } else if (data == 6) {
+                    alert('訂單建立成功');
+                } else if (data == 7) {
+                    openCart();
+                } else {
+                    alert('資料錯誤');
+                }
+            },
+            error: function (err) {
+                str = JSON.stringify(err, null, 2);
+                console.log('err:');
+                console.log(err);
+                alert(str);
             }
-        },
-        error: function (err) {
-            str = JSON.stringify(err, null, 2);
-            console.log('err:');
-            console.log(err);
-            alert(str);
-        }
-   });
-
-
-
+        });
+    }
 }
