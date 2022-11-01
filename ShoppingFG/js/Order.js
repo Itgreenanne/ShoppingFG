@@ -1,6 +1,6 @@
 ﻿
 //顯示訂單內容
-function PrintOrder() {
+function PrintPriviewOrder() {
     $('#orderTable').html('');
     var cartItem = JSON.parse(localStorage.getItem('cartItem'));    
     var tableRow = '';
@@ -35,8 +35,6 @@ function PrintOrder() {
 
 
 function OrderConfirm() {
-
-    console.log('全域變數在order頁', productInfoFromDB);    
     var orderItemArray = [];
     var total = 0;
     for (var i = 0; i < productInfoFromDB.length; i++) {
@@ -52,7 +50,6 @@ function OrderConfirm() {
         alert('點數不夠');
         OpenCart();
     } else {
-        console.log('要打ajax的資料', orderItemArray);
 
         $.ajax({
             url: '/ajax/AjaxProductPage.aspx?fn=AddOrder',
@@ -62,12 +59,20 @@ function OrderConfirm() {
                 getItemArray: JSON.stringify(orderItemArray)
             },
             success: function (data) {
-                console.log(data);
+
                 if (data) {
-                } else if (data == 6) {
-                    alert('訂單建立成功');
-                } else if (data == 7) {
-                    openCart();
+                    if (data == '6') {
+                        localStorage.clear();
+                        $('#orderPriviewBlock').hide();
+                        $('#orderCreated').show();
+                        $('#messageForOrderCreated').text('訂單建立成功');
+                    } else if (data == '7') {
+                        $('#orderPriviewBlock').hide();
+                        $('#orderNotCreated').show();
+                        $('#messageForUser').text('價格或數量有變動所以訂單沒有成立');
+                    } else {
+                        alert('資料錯誤');
+                    }
                 } else {
                     alert('資料錯誤');
                 }

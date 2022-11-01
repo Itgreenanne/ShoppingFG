@@ -3,7 +3,6 @@
 function LoginVerify() {  
     var loginIdInput = $('#inputIdNo').val();
     var loginPwdInput = $('#inputPwd').val();
-    console.log('login.js',productInfoGlobal);
 
     if (!loginIdInput || !loginPwdInput) {
         alert('請輸入帳號密碼');
@@ -18,7 +17,7 @@ function LoginVerify() {
             data: { getId: loginIdInput, getPwd: loginPwdInput },
             success: function (data) {
                 var jsonResult = (JSON.parse(data));
-                console.log('jsonresultinlogin', jsonResult);
+
                 if (!jsonResult) {
                     alert('資料錯誤');
                 } else if (jsonResult.Result == 1) {

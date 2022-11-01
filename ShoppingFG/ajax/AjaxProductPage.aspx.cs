@@ -312,7 +312,7 @@ namespace ShoppingFG.ajax
             string orderNumber = dt + idNostring + rn;
             string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("pro_shoppingFG_addOrder", conn);
+            SqlCommand cmd = new SqlCommand("pro_shoppingFG_addAnOrder ", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             conn.Open();
 
@@ -321,26 +321,26 @@ namespace ShoppingFG.ajax
                 cmd.Parameters.Add(new SqlParameter("@MemberIdNo", idNo));
                 cmd.Parameters.Add(new SqlParameter("@totalPrice", total));
                 cmd.Parameters.Add(new SqlParameter("@orderNo", orderNumber));
-                SqlParameter listParam = cmd.Parameters.AddWithValue("@items", items);
+                SqlParameter listParam = cmd.Parameters.AddWithValue("@item", items);
                 listParam.Direction = ParameterDirection.Input;
-                SqlDataReader reader = cmd.ExecuteReader();           
+                SqlDataReader reader = cmd.ExecuteReader();
 
-                //if (reader.HasRows)
-                //{
-                //    while (reader.Read())
-                //    {
-                //        int result = Convert.ToInt16(reader["result"]);
-                //        if (result ==1)
-                //        {
-                //            msgValue = ProductMsg.OrderCreated;
-                //            break;
-                //        }
-                //        else
-                //        {
-                //            msgValue = ProductMsg.OrderNotCreated;
-                //        }
-                //    }
-                //}
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        int result = Convert.ToInt16(reader["result"]);
+                        if (result == 1)
+                        {
+                            msgValue = ProductMsg.OrderCreated;
+                            break;
+                        }
+                        else
+                        {
+                            msgValue = ProductMsg.OrderNotCreated;
+                        }
+                    }
+                }
 
                 Response.Write((int)msgValue);
               
@@ -356,7 +356,5 @@ namespace ShoppingFG.ajax
                 conn.Dispose();
             }
         }
-        
-
     }
 }

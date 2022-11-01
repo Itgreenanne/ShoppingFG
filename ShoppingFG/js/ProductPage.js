@@ -72,9 +72,7 @@ function AddToCart() {
         OpenLoginBlock();
     } else {
         var myCart = localStorage.getItem('cartItem');
-        myCart = JSON.parse(myCart);
-        console.log('myCart=', myCart);
-        console.log('productInfo=', productInfo );
+        myCart = JSON.parse(myCart);       
 
         //判斷購物車裡是否已有產品，如果已有產品        
         if (myCart) {
@@ -94,7 +92,6 @@ function AddToCart() {
                 if (!key) {                    
                     myCart.push({ 'ProductId': productInfo.ProductId, 'QtnForBuy': 1 });
                     localStorage.setItem('cartItem', JSON.stringify(myCart));
-                    console.log('購物車有產品，carItem在加入購物車操作', myCart);
 
                     $('#messageBoxInProductPage').show();
                     $('#MessageInProductPage').text('加入購物車成功');
@@ -112,19 +109,18 @@ function AddToCart() {
             //var goodArray = [goods];
             
             localStorage.setItem('cartItem', JSON.stringify(goodArray));
-            console.log('購物車裡無產品，carItem在加入購物車操作', goodArray);
             $('#messageBoxInProductPage').show();
             $('#MessageInProductPage').text('加入購物車成功');
         }
 
         //console.log('mycartlength', myCart.length);
         var i;
-        console.log('local storage');
-        for (i = 0; i < localStorage.length; i++) {
 
-            console.log(localStorage.key(i) + '=[' + localStorage.getItem(localStorage.key(i)) + ']');
-        }
-        console.log(localStorage.length);
+        //for (i = 0; i < localStorage.length; i++) {
+
+        //    console.log(localStorage.key(i) + '=[' + localStorage.getItem(localStorage.key(i)) + ']');
+        //}
+
         $('#productInfoBlock').hide();
     }
 }

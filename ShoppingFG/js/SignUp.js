@@ -45,7 +45,6 @@ function SignUp() {
                 getAddress: address
             },
             success: function (data) {
-                console.log(data);
                 if (data) {
                     switch (data) {
                         case '11':
@@ -90,7 +89,6 @@ function SignUp() {
 function IdNoVerify(el) {
     if (el && el.value) {
         var inputText = el.value.toUpperCase();
-        console.log(inputText);
         el.value = inputText;
         var rightForm = /^[A-Z]{1}\d{9}$/;
 

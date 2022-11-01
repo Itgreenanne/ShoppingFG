@@ -10,7 +10,6 @@ function GetAllProduct() {
         success: function (data) {
             if (data) {
                 var jsonResult = JSON.parse(data);
-                console.log(jsonResult);                
                 productInfoGlobal = jsonResult;
                 sessionBool = jsonResult['SessionIsNull'];
                 memberInfo = jsonResult.UserInfo;
@@ -45,7 +44,7 @@ function addKeyValue(obj, key, data) {
 function SortProduct() {
     $('#productMessage').text('');
     var keyWord = $('#searchBar').val();
-    console.log("keyWord=", keyWord);
+
     if (!keyWord) {
         GetAllProduct();
     } else if (keyWord.length > 100) {
@@ -59,7 +58,7 @@ function SortProduct() {
             },
             success: function (data) {
                 if (data) {
-                    console.log(data);
+
                     var jsonResult = JSON.parse(data);
                     if (RepeatedStuff(jsonResult)) {
                         return;
@@ -98,7 +97,7 @@ function StatusVerify() {
             success: function (data) {
                 if (data) {
                     var jsonResult = JSON.parse(data);
-                    console.log(jsonResult);
+
                     if (RepeatedStuff(jsonResult)) {
                         return;
                     }
@@ -150,7 +149,10 @@ function BlockClear() {
 function ClearMemberCenterAllBlock() {
     $('#settingBlock').hide();
     $('#cartBlock').hide();
-    $('#orderBlock').hide();
+    $('#myOrderBlock').hide();
+    $('#orderPriviewBlock').hide();
+    $('#orderNotCreated').hide();
+    $('#orderCreated').hide();
 }
 
 //顯示產品
@@ -201,7 +203,9 @@ function OpenMemberCenterBlock() {
     $('#memberCenter').show();
     $('#memberCenterlogo').show();
     $('#pwdModify').hide();
-    $('#orderBlock').hide();
+    $('#orderPriviewBlock').hide();
+    $('#orderNotCreated').hide();
+    $('#orderCreated').hide();
     ClassSet();
 }
 
@@ -237,7 +241,7 @@ function OpenCart() {
         OpenLoginBlock();
     } else {
         $('#overlay1').hide();
-        $('#orderBlock').hide();
+        $('#orderPriviewBlock').hide();
         OpenMemberCenterBlock();
         OpenCartBlock();
     }
@@ -248,7 +252,6 @@ function LeaveCartBlock() {
     //if (localStorage.length != 0) {
     //    localStorage.setItem('cartItem', JSON.stringify(productInfoInCart));
     //}
-    console.log('cartitemin home', localStorage.getItem('cartItem'));
     $('#overlay').hide();
     $('#cartBlock').hide();
 }

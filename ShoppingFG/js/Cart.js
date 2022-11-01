@@ -34,7 +34,6 @@ function PrintAllItem() {
                 '</tr>';
             total += productInfoFromDB[i].ProductUnitPrice * qtn;
         }
-        console.log('一開始的總額', total);
 
         $('#productTable').append(tableRow);
         $('#totalInCart').text(total);
@@ -52,7 +51,6 @@ function PriceCal(id, maxQtn, row) {
     var qtn = $('#itemQtnInCart' + row).val();
     if (qtn > 0 && qtn <= maxQtn) {
         //productInfoFromDB.find(function (x) { return x.ProductId === +id }).QtnForBuy = qtn;
-        console.log('qtn', qtn);
         //var unitPrice = productInfoFromDB.find(function (x) { return x.ProductId === +id }).ProductUnitPrice;
         //console.log('unitprice=', unitPrice);
         //price = qtn * unitPrice;
@@ -63,7 +61,7 @@ function PriceCal(id, maxQtn, row) {
             $('#subTotalInCart' + i).html(price);
             total += price;
         }
-        console.log('productInforInCart', productInfoFromDB);
+
         $('#totalInCart').text(total);
         //var ItemForSave = {};
         var ItemForSaveArray = [];
@@ -91,13 +89,10 @@ function PriceCal(id, maxQtn, row) {
 //開啟購物車就會從DB讀取產品庫存數量、單價、標題
 function ReadProductInfoFromDB(myCartItem) {
     ItemAfterParse = JSON.parse(myCartItem);
-    console.log('before read db', ItemAfterParse);
     //新生一個物件裡面只有ProductId這個key
     var ItemAfterMap = ItemAfterParse.map(function (x) {
         return x.ProductId;
     });
-
-    console.log('afterdelete', ItemAfterMap);
 
     $.ajax({
         url: '/ajax/AjaxProductPage.aspx?fn=SearchProductByIdForCart',
@@ -117,7 +112,6 @@ function ReadProductInfoFromDB(myCartItem) {
                 //    return addKeyValue(jsonResult, 'SubTotal', jsonResult.ProductUnitPrice);
                 //});
                 productInfoFromDB = jsonResult;
-                console.log('1讀庫出來的資料', productInfoFromDB);
                 //列印購物車裡的產品表格
                 PrintAllItem();
             } else {
@@ -157,14 +151,10 @@ function ReadProductInfoFromDB(myCartItem) {
 
 //刪除購物車裡的產品項目
 function DeleteProduct(productId) {
-    console.log(productId);
-    console.log('在刪除函式裡的productInfo', productInfoFromDB);
 
     productInfoFromDB = productInfoFromDB.filter(function (item) {
         return item.ProductId != productId;
     });
-
-    console.log('delete裡after filter', productInfoFromDB)
 
     var ItemForSaveArray = [];
     for (var i = 0; i < productInfoFromDB.length; i++) {
@@ -173,7 +163,7 @@ function DeleteProduct(productId) {
         ItemForSave['QtnForBuy'] = productInfoFromDB[i].QtnForBuy;
         ItemForSaveArray.push(ItemForSave);
     }
-    console.log('before setItem in delete function', ItemForSaveArray);
+
     localStorage.setItem('cartItem', JSON.stringify(ItemForSaveArray));
 
     if (!(localStorage.getItem('cartItem'))) {
@@ -188,6 +178,6 @@ function DeleteProduct(productId) {
 //開啟訂單div
 function OrderPreview() {
     $('#overlay1').show();
-    $('#orderBlock').show();
-    PrintOrder();
+    $('#orderPriviewBlock').show();
+    PrintPriviewOrder();
 }

@@ -89,11 +89,15 @@ namespace ShoppingFG.ajax
                     ModifyMember();
                     break;
 
+                case "GetOrder":
+                    GetOrder();
+                    break;
+
                 case "Logout":
                     Logout();
-                    break;              
+                    break;
             }
-        }       
+        }
 
         /// <summary>
         /// 會員修改視窗中用來搜尋選中會員的資料
@@ -188,7 +192,7 @@ namespace ShoppingFG.ajax
             {
                 msgValue = MsgType.NullEmptyInput;
                 Response.Write((int)msgValue);
-            }          
+            }
             else if (tel.Length != 10)
             {
                 msgValue = MsgType.TelLengthIsNotRight;
@@ -268,6 +272,90 @@ namespace ShoppingFG.ajax
                 }
             }
         }
+
+
+        /// <summary>
+        /// 讀取此會員所有訂單
+        /// </summary>
+        private void GetOrder() {
+            int memberId = 0;
+            bool idIsInt = int.TryParse(Request.Form["getMemberId"].ToString(), out memberId);
+            MsgType msgValue = new MsgType();
+
+            if (!idIsInt)
+            {
+                msgValue = MsgType.IdIsNotConvToInt;
+                Response.Write((int)msgValue);
+            }
+            else 
+            {
+                string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
+                SqlConnection conn = new SqlConnection(strConnString);
+                SqlCommand cmd = new SqlCommand("pro_shoppingFG_getOrderByMemberId", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@memberId", memberId));
+                    //從Command取得資料存入dataAdapter
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    //創一個dataset的記憶體資料集
+                    DataSet ds = new DataSet();
+                    //將dataAdapter資料存入dataset
+                    adapter.Fill(ds);
+                    DataTable dt = new DataTable();
+                    ///讀取訂單表格
+                    dt = ds.Tables[0];
+                    OrderInfo orderInfo = new OrderInfo();
+                    List<OtherInfo> otherInfoArray = new List<OtherInfo>();
+                    List<OrderItem> orderItemArray = new List<OrderItem>();
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        DataRow row = dt.Rows[i];
+                        OtherInfo otherInfo = new OtherInfo()
+                        {
+                            OrderId = Convert.ToInt16(row.ItemArray[0]),
+                            OrderNo = row.ItemArray[1].ToString(),
+                            OrderCreatedTime = row.ItemArray[2].ToString()
+                        }; otherInfoArray.Add(otherInfo);
+
+                        
+                    }
+
+                    dt = ds.Tables[1];
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        DataRow row = dt.Rows[i];
+                        OrderItem orderItem = new OrderItem()
+                        {
+                            OrderItemId = Convert.ToInt16(row.ItemArray[0]),
+                            ProductId = Convert.ToInt16(row.ItemArray[1]),
+                            ProductTitle = row.ItemArray[2].ToString(),
+                            QtnForBuy = Convert.ToInt16(row.ItemArray[3]),
+                            ProductUnitPrice = Convert.ToInt16(row.ItemArray[4]),
+                            OrderId = Convert.ToInt16(row.ItemArray[5])
+                        }; orderItemArray.Add(orderItem);
+                    }
+                    orderInfo.InfoList = otherInfoArray;
+                    orderInfo.OrderList = orderItemArray;
+                    Response.Write(JsonConvert.SerializeObject(orderInfo));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    throw ex.GetBaseException();
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
+
+        }       
 
         /// <summary>
         /// 會員登出

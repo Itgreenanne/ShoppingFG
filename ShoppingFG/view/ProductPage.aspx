@@ -237,8 +237,18 @@
               </div>
               
                 
-                <div class="myOrderBlock" id="myOrderBlock"></div>       
-
+              <div class="myOrderBlock" id="myOrderBlock">
+                 <span class="myCartTitle">訂單</span>
+                 <div class="productList" id="orderCreatedList">
+                    <table class="productTable" id="orderCreatedTable"></table>
+                    <div class="balanceBlock">
+                        <div class="totalBlock">
+                        <div class="labelInCart">總額：</div>
+                        <div class="labelInCartShown" id="totalInOrderCreated"></div><br/>
+                    </div>                   
+                 </div>                
+                 <button class="btnCart" id="btnBackToMemberCenter" onclick="CancelContent()">確定</button>               
+              </div>
 
             </div>
 
@@ -266,7 +276,7 @@
                 </div>
            </div>
 
-            <div class="orderBlock" id="orderBlock">
+            <div class="orderBlock" id="orderPriviewBlock">
                 <span class="myOrderTitle">訂單</span>
                 <div class="productList" id="orderList">
                     <table class="productTable" id="orderTable"></table>                
@@ -286,6 +296,15 @@
                 <button class="btnCart" id="btnBacktoCart" onclick="OpenCart()">回購物車</button>
             </div>
 
+            <div class="orderMessage" id="orderCreated">               
+                <span class="messageInPreviewOrder" id="messageForOrderCreated"></span>           
+                <button class="btnCart" id="btnBacktoHome" onclick="window.location.href = '/view/HomePage.aspx'">確定</button>
+            </div>
+
+            <div class="orderMessage" id="orderNotCreated">               
+                <span class="messageInPreviewOrder" id="messageForUser"></span>           
+                <button class="btnCart" id="btnBacktoCartFromMessageBox" onclick="OpenCart()">回購物車</button>
+            </div>
 
       </div>
    

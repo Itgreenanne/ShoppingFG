@@ -1,10 +1,11 @@
 ﻿var globalMember;
+var orderData;
 
 //會員中心四個按鍵的增加移除樣式設定
 function ClassSet() {
     $('#setting').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
     $('#cart').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
-    $('#order').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
+    $('#myOrder').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
 }
 
 
@@ -25,8 +26,7 @@ function OpenSettingBlock() {
                 var jsonResult = JSON.parse(data);
                 if (RepeatedStuff(jsonResult)) {
                     return;
-                } else {
-                    console.log(jsonResult);
+                } else {                
                     //顯示跟選擇列資料一樣的資料
                     globalMember = jsonResult;
                     $('#setInputTel').val(jsonResult.phone);
@@ -65,7 +65,6 @@ function OpenSettingBlock() {
 function SettingConfirm() {
     var tel = $('#setInputTel').val();
     var pwd = globalMember.pwd;
-    console.log('pwd=', pwd);
     var lastname = $('#setLastName').val();
     var firstname = $('#setFirstName').val();
     var mail = $('#setInputMail').val();
@@ -179,12 +178,47 @@ function OpenCartBlock() {
     } else {
         myCartItem = localStorage.getItem('cartItem');
         $('#cartBlock').show();
-        console.log('ReadProductInfoFromDB(myCartItem)');
         ReadProductInfoFromDB(myCartItem);        
     }
 }
 
+//我的訂單
+function OpenMyOrder() {
+    ClassSet();
+    ClearMemberCenterAllBlock();
+    $('#myOrder').removeClass('btnMemberGroup').addClass('btnMemberGroupPressed');
+    $('#memberCenterlogo').hide();
+    $.ajax({
+        url: '/ajax/AjaxFrontUser.aspx?fn=GetOrder',
+        type: 'POST',
+        data: {
+            getMemberId: memberInfo.MemberId
+        },
+        success: function (data) {
 
+            if (data) {
+                var jsonResult = JSON.parse(data);
+                console.log('1.訂單資料fromDB', jsonResult);
+
+                if (RepeatedStuff(jsonResult)) {
+                    return;
+                } else {
+                    orderData = jsonResult;
+                    $('#myOrderBlock').show();
+                    PrintMyOrder();
+                }                
+            } else {
+                alert('資料錯誤');
+            }
+        },
+        error: function (err) {
+            str = JSON.stringify(err, null, 2);
+            console.log('err:');
+            console.log(err);
+            alert(str);
+        }
+    });
+}
 
 
 //登出
@@ -211,8 +245,6 @@ function SetModifiedPwd() {
     var newPwd = $('#inputNewPwd').val();
     var newPwdConfirm = $('#newPwdConfirm').val();
 
-    console.log('before globalMemberPwd', globalMember.pwd);
-
     if (oldPwd == globalMember.pwd && newPwd == newPwdConfirm) {
         alert('修改密碼成功');
         globalMember.pwd = newPwdConfirm;
@@ -228,9 +260,7 @@ function SetModifiedPwd() {
         //$('#inputOldPwd').val('');
         $('#inputNewPwd').val('');
         $('#newPwdConfirm').val('');
-    }
-    console.log(oldPwd);
-    console.log('after globalMemberPwd', globalMember.pwd);
+    } 
 }
 
 function LeavePwdBlock() {
@@ -254,6 +284,39 @@ function MemberCenterTelVerify(el) {
         alert('聯絡電話輸入錯誤或空白');
         $('#setInputTel').val(globalMember.phone);
     }
+}
+
+
+function PrintMyOrder() {
+    $('#orderCreatedTable').html('');
+    var tableRow = '';
+    tableRow = '<tr>' +
+        '<th>' + '項次' + '</th>' +
+        '<th>' + '產品標題' + '</th>' +
+        '<th>' + '數量' + '</th>' +
+        '<th>' + '單價' + '</th>' +
+        '<th>' + '小計' + '</th>' +
+        '</tr>';
+
+    total = 0;
+
+    for (var i = 0; i < productInfoFromDB.length; i++) {
+        qtn = cartItem[i].QtnForBuy;
+        tableRow +=
+            '<tr>' +
+            '<td>' + (i + 1) + '</td>' +
+            '<td class="productTitleInCart">' + productInfoFromDB[i].ProductTitle + '</td>' +
+            '<td>' + qtn + '</td>' +
+            '<td class="unitPriceInCart" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
+            '<td id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
+            '</tr>';
+        total += productInfoFromDB[i].ProductUnitPrice * qtn;
+    }
+
+    $('#orderTable').append(tableRow);
+    $('#orderTable').show();
+    $('#totalInOrderPreview').text(total);
+    $('#pointInPreviewOrder').html(memberInfo.Points);
 }
 
 //const button = $('.btnMemberGroup');
