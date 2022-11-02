@@ -196,16 +196,16 @@
                     </div>
                 </div>  
          
-               <div class="cartBlock" id="cartBlock">
+                <div class="cartBlock" id="cartBlock">
                  <span class="myCartTitle">購物車</span>
                  <span class="myCartTitle" id="cartMessage"></span>
                  <div class="productList" id="productList">
                     <table class="productTable" id="productTable"></table>
                     <div class="balanceBlock">
                         <div class="totalBlock">
-                        <div class="labelInCart">總額：</div>
-                        <div class="labelInCartShown" id="totalInCart"></div><br/>
-                    </div>
+                            <div class="labelInCart">總額：</div>
+                            <div class="labelInCartShown" id="totalInCart"></div><br/>
+                        </div>
                     <div class="pointInputBlock">
                         <label for="inputPoint" class="labelInCart">請輸入折抵點數： </label>
                         <input type="number" class="inputPoint" id="inputPoint" autocomplete="off" onchange="PointVerify(this)" value=""/><br/>
@@ -214,29 +214,24 @@
                         <div  class="labelInCart">目前擁有點數：</div>
                         <div class="labelInCartShown" id="pointOwned"></div>     
                     </div>
-                 </div>
+                    </div>
                  <button class="btnCart" id="btnCheckOut" onclick ="OrderPreview()">結帳</button>
                  </div>
                  <button class="btnCart" id="btnKeepShopping" onclick="CancelContent()">確定</button>
               </div>
 
-              <div class="myOrderBlock" id="myOrderBlock">
+                <div class="myOrderBlock" id="myOrderBlock">
                  <span class="myCartTitle">訂單</span>
                  <div class="productList" id="orderCreatedList">
-                    <table class="productTable" id="orderCreatedTable"></table>
-                    <div class="balanceBlock">
-                        <div class="totalBlock">
-                        <div class="labelInCart">總額：</div>
-                        <div class="labelInCartShown" id="totalInOrderCreated"></div><br/>
-                    </div>                   
-                 </div>                
+                    <table class="productTable" id="orderCreatedTable"></table>                            
                  <button class="btnCart" id="btnBackToMemberCenter" onclick="CancelContent()">確定</button>               
+                 </div>
+
               </div>
+            </div>
+        </div>
 
-         </div>
-
-
-           <div class="pwdModify" id="pwdModify">
+        <div class="pwdModify" id="pwdModify">
               <span class="pwdSetting">修改密碼</span>
                <div class="pwdModifyBlock">
                  <div class="pwdModifyBox">
@@ -258,9 +253,21 @@
                 </div>
            </div>
 
+        <div class="orderBlock" id="orderItemBlock">
+                <span class="myOrderTitle">訂單細項</span>
+                <div class="productList" id="orderItemList">
+                    <table class="productTable" id="orderItemTable"></table>                
+                </div>
+                <div class="balanceBlock">
+                        <div class="totalBlock">
+                            <div class="labelInPreviewOrder">總額：</div>
+                            <div class="resultInPreviewOrder" id="totalInOrderItem"></div><br/>
+                        </div>
+                </div>          
+                <button class="btnCart" id="btnBackToAllOrder" onclick ="CloseOrderItem()">確定</button>                
+          </div>
 
-
-             <div class="orderBlock" id="orderPriviewBlock">
+        <div class="orderBlock" id="orderPriviewBlock">
                 <span class="myOrderTitle">訂單</span>
                 <div class="productList" id="orderList">
                     <table class="productTable" id="orderTable"></table>                
@@ -280,17 +287,22 @@
                 <button class="btnCart" id="btnBacktoCart" onclick="OpenCart()">回購物車</button>
             </div>
 
-            <div class="orderMessage" id="orderCreated">               
+        <div class="orderMessage" id="orderCreated">               
                 <span class="messageInPreviewOrder" id="messageForOrderCreated"></span>           
                 <button class="btnCart" id="btnBacktoHome" onclick="window.location.href = '/view/HomePage.aspx'">確定</button>
             </div>
 
-            <div class="orderMessage" id="orderNotCreated">               
+        <div class="orderMessage" id="orderNotCreated">               
                 <span class="messageInPreviewOrder" id="messageForUser"></span>           
                 <button class="btnCart" id="btnBacktoCartFromMessageBox" onclick="OpenCart()">回購物車</button>
             </div>
 
+            
+       
+
     </div>
+
+
   
 </body>
 </html>

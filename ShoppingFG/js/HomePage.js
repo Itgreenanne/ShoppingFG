@@ -97,6 +97,8 @@ function StatusVerify() {
             success: function (data) {
                 if (data) {
                     var jsonResult = JSON.parse(data);
+                    memberInfo = jsonResult;
+                    console.log('userinfo in statusverify', jsonResult);
 
                     if (RepeatedStuff(jsonResult)) {
                         return;
@@ -150,6 +152,7 @@ function ClearMemberCenterAllBlock() {
     $('#settingBlock').hide();
     $('#cartBlock').hide();
     $('#myOrderBlock').hide();
+    $('#orderItemBlock').hide();
     $('#orderPriviewBlock').hide();
     $('#orderNotCreated').hide();
     $('#orderCreated').hide();
@@ -162,13 +165,15 @@ function PrintProductDiv(jsonResult) {
     var productInfo = '';    
 
     for (var i = 0; i < jsonResult.length; i++) {
-        productInfo +=
-            '<div class="productInfo">' +
-            '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg" id = "productImg" onclick = " window.location.href = \'/view/ProductPage.aspx?id='+ jsonResult[i].ProductId +'\'" target = "_self" /></div > ' +
-            '<div class="productTitle">' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
-            '<div class="priceStyle">' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
-            '<div><img src="/images/Qtn1.png" class="qtnImg">' + jsonResult[i].ProductQtn + '</div >'+          
-            '</div>';            
+        if (jsonResult[i].ProductQtn > 0) {
+            productInfo +=
+                '<div class="productInfo">' +
+                '<div><img src="/images/' + jsonResult[i].ProductPic + '" class="productImg" id = "productImg" onclick = " window.location.href = \'/view/ProductPage.aspx?id=' + jsonResult[i].ProductId + '\'" target = "_self" /></div > ' +
+                '<div class="productTitle">' + '標題：' + productTitleShown[i].ProductTitle + '</div>' +
+                '<div class="priceStyle">' + '$' + jsonResult[i].ProductUnitPrice + '</div>' +
+                '<div><img src="/images/Qtn1.png" class="qtnImg">' + jsonResult[i].ProductQtn + '</div >' +
+                '</div>';
+        }
     }
 
     $('#productContainer').append(productInfo);

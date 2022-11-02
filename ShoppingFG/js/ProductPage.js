@@ -28,11 +28,11 @@ function ReadProductInfo(productId) {
                 sessionBool = jsonResult.SessionIsNull;
                 memberInfo = jsonResult.UserInfo;
                 ShowProductInfo(productInfo);
-                if (data == 0) {
+                if (data == '0') {
                     $('#MessageInProductPage').text('網路錯誤');
-                } else if (data == 1) {
+                } else if (data == '1') {
                     $('#MessageInProductPage').text('id型別錯誤');
-                } else if (data == 2) {
+                } else if (data == '2') {
                     $('#MessageInProductPage').text('無此產品');
                 } else if (jsonResult['SessionIsNull'] == true) {
                     $('#lastNameShown').text('');

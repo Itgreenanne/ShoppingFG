@@ -29,7 +29,7 @@
 <body class="no-scroll">
     <div id="overlay"></div>
     <div id="overlay1"></div>
-      <div class="productPageContainer" id="productPageContainer">
+    <div class="productPageContainer" id="productPageContainer">
          <img src="/images/logo.png" class="homePageLogo" id="homePageLogo" onclick=" window.location.href = '/view/HomePage.aspx'"/>
          <div class="pageHead" id="pageHeadBefore">
           <div class="searchBlock">
@@ -46,13 +46,13 @@
           </div>
          </div>     
         
-        <div class="messageBoxInProductPage" id="messageBoxInProductPage">
+          <div class="messageBoxInProductPage" id="messageBoxInProductPage">
             <div class="MessageInProductPage" id="MessageInProductPage"></div>
             <button class="btnLastPageInMessageBox" id="btnLastPageInMessageBox" onclick="BackToProductPage()">上一頁</button>
-        </div>
+          </div>
 
 
-        <div class="productInfoBlock" id="productInfoBlock">
+          <div class="productInfoBlock" id="productInfoBlock">
             <div class="productImgDiv" id="productImgDiv"></div>
             <div class="ProductInfoContainer" id="ProductInfoContainer">
                 <div class="productTitleInProductPage" id="productTitleInProductPage"></div>
@@ -66,7 +66,7 @@
                 </div>            
         </div>
 
-         <div class="loginBlock" id="loginBlock">
+          <div class="loginBlock" id="loginBlock">
              <img src="/images/logo.png" class="shoppingLogo"/>
            <div class="inputBlock">
              <div class="inputBox">
@@ -82,7 +82,7 @@
            <button class="btnLogin" id="btnLogin" onclick ="LoginVerify()">登入</button>
            <button class="btnSignup" id="btnSignup" onclick="OpenSignUpBlock()">註冊</button>
            <button class="btnLoginBlockCancel" id="btnLoginBlockCancel" onclick="LeaveLoginBlock()">取消</button>
-        </div>
+         </div>
 
           <div class="signUpBlock" id="signUpBlock">
             <img src="/images/logo.png" class="shoppingLogo"/>
@@ -139,11 +139,11 @@
                     <button class="btnLoginBlockCancel" id="btnCancel" onclick="LeaveSignUpBlock()">取消</button>
                 </div>
             </div>
-        </div>
+          </div>
         
 
 
-        <div class="memberCenter" id="memberCenter">
+          <div class="memberCenter" id="memberCenter">
             <img src="/images/leave.png" class="leaveMemberCenter" id="leaveMemberCenter" onclick="LeaveMemberCenter()"/>
             <span class="memberCenterTitle">會員中心</span>
             <div class="btnMemberBox">
@@ -154,8 +154,7 @@
             </div>
             <div class="memberCenterlogo" id="memberCenterlogo">
                 <img src="/images/logo.png" class="memberCenterlogoPic"/>  
-            </div>
-        
+            </div>        
             <div class="functionContent" id="functionContent">
                 <div class="settingBlock" id="settingBlock">
                     <span class="accountSetting">帳戶設定</span>
@@ -212,16 +211,16 @@
                     </div>
                 </div>  
          
-              <div class="cartBlock" id="cartBlock">
+                <div class="cartBlock" id="cartBlock">
                  <span class="myCartTitle">購物車</span>
                  <span class="myCartTitle" id="cartMessage"></span>
                  <div class="productList" id="productList">
                     <table class="productTable" id="productTable"></table>
                     <div class="balanceBlock">
                         <div class="totalBlock">
-                        <div class="labelInCart">總額：</div>
-                        <div class="labelInCartShown" id="totalInCart"></div><br/>
-                    </div>
+                            <div class="labelInCart">總額：</div>
+                            <div class="labelInCartShown" id="totalInCart"></div><br/>
+                        </div>
                     <div class="pointInputBlock">
                         <label for="inputPoint" class="labelInCart">請輸入折抵點數： </label>
                         <input type="number" class="inputPoint" id="inputPoint" autocomplete="off" onchange="PointVerify(this)" value=""/><br/>
@@ -230,34 +229,28 @@
                         <div  class="labelInCart">目前擁有點數：</div>
                         <div class="labelInCartShown" id="pointOwned"></div>     
                     </div>
-                 </div>
+                    </div>
                  <button class="btnCart" id="btnCheckOut" onclick ="OrderPreview()">結帳</button>
                  </div>
                  <button class="btnCart" id="btnKeepShopping" onclick="CancelContent()">確定</button>
-              </div>
-              
+              </div>              
                 
-              <div class="myOrderBlock" id="myOrderBlock">
+                <div class="myOrderBlock" id="myOrderBlock">
                  <span class="myCartTitle">訂單</span>
                  <div class="productList" id="orderCreatedList">
-                    <table class="productTable" id="orderCreatedTable"></table>
-                    <div class="balanceBlock">
-                        <div class="totalBlock">
-                        <div class="labelInCart">總額：</div>
-                        <div class="labelInCartShown" id="totalInOrderCreated"></div><br/>
-                    </div>                   
-                 </div>                
+                    <table class="productTable" id="orderCreatedTable"></table>                           
                  <button class="btnCart" id="btnBackToMemberCenter" onclick="CancelContent()">確定</button>               
+                 </div>
+
               </div>
 
             </div>
+          </div>
 
-         </div>
-
-           <div class="pwdModify" id="pwdModify">
+          <div class="pwdModify" id="pwdModify">
               <span class="pwdSetting">修改密碼</span>
-               <div class="pwdModifyBlock">
-                 <div class="pwdModifyBox">
+              <div class="pwdModifyBlock">
+                <div class="pwdModifyBox">
                     <label for="inputOldPwd">請輸入舊密碼： </label>
                     <input type="password" class="inputOldPwd" id="inputOldPwd" autocomplete="off" onchange="PwdVerify(this)" value=""/><br/>
                  </div>
@@ -270,13 +263,13 @@
                     <input type="password" class="newPwdConfirm" id="newPwdConfirm" autocomplete="off" onchange="PwdVerify(this)" value=""/><br/>
                 </div>
                </div>
-                <div class="btnSettingGroup">
+              <div class="btnSettingGroup">
                   <button class="btnsettingConfirm" id="btnPwdConfirm" onclick="SetModifiedPwd()">確定</button>
                   <button class="btnCancelContent" id="btnleavePwdBlock" onclick="LeavePwdBlock()">取消</button>
                 </div>
            </div>
 
-            <div class="orderBlock" id="orderPriviewBlock">
+          <div class="orderBlock" id="orderPriviewBlock">
                 <span class="myOrderTitle">訂單</span>
                 <div class="productList" id="orderList">
                     <table class="productTable" id="orderTable"></table>                
@@ -294,19 +287,36 @@
                 </div>
                 <button class="btnCart" id="btnOrderComfirm" onclick ="OrderConfirm()">確定</button>
                 <button class="btnCart" id="btnBacktoCart" onclick="OpenCart()">回購物車</button>
-            </div>
+          </div>
 
-            <div class="orderMessage" id="orderCreated">               
+          <div class="orderBlock" id="orderItemBlock">
+                <span class="myOrderTitle">訂單細項</span>
+                <div class="productList" id="orderItemList">
+                    <table class="productTable" id="orderItemTable"></table>                
+                </div>
+                <div class="balanceBlock">
+                        <div class="totalBlock">
+                            <div class="labelInPreviewOrder">總額：</div>
+                            <div class="resultInPreviewOrder" id="totalInOrderItem"></div><br/>
+                        </div>
+                </div>
+          
+                <button class="btnCart" id="btnBackToAllOrder" onclick ="CloseOrderItem()">確定</button>                
+          </div>
+
+
+          <div class="orderMessage" id="orderCreated">               
                 <span class="messageInPreviewOrder" id="messageForOrderCreated"></span>           
                 <button class="btnCart" id="btnBacktoHome" onclick="window.location.href = '/view/HomePage.aspx'">確定</button>
             </div>
 
-            <div class="orderMessage" id="orderNotCreated">               
+          <div class="orderMessage" id="orderNotCreated">               
                 <span class="messageInPreviewOrder" id="messageForUser"></span>           
                 <button class="btnCart" id="btnBacktoCartFromMessageBox" onclick="OpenCart()">回購物車</button>
             </div>
 
-      </div>
+        
+    </div>
    
 </body>
 </html>

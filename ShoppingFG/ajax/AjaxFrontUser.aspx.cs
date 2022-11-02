@@ -309,7 +309,6 @@ namespace ShoppingFG.ajax
                     dt = ds.Tables[0];
                     OrderInfo orderInfo = new OrderInfo();
                     List<OtherInfo> otherInfoArray = new List<OtherInfo>();
-                    List<OrderItem> orderItemArray = new List<OrderItem>();
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
@@ -318,13 +317,13 @@ namespace ShoppingFG.ajax
                         {
                             OrderId = Convert.ToInt16(row.ItemArray[0]),
                             OrderNo = row.ItemArray[1].ToString(),
-                            OrderCreatedTime = row.ItemArray[2].ToString()
-                        }; otherInfoArray.Add(otherInfo);
-
-                        
+                            OrderTotalPrice = Convert.ToInt16(row.ItemArray[2]),
+                            OrderCreatedTime = row.ItemArray[3].ToString()
+                        }; otherInfoArray.Add(otherInfo);                        
                     }
 
                     dt = ds.Tables[1];
+                    List<OrderItem> orderItemArray = new List<OrderItem>();
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
@@ -332,11 +331,11 @@ namespace ShoppingFG.ajax
                         OrderItem orderItem = new OrderItem()
                         {
                             OrderItemId = Convert.ToInt16(row.ItemArray[0]),
-                            ProductId = Convert.ToInt16(row.ItemArray[1]),
-                            ProductTitle = row.ItemArray[2].ToString(),
-                            QtnForBuy = Convert.ToInt16(row.ItemArray[3]),
-                            ProductUnitPrice = Convert.ToInt16(row.ItemArray[4]),
-                            OrderId = Convert.ToInt16(row.ItemArray[5])
+                            OrderId = Convert.ToInt16(row.ItemArray[1]),
+                            ProductId = Convert.ToInt16(row.ItemArray[2]),
+                            ProductTitle = row.ItemArray[3].ToString(),
+                            QtnForBuy = Convert.ToInt16(row.ItemArray[4]),
+                            ProductUnitPrice = Convert.ToInt16(row.ItemArray[5]),
                         }; orderItemArray.Add(orderItem);
                     }
                     orderInfo.InfoList = otherInfoArray;

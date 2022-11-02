@@ -16,6 +16,10 @@ namespace ShoppingFG.models
         /// </summary>
         public string OrderNo { get; set; }
         /// <summary>
+        /// 訂單總金額
+        /// </summary>
+        public int OrderTotalPrice { get; set; }
+        /// <summary>
         /// 訂單建立時間
         /// </summary>
         public string OrderCreatedTime { get; set; }

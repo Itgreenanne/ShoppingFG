@@ -55,6 +55,7 @@ namespace ShoppingFG.ajax
                 string memberPwdCompare = "";
                 string memberLastNameCompare = "";
                 string memberFirstNameCompare = "";
+                int memberPointsCompare = 0;
 
                 if (reader.HasRows)
                 {
@@ -64,6 +65,7 @@ namespace ShoppingFG.ajax
                         memberPwdCompare = reader["f_pwd"].ToString();
                         memberLastNameCompare = reader["f_lastname"].ToString();
                         memberFirstNameCompare = reader["f_firstname"].ToString();
+                        memberPointsCompare = Convert.ToInt16(reader["f_points"]);
                     }
                 }
 
@@ -76,10 +78,11 @@ namespace ShoppingFG.ajax
                     Response.Write(msgReturn);
                     Response.End();
                 }
-                else if (memberLastNameCompare != userInfo.LastName || memberFirstNameCompare != userInfo.FirstName) 
+                else if (memberLastNameCompare != userInfo.LastName || memberFirstNameCompare != userInfo.FirstName || memberPointsCompare != userInfo.Points) 
                 {
                     userInfo.LastName = memberLastNameCompare;
                     userInfo.FirstName = memberFirstNameCompare;
+                    userInfo.Points = memberPointsCompare;
                     Session["userInfo"] = userInfo;
                     Response.Write(JsonConvert.SerializeObject(userInfo));
                 }

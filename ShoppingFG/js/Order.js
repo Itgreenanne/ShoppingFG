@@ -47,8 +47,10 @@ function OrderConfirm() {
     }
 
     if (memberInfo.Points < total) {
-        alert('點數不夠');
-        OpenCart();
+        $('#orderPriviewBlock').hide();
+        $('#orderNotCreated').show();
+        $('#messageForUser').text('點數不夠');
+        //OpenCart();
     } else {
 
         $.ajax({

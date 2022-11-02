@@ -44,11 +44,8 @@
 
 .orderMessage {
     display: flex;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    padding-top: 30px;
+    position: absolute;
     border: solid 1px black;
     font-size: 30px;
     color: #26C6DA;
@@ -61,5 +58,8 @@
     flex-wrap: nowrap;
     z-index: 4;
     overflow: auto;
-    justify-content: center;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    top: 25%;
 }

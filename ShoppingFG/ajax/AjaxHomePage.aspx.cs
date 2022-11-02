@@ -108,7 +108,7 @@ namespace ShoppingFG.ajax
                         productInfo.ProductId = Convert.ToInt16(reader["f_id"]);
                         productInfo.ProductPic = reader["f_picturePath"].ToString();
                         productInfo.ProductTitle = reader["f_title"].ToString();
-                        productInfo.ProductUnitPrice = Convert.ToInt16(reader["f_unitprice"]);
+                        productInfo.ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]);
                         productInfo.ProductQtn = Convert.ToInt16(reader["f_quantity"]);
                         productInfo.ProductTypeId = Convert.ToInt16(reader["f_typeId"]);
                         productInfo.ProductDetail = reader["f_detail"].ToString();
@@ -172,7 +172,7 @@ namespace ShoppingFG.ajax
                             productInfo.Add("ProductId", Convert.ToInt16(reader["f_id"]));
                             productInfo.Add("ProductPic", reader["f_picturePath"].ToString());
                             productInfo.Add("ProductTitle", reader["f_title"].ToString());
-                            productInfo.Add("ProductUnitPrice", Convert.ToInt16(reader["f_unitprice"]));
+                            productInfo.Add("ProductUnitPrice", Convert.ToInt32(reader["f_unitprice"]));
                             productInfo.Add("ProductQtn", Convert.ToInt16(reader["f_quantity"]));
                             productInfo.Add("ProductTypeId", Convert.ToInt16(reader["f_typeId"]));
                             productInfo.Add("ProductDetail", reader["f_detail"].ToString());

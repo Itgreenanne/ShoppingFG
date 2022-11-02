@@ -126,6 +126,8 @@
     <Compile Include="appCode\IsPwdChangeVerify.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="models\ProductForCart.cs" />
+    <Compile Include="models\InfoForCart.cs" />
     <Compile Include="models\OtherInfo.cs" />
     <Compile Include="models\OrderItem.cs" />
     <Compile Include="models\OrderInfo.cs" />

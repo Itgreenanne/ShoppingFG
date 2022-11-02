@@ -102,7 +102,7 @@
     float: left;
     word-break: break-all;
     margin-right: 10px;
-    margin-left: 20px;
+    margin-left: 10px;
     align-items: center;
     color: grey;
 }
@@ -115,9 +115,9 @@
 }
 
 .productImg {
-    width: 180PX;
+    width: 160PX;
     margin-top: 10px;
-    height: 190px;
+    height: 185px;
 }
 
 .shoppingLogo {

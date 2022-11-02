@@ -8,7 +8,6 @@ function ClassSet() {
     $('#myOrder').removeClass('btnMemberGroupPressed').addClass('btnMemberGroup');
 }
 
-
 //開啟會員帳號設定視窗
 function OpenSettingBlock() {
     ClassSet();
@@ -62,6 +61,7 @@ function OpenSettingBlock() {
     })
 }
 
+//確定會員中心中的帳號設定
 function SettingConfirm() {
     var tel = $('#setInputTel').val();
     var pwd = globalMember.pwd;
@@ -116,6 +116,7 @@ function SettingConfirm() {
                             case '0':
                                 alert("修改會員資料成功");
                                 $('#settingBlock').hide();
+                                ClassSet();
                                 $('#memberCenterlogo').show();
                                 $('#lastNameShown').text(lastname);
                                 $('#firstNameShown').text(firstname);
@@ -182,7 +183,7 @@ function OpenCartBlock() {
     }
 }
 
-//我的訂單
+//開啟會員中心中的訂單
 function OpenMyOrder() {
     ClassSet();
     ClearMemberCenterAllBlock();
@@ -203,6 +204,8 @@ function OpenMyOrder() {
                 if (RepeatedStuff(jsonResult)) {
                     return;
                 } else {
+                    var orderDate = jsonResult.InfoList.OrderCreatedTime.getFullYear();
+                    console.log('orderDate', orderDate);
                     orderData = jsonResult;
                     $('#myOrderBlock').show();
                     PrintMyOrder();
@@ -220,8 +223,7 @@ function OpenMyOrder() {
     });
 }
 
-
-//登出
+//按下會員中心中的登出鍵
 function Logout() {
     $.ajax({
         url: '/ajax/AjaxFrontUser.aspx?fn=Logout',
@@ -231,6 +233,7 @@ function Logout() {
     window.location.href = '/view/HomePage.aspx';
 }
 
+//修改會員密碼
 function ModifyPwdBlock() {
     $('#overlay1').show();
     $('#inputOldPwd').val('');
@@ -263,11 +266,13 @@ function SetModifiedPwd() {
     } 
 }
 
+//關閉修改密碼div
 function LeavePwdBlock() {
     $('#pwdModify').hide();
     $('#overlay1').hide();
 }
 
+//帳號設定中的email格式驗証
 function MemberCenterEmailVerify(el) {
     var inputText = el.value;
     var emailSymbol = '@';
@@ -277,6 +282,7 @@ function MemberCenterEmailVerify(el) {
     }
 }
 
+//帳號設定中的電話格式驗証
 function MemberCenterTelVerify(el) {
     var inputText = el.value;
     var rightForm = /^\d{10}$/;
@@ -286,9 +292,45 @@ function MemberCenterTelVerify(el) {
     }
 }
 
-
+//列印會員所有訂單
 function PrintMyOrder() {
     $('#orderCreatedTable').html('');
+    var tableForAll = '';
+    var total = 0;
+    tableForAll = '<tr>' +
+        '<th>' + '項次' + '</th>' +
+        '<th>' + '訂單編號' + '</th>' +
+        '<th>' + '總額' + '</th>' +
+        '<th>' + '建立日期' + '</th>' +
+        '<th>' + '操作' + '</th>' +
+        '</tr>';
+
+    for (var i = 0; i < orderData.InfoList.length; i++) {        
+        tableForAll +=
+            '<tr>' +
+            '<td>' + (i + 1) + '</td>' +
+            '<td class="productTitleInCart">' + orderData.InfoList[i].OrderNo + '</td>' +
+            '<td>' + orderData.InfoList[i].OrderTotalPrice + '</td>' +
+            '<td>' + orderData.InfoList[i].OrderCreatedTime + '</td>' +
+            '<td><button class = "btnShowOrderItem" onclick = "OpenOrderItem(\'' + orderData.InfoList[i].OrderId + '\')">查看</button></td>' +
+            '</tr>';
+    }
+
+    $('#orderCreatedTable').append(tableForAll);
+    $('#orderCreatedTable').show();
+    //$('#totalInOrderCreated').text(total);
+}
+
+//開啟訂單細項div
+function OpenOrderItem(OrderId) {    
+    $('#overlay1').show();
+    $('#orderItemBlock').show();
+    PrintOrderItem(OrderId);
+}
+
+//列印訂單細項
+function PrintOrderItem(OrderId) {
+    $('#orderItemTable').html('');
     var tableRow = '';
     tableRow = '<tr>' +
         '<th>' + '項次' + '</th>' +
@@ -299,24 +341,33 @@ function PrintMyOrder() {
         '</tr>';
 
     total = 0;
+    var j = 1;
+    for (var i = 0; i < orderData.OrderList.length; i++) {
 
-    for (var i = 0; i < productInfoFromDB.length; i++) {
-        qtn = cartItem[i].QtnForBuy;
-        tableRow +=
-            '<tr>' +
-            '<td>' + (i + 1) + '</td>' +
-            '<td class="productTitleInCart">' + productInfoFromDB[i].ProductTitle + '</td>' +
-            '<td>' + qtn + '</td>' +
-            '<td class="unitPriceInCart" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
-            '<td id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
-            '</tr>';
-        total += productInfoFromDB[i].ProductUnitPrice * qtn;
+        if (orderData.OrderList[i].OrderId == OrderId) {
+            
+            tableRow +=
+                '<tr>' +
+                '<td>' + j + '</td>' +
+                '<td class="productTitleInCart">' + orderData.OrderList[i].ProductTitle + '</td>' +
+                '<td>' + orderData.OrderList[i].QtnForBuy + '</td>' +
+                '<td class="unitPriceInCart" id="unitPriceInCart' + i + '">' + orderData.OrderList[i].ProductUnitPrice + '</td>' +
+                '<td id="subTotalInCart' + i + '">' + orderData.OrderList[i].QtnForBuy * orderData.OrderList[i].ProductUnitPrice + '</td>' +
+                '</tr>';
+            total += orderData.OrderList[i].QtnForBuy * orderData.OrderList[i].ProductUnitPrice;
+            j++;
+        }
     }
 
-    $('#orderTable').append(tableRow);
-    $('#orderTable').show();
-    $('#totalInOrderPreview').text(total);
-    $('#pointInPreviewOrder').html(memberInfo.Points);
+    $('#orderItemTable').append(tableRow);
+    $('#orderItemTable').show();
+    $('#totalInOrderItem').text(total);
+}
+
+//關掉訂單細項div
+function CloseOrderItem() {
+    $('#overlay1').hide();
+    $('#orderItemBlock').hide();
 }
 
 //const button = $('.btnMemberGroup');

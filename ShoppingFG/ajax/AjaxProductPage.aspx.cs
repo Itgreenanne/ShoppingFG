@@ -113,7 +113,7 @@ namespace ShoppingFG.ajax
                             productInfo.ProductId = Convert.ToInt16(reader["f_id"]);
                             productInfo.ProductPic = reader["f_picturePath"].ToString();
                             productInfo.ProductTitle = reader["f_title"].ToString();
-                            productInfo.ProductUnitPrice = Convert.ToInt16(reader["f_unitprice"]);
+                            productInfo.ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]);
                             productInfo.ProductQtn = Convert.ToInt16(reader["f_quantity"]);
                             productInfo.ProductTypeId = Convert.ToInt16(reader["f_typeId"]);
                             productInfo.ProductDetail = reader["f_detail"].ToString();
@@ -142,12 +142,12 @@ namespace ShoppingFG.ajax
             }
         }
 
-
         /// <summary>
         /// 購物車用產品id從DB讀取產品資訊
         /// </summary>
         private void SearchProductByIdForCart()
         {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             string cartItem = Request.Form["getIdArray"];
             JArray itemId = JArray.Parse(cartItem);
             ProductMsg msgValue = ProductMsg.WrongConnection;
@@ -188,23 +188,28 @@ namespace ShoppingFG.ajax
                 SqlParameter listParam = cmd.Parameters.AddWithValue("@list", ids);
                 listParam.Direction = ParameterDirection.Input;
                 SqlDataReader reader = cmd.ExecuteReader();
-                //ProductDataArray productInfo = new ProductDataArray();
-                //List<ProductDataArray> productArray = new List<ProductDataArray>();
-                JArray productArray = new JArray();
-
+                InfoForCart infoForCart = new InfoForCart();
+                List<ProductForCart> productArray = new List<ProductForCart>();
+                //if(userInfo != null)
+                //{
+                //    infoForCart.MemberPoints = userInfo.Points;
+                //}
 
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        JObject productInfo = new JObject();
-                        productInfo.Add("ProductId", Convert.ToInt16(reader["f_id"]));
-                        productInfo.Add("ProductTitle", reader["f_title"].ToString());
-                        productInfo.Add("ProductUnitPrice", Convert.ToInt16(reader["f_unitprice"]));
-                        productInfo.Add("ProductQtn", Convert.ToInt16(reader["f_quantity"]));
-                        productArray.Add(productInfo);
+                        ProductForCart productForCart = new ProductForCart()
+                        {
+                            ProductId = Convert.ToInt16(reader["f_id"]),
+                            ProductTitle = reader["f_title"].ToString(),
+                            ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]),
+                            ProductQtn = Convert.ToInt16(reader["f_quantity"])
+                        };
+                        productArray.Add(productForCart);
                     }
-                    Response.Write(productArray);
+                    infoForCart.ProductInfoList = productArray;
+                    Response.Write(JsonConvert.SerializeObject(infoForCart));
                 }
                 else
                 {
@@ -242,7 +247,6 @@ namespace ShoppingFG.ajax
             int tempUnitPrice;
             int subTotal = 0, total = 0;
             bool productIdIsInt, qtnIsInt, priceIsInt;
-
 
             if (string.IsNullOrEmpty(idNo) || idNo.Length > 10)
             {
