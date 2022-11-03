@@ -317,8 +317,8 @@ namespace ShoppingFG.ajax
                         {
                             OrderId = Convert.ToInt16(row.ItemArray[0]),
                             OrderNo = row.ItemArray[1].ToString(),
-                            OrderTotalPrice = Convert.ToInt16(row.ItemArray[2]),
-                            OrderCreatedTime = row.ItemArray[3].ToString()
+                            OrderTotalPrice = Convert.ToInt16(row.ItemArray[2]),                                                 
+                            OrderCreatedTime = String.Format("{0:yyyy/MM/dd HH:mm:ss}", DateTime.Parse(row.ItemArray[3].ToString()))
                         }; otherInfoArray.Add(otherInfo);                        
                     }
 

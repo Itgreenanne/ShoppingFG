@@ -204,8 +204,9 @@ function OpenMyOrder() {
                 if (RepeatedStuff(jsonResult)) {
                     return;
                 } else {
-                    var orderDate = jsonResult.InfoList.OrderCreatedTime.getFullYear();
-                    console.log('orderDate', orderDate);
+                    //var orderDate = jsonResult.InfoList.OrderCreatedTime.getFullYear();
+                    //console.log('orderDate', orderDate);
+                    //orderData = jsonResult;
                     orderData = jsonResult;
                     $('#myOrderBlock').show();
                     PrintMyOrder();
@@ -302,10 +303,10 @@ function PrintMyOrder() {
         '<th>' + '訂單編號' + '</th>' +
         '<th>' + '總額' + '</th>' +
         '<th>' + '建立日期' + '</th>' +
-        '<th>' + '操作' + '</th>' +
+        '<th>' + '細項' + '</th>' +
         '</tr>';
 
-    for (var i = 0; i < orderData.InfoList.length; i++) {        
+    for (var i = orderData.InfoList.length - 1; i >= 0 ; i--) {        
         tableForAll +=
             '<tr>' +
             '<td>' + (i + 1) + '</td>' +

@@ -93,6 +93,7 @@
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .btnMemberBox {
@@ -341,6 +342,10 @@
     background-color: #E0F7FA;
     font-size: 15px;
     color: #0277BD;
+}
+
+.seperateLine {
+    border-top: dashed #EBEBFF;
 }
 
 .myOrderBlock {

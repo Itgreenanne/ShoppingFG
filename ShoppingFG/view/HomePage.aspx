@@ -17,6 +17,7 @@
 
 </head>
     <script src="/js/jquery-2.1.4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
     <script type="text/javascript" src="/js/StartHomePage.js"> </script>
     <script type="text/javascript" src="/js/HomePage.js"> </script>
     <script type="text/javascript" src="/js/Login.js"> </script>
@@ -137,7 +138,7 @@
             </div>
             <div class="memberCenterlogo" id="memberCenterlogo">
                 <img src="/images/logo.png" class="memberCenterlogoPic"/>  
-            </div>
+            </div>          
         
             <div class="functionContent" id="functionContent">
 
@@ -228,8 +229,10 @@
                  </div>
 
               </div>
+
             </div>
         </div>
+        
 
         <div class="pwdModify" id="pwdModify">
               <span class="pwdSetting">修改密碼</span>

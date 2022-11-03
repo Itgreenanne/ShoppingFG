@@ -18,6 +18,7 @@
 
 </head>
      <script src="/js/jquery-2.1.4.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
      <script type="text/javascript" src="/js/HomePage.js"> </script>
      <script type="text/javascript" src="/js/ProductPage.js"> </script>
      <script type="text/javascript" src="/js/Login.js"> </script>

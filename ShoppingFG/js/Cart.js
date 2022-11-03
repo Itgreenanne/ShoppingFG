@@ -11,14 +11,14 @@ function PrintAllItem() {
 
     //判斷購物車裡是否有產品，沒有的話就秀'尚無產品'
     if (cartItem.length != 0) {
-        tableRow = '<tr>' +
-            '<th>' + '項次' + '</th>' +
-            '<th>' + '產品標題' + '</th>' +
-            '<th>' + '數量' + '</th>' +
-            '<th>' + '單價' + '</th>' +
-            '<th>' + '小計' + '</th>' +
-            '<th>' + '操作' + '</th>' +
-            '</tr>';
+        //tableRow = '<tr>' +
+        //    '<th>' + '項次' + '</th>' +
+        //    '<th>' + '產品標題' + '</th>' +
+        //    '<th>' + '數量' + '</th>' +
+        //    '<th>' + '單價' + '</th>' +
+        //    '<th>' + '小計' + '</th>' +
+        //    '<th>' + '操作' + '</th>' +
+        //    '</tr>';
 
         total = 0;
 
@@ -26,9 +26,14 @@ function PrintAllItem() {
             var qtn = cartItem[i].QtnForBuy;
             productInfoFromDB[i].QtnForBuy = qtn;
             tableRow +=
-                '<tr>' +
+                '<tr>' + '<th class="seperateLine">' + '項次' + '</th>' +
+                '<th class="seperateLine" colspan="3">' + '產品標題' + '</th></tr><tr>' +
                 '<td>' + (i + 1) + '</td>' +
-                '<td class="productTitleInCart">' + productInfoFromDB[i].ProductTitle + '</td>' +
+                '<td colspan="3"class="productTitleInCart">' + productInfoFromDB[i].ProductTitle + '</td></tr><tr>' +
+                '<th>' + '數量' + '</th>' +
+                '<th>' + '單價' + '</th>' +
+                '<th>' + '小計' + '</th>' +
+                '<th>' + '操作' + '</th></tr><tr>' +
                 '<td><input type="number" class="itemQtnInCart" id="itemQtnInCart' + i + '" onchange="PriceCal(' + productInfoFromDB[i].ProductId + ', ' + productInfoFromDB[i].ProductQtn + ', ' + i + ' )" value="' + qtn + '" min="1"  max="'+ productInfoFromDB[i].ProductQtn + '"/></td>' +
                 '<td class="unitPriceInCart" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
                 '<td id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
@@ -46,6 +51,52 @@ function PrintAllItem() {
         $('#productList').hide();       
     }
 }
+
+
+//back up just in case i screw it
+//function PrintAllItem() {
+//    $('#productTable').html('');
+//    var cartItem = JSON.parse(localStorage.getItem('cartItem'));
+//    var tableRow = '';
+
+//    //判斷購物車裡是否有產品，沒有的話就秀'尚無產品'
+//    if (cartItem.length != 0) {
+//        tableRow = '<tr>' +
+//            '<th>' + '項次' + '</th>' +
+//            '<th>' + '產品標題' + '</th>' +
+//            '<th>' + '數量' + '</th>' +
+//            '<th>' + '單價' + '</th>' +
+//            '<th>' + '小計' + '</th>' +
+//            '<th>' + '操作' + '</th>' +
+//            '</tr>';
+
+//        total = 0;
+
+//        for (var i = 0; i < cartItem.length; i++) {
+//            var qtn = cartItem[i].QtnForBuy;
+//            productInfoFromDB[i].QtnForBuy = qtn;
+//            tableRow +=
+//                '<tr>' +
+//                '<td>' + (i + 1) + '</td>' +
+//                '<td class="productTitleInCart">' + productInfoFromDB[i].ProductTitle + '</td>' +
+//                '<td><input type="number" class="itemQtnInCart" id="itemQtnInCart' + i + '" onchange="PriceCal(' + productInfoFromDB[i].ProductId + ', ' + productInfoFromDB[i].ProductQtn + ', ' + i + ' )" value="' + qtn + '" min="1"  max="' + productInfoFromDB[i].ProductQtn + '"/></td>' +
+//                '<td class="unitPriceInCart" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
+//                '<td id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
+//                '<td><img src="/images/trashcan.png" class="trashCanImg" onclick="DeleteProduct(\'' + productInfoFromDB[i].ProductId + '\')" /><td>' +
+//                '</tr>';
+//            total += productInfoFromDB[i].ProductUnitPrice * qtn;
+//        }
+
+//        $('#productTable').append(tableRow);
+//        $('#totalInCart').text(total);
+//        $('#productTable').show();
+//        $('#pointOwned').html(memberInfo.Points);
+//    } else {
+//        $('#cartMessage').text('尚無產品');
+//        $('#productList').hide();
+//    }
+//}
+
 
 //計算小計的函式
 function PriceCal(id, maxQtn, row) {
