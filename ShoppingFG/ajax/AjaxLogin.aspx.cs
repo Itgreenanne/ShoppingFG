@@ -127,7 +127,7 @@ namespace ShoppingFG.ajax
                         while (reader.Read())
                         {
                             userInfo.Result = Convert.ToInt16(reader["result"]);
-                            userInfo.MemberId = Convert.ToInt16(reader["f_id"]);
+                            userInfo.MemberId = Convert.ToInt32(reader["f_id"]);
                             userInfo.IdNo = reader["f_idNumber"].ToString();
                             userInfo.Pwd = reader["f_pwd"].ToString();
                             userInfo.FirstName = reader["f_firstname"].ToString();

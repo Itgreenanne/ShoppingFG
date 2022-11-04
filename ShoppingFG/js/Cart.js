@@ -3,10 +3,67 @@ var productInfoFromDB
 var total = 0;
 var price;
 
+//開啟購物車就會從DB讀取產品庫存數量、單價、標題
+function ReadProductInfoFromDB(myCartItem) {
+    ItemAfterParse = JSON.parse(myCartItem);
+    console.log('2.myCartItem after Json parse', ItemAfterParse);
+    //新生一個物件裡面只有ProductId這個key
+    var ItemAfterMap = ItemAfterParse.map(function (x) {
+        return x.ProductId;
+    });
+    console.log('3.myCartItem after map', ItemAfterMap);
+
+
+    $.ajax({
+        url: '/ajax/AjaxProductPage.aspx?fn=SearchProductByIdForCart',
+        type: 'POST',
+        data: {
+            getIdArray: JSON.stringify(ItemAfterMap)
+        },
+        success: function (data) {
+            if (data) {
+                if (data == 2) {
+                    alert('產品不存在');
+                }
+                else {
+                    var jsonResult = JSON.parse(data);
+                    console.log('4.讀庫後parse的資料', jsonResult);
+                    //將讀庫出來後的資料加上新key QtnForBuy，預設值為1
+                    //jsonResult.map(function (jsonResult) {
+                    //    addKeyValue(jsonResult, 'QtnForBuy', ItemAfterParse.QtnForBuy);
+                    //});
+                    //將讀庫出來後的資料加上新key QtnForBuy，預設值為1
+                    //jsonResult.map(function (jsonResult) {
+                    //    return addKeyValue(jsonResult, 'SubTotal', jsonResult.ProductUnitPrice);
+                    //});
+                    //memberInfo.Points = jsonResult.MemberPoints;
+                    productInfoFromDB = jsonResult.ProductInfoList;
+                    console.log('5.全域變數productInfoFromDB', productInfoFromDB);
+
+                    //列印購物車裡的產品表格
+                    PrintAllItem();
+                }
+            } else {
+                alert('資料錯誤');
+            }
+        },
+        error: function (err) {
+            str = JSON.stringify(err, null, 2);
+            console.log('err:');
+            console.log(err);
+            alert(str);
+        }
+    });
+}
+
+
+
 //購物車視窗
 function PrintAllItem() {
     $('#productTable').html('');
+    $('#cartMessage').html('');
     var cartItem = JSON.parse(localStorage.getItem('cartItem'));
+    console.log('6 在表格PrintAllItem裡的carItem', cartItem);
     var tableRow = '';
 
     //判斷購物車裡是否有產品，沒有的話就秀'尚無產品'
@@ -41,10 +98,13 @@ function PrintAllItem() {
                 '</tr>';
             total += productInfoFromDB[i].ProductUnitPrice * qtn;
         }
-
+        console.log('7 tableRow', tableRow);
         $('#productTable').append(tableRow);
         $('#totalInCart').text(total);
         $('#productTable').show();
+        $('#productList').show();
+        console.log('8 total', total);
+
         $('#pointOwned').html(memberInfo.Points);
     } else {
         $('#cartMessage').text('尚無產品');
@@ -142,53 +202,7 @@ function PriceCal(id, maxQtn, row) {
     }
 }
 
-//開啟購物車就會從DB讀取產品庫存數量、單價、標題
-function ReadProductInfoFromDB(myCartItem) {
-    ItemAfterParse = JSON.parse(myCartItem);
-    //新生一個物件裡面只有ProductId這個key
-    var ItemAfterMap = ItemAfterParse.map(function (x) {
-        return x.ProductId;
-    });
 
-    $.ajax({
-        url: '/ajax/AjaxProductPage.aspx?fn=SearchProductByIdForCart',
-        type: 'POST',
-        data: {
-            getIdArray: JSON.stringify(ItemAfterMap)
-        },
-        success: function (data) {
-            if (data) {
-                if (data == 2) {
-                    alert('產品不存在');
-                }
-                else {
-                    var jsonResult = JSON.parse(data);
-                    console.log(jsonResult)
-                    //將讀庫出來後的資料加上新key QtnForBuy，預設值為1
-                    //jsonResult.map(function (jsonResult) {
-                    //    addKeyValue(jsonResult, 'QtnForBuy', ItemAfterParse.QtnForBuy);
-                    //});
-                    //將讀庫出來後的資料加上新key QtnForBuy，預設值為1
-                    //jsonResult.map(function (jsonResult) {
-                    //    return addKeyValue(jsonResult, 'SubTotal', jsonResult.ProductUnitPrice);
-                    //});
-                    //memberInfo.Points = jsonResult.MemberPoints;
-                    productInfoFromDB = jsonResult.ProductInfoList;
-                    //列印購物車裡的產品表格
-                    PrintAllItem();
-                }
-            } else {
-                alert('資料錯誤');
-            }
-        },
-        error: function (err) {
-            str = JSON.stringify(err, null, 2);
-            console.log('err:');
-            console.log(err);
-            alert(str);
-        }
-    });
-}
 
 
 ////計算小計的函式

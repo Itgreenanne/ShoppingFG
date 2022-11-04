@@ -65,7 +65,7 @@ namespace ShoppingFG.ajax
                         memberPwdCompare = reader["f_pwd"].ToString();
                         memberLastNameCompare = reader["f_lastname"].ToString();
                         memberFirstNameCompare = reader["f_firstname"].ToString();
-                        memberPointsCompare = Convert.ToInt16(reader["f_points"]);
+                        memberPointsCompare = Convert.ToInt32(reader["f_points"]);
                     }
                 }
 

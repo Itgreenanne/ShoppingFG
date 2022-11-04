@@ -179,7 +179,8 @@ function OpenCartBlock() {
     } else {
         myCartItem = localStorage.getItem('cartItem');
         $('#cartBlock').show();
-        ReadProductInfoFromDB(myCartItem);        
+        console.log('1 myCartItem', myCartItem);
+        ReadProductInfoFromDB(myCartItem);
     }
 }
 

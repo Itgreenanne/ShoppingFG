@@ -315,9 +315,9 @@ namespace ShoppingFG.ajax
                         DataRow row = dt.Rows[i];
                         OtherInfo otherInfo = new OtherInfo()
                         {
-                            OrderId = Convert.ToInt16(row.ItemArray[0]),
+                            OrderId = Convert.ToInt32(row.ItemArray[0]),
                             OrderNo = row.ItemArray[1].ToString(),
-                            OrderTotalPrice = Convert.ToInt16(row.ItemArray[2]),                                                 
+                            OrderTotalPrice = Convert.ToInt32(row.ItemArray[2]),                                                 
                             OrderCreatedTime = String.Format("{0:yyyy/MM/dd HH:mm:ss}", DateTime.Parse(row.ItemArray[3].ToString()))
                         }; otherInfoArray.Add(otherInfo);                        
                     }
@@ -330,12 +330,12 @@ namespace ShoppingFG.ajax
                         DataRow row = dt.Rows[i];
                         OrderItem orderItem = new OrderItem()
                         {
-                            OrderItemId = Convert.ToInt16(row.ItemArray[0]),
-                            OrderId = Convert.ToInt16(row.ItemArray[1]),
-                            ProductId = Convert.ToInt16(row.ItemArray[2]),
+                            OrderItemId = Convert.ToInt32(row.ItemArray[0]),
+                            OrderId = Convert.ToInt32(row.ItemArray[1]),
+                            ProductId = Convert.ToInt32(row.ItemArray[2]),
                             ProductTitle = row.ItemArray[3].ToString(),
-                            QtnForBuy = Convert.ToInt16(row.ItemArray[4]),
-                            ProductUnitPrice = Convert.ToInt16(row.ItemArray[5]),
+                            QtnForBuy = Convert.ToInt32(row.ItemArray[4]),
+                            ProductUnitPrice = Convert.ToInt32(row.ItemArray[5]),
                         }; orderItemArray.Add(orderItem);
                     }
                     orderInfo.InfoList = otherInfoArray;

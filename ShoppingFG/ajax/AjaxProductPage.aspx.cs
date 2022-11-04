@@ -110,12 +110,12 @@ namespace ShoppingFG.ajax
                         while (reader.Read())
                         {
                             ProductDataArray productInfo = new ProductDataArray();
-                            productInfo.ProductId = Convert.ToInt16(reader["f_id"]);
+                            productInfo.ProductId = Convert.ToInt32(reader["f_id"]);
                             productInfo.ProductPic = reader["f_picturePath"].ToString();
                             productInfo.ProductTitle = reader["f_title"].ToString();
                             productInfo.ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]);
-                            productInfo.ProductQtn = Convert.ToInt16(reader["f_quantity"]);
-                            productInfo.ProductTypeId = Convert.ToInt16(reader["f_typeId"]);
+                            productInfo.ProductQtn = Convert.ToInt32(reader["f_quantity"]);
+                            productInfo.ProductTypeId = Convert.ToInt32(reader["f_typeId"]);
                             productInfo.ProductDetail = reader["f_detail"].ToString();
                             productInfo.ProductTypeName = reader["f_name"].ToString();
                             productArray.Add(productInfo);
@@ -201,10 +201,10 @@ namespace ShoppingFG.ajax
                     {
                         ProductForCart productForCart = new ProductForCart()
                         {
-                            ProductId = Convert.ToInt16(reader["f_id"]),
+                            ProductId = Convert.ToInt32(reader["f_id"]),
                             ProductTitle = reader["f_title"].ToString(),
                             ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]),
-                            ProductQtn = Convert.ToInt16(reader["f_quantity"])
+                            ProductQtn = Convert.ToInt32(reader["f_quantity"])
                         };
                         productArray.Add(productForCart);
                     }

@@ -56,7 +56,7 @@ namespace ShoppingFG.appCode
                 {
                     while (reader.Read())
                     {
-                        memberId = Convert.ToInt16(reader["f_id"]);
+                        memberId = Convert.ToInt32(reader["f_id"]);
                         memberPwdCompare = reader["f_pwd"].ToString();
                     }
                 }

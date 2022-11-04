@@ -105,12 +105,12 @@ namespace ShoppingFG.ajax
                     while (reader.Read())
                     {
                         ProductDataArray productInfo = new ProductDataArray();
-                        productInfo.ProductId = Convert.ToInt16(reader["f_id"]);
+                        productInfo.ProductId = Convert.ToInt32(reader["f_id"]);
                         productInfo.ProductPic = reader["f_picturePath"].ToString();
                         productInfo.ProductTitle = reader["f_title"].ToString();
                         productInfo.ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]);
-                        productInfo.ProductQtn = Convert.ToInt16(reader["f_quantity"]);
-                        productInfo.ProductTypeId = Convert.ToInt16(reader["f_typeId"]);
+                        productInfo.ProductQtn = Convert.ToInt32(reader["f_quantity"]);
+                        productInfo.ProductTypeId = Convert.ToInt32(reader["f_typeId"]);
                         productInfo.ProductDetail = reader["f_detail"].ToString();
                         productInfo.ProductTypeName = reader["f_name"].ToString();
                         productArray.Add(productInfo);
@@ -169,12 +169,12 @@ namespace ShoppingFG.ajax
                         while (reader.Read())
                         {
                             JObject productInfo = new JObject();
-                            productInfo.Add("ProductId", Convert.ToInt16(reader["f_id"]));
+                            productInfo.Add("ProductId", Convert.ToInt32(reader["f_id"]));
                             productInfo.Add("ProductPic", reader["f_picturePath"].ToString());
                             productInfo.Add("ProductTitle", reader["f_title"].ToString());
                             productInfo.Add("ProductUnitPrice", Convert.ToInt32(reader["f_unitprice"]));
-                            productInfo.Add("ProductQtn", Convert.ToInt16(reader["f_quantity"]));
-                            productInfo.Add("ProductTypeId", Convert.ToInt16(reader["f_typeId"]));
+                            productInfo.Add("ProductQtn", Convert.ToInt32(reader["f_quantity"]));
+                            productInfo.Add("ProductTypeId", Convert.ToInt32(reader["f_typeId"]));
                             productInfo.Add("ProductDetail", reader["f_detail"].ToString());
                             productInfo.Add("ProductTypeName", reader["f_name"].ToString());
                             resultArray.Add(productInfo);
