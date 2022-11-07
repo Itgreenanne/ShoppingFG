@@ -49,7 +49,7 @@
         
           <div class="messageBoxInProductPage" id="messageBoxInProductPage">
             <div class="MessageInProductPage" id="MessageInProductPage"></div>
-            <button class="btnLastPageInMessageBox" id="btnLastPageInMessageBox" onclick="BackToProductPage()">上一頁</button>
+            <button class="btnLastPageInMessageBox" id="btnLastPageInMessageBox" onclick="BackToHomePage()">回首頁</button>
           </div>
 
 
@@ -62,7 +62,7 @@
                 <div class="productDetailInProductPage" id="productDetailInProductPage"></div>
             </div>
                 <div class="btnProductPage">
-                    <button class="btnLastPage" id="btnLastPage" onclick="window.location.href = '/view/HomePage.aspx'">上一頁</button>
+                    <button class="btnLastPage" id="btnLastPage" onclick="BackToHomePage()">回首頁</button>
                     <button class="btnAddToCart" id="btnAddToCart" onclick="AddToCart()">加入購物車</button>
                 </div>            
         </div>

@@ -243,8 +243,6 @@ function AddToCart() {
 //}
 
 //產品頁中的回上頁
-function BackToProductPage() {
-    $('#messageBoxInProductPage').hide();
-    $('#productInfoBlock').show();
-
+function BackToHomePage() {
+    window.location.href = '/view/HomePage.aspx';
 }
