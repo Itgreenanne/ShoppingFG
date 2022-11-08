@@ -201,7 +201,7 @@
                  <span class="myCartTitle">購物車</span>
                  <span class="myCartTitle" id="cartMessage"></span>
                  <div class="productList" id="productList">
-                    <table class="productTable" id="productTable"></table>
+                    <table class="productTableInCart" id="productTable"></table>
                     <div class="balanceBlock">
                         <div class="totalBlock">
                             <div class="labelInCart">總額：</div>
@@ -223,8 +223,8 @@
 
                 <div class="myOrderBlock" id="myOrderBlock">
                  <span class="myCartTitle">訂單</span>
-                 <div class="productList" id="orderCreatedList">
-                    <table class="productTable" id="orderCreatedTable"></table>                            
+                 <div class="myProductList" id="orderCreatedList">
+                    <table class="myOrderTable" id="orderCreatedTable"></table>                            
                  <button class="btnCart" id="btnBackToMemberCenter" onclick="CancelContent()">確定</button>               
                  </div>
 

@@ -3,15 +3,6 @@
 }
 
 
-tr:nth-child(even) {
-    background: #FFF;
-}
-
-tr:nth-child(odd) {
-    background: #F2FFFF;
-}
-
-
 .content {
     display: flex;
     flex-wrap: nowrap;

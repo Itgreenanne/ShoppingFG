@@ -298,7 +298,6 @@ function MemberCenterTelVerify(el) {
 function PrintMyOrder() {
     $('#orderCreatedTable').html('');
     var tableForAll = '';
-    var total = 0;
     tableForAll = '<tr>' +
         '<th>' + '項次' + '</th>' +
         '<th>' + '訂單編號' + '</th>' +
@@ -310,8 +309,8 @@ function PrintMyOrder() {
     for (var i = orderData.InfoList.length - 1; i >= 0 ; i--) {        
         tableForAll +=
             '<tr>' +
-            '<td>' + (i + 1) + '</td>' +
-            '<td class="productTitleInCart">' + orderData.InfoList[i].OrderNo + '</td>' +
+            '<td>' + (orderData.InfoList.length - i) + '</td>' +
+            '<td class="ordreNoInMyOrder">' + orderData.InfoList[i].OrderNo + '</td>' +
             '<td>' + orderData.InfoList[i].OrderTotalPrice + '</td>' +
             '<td>' + orderData.InfoList[i].OrderCreatedTime + '</td>' +
             '<td><button class = "btnShowOrderItem" onclick = "OpenOrderItem(\'' + orderData.InfoList[i].OrderId + '\')">查看</button></td>' +

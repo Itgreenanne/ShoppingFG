@@ -266,6 +266,27 @@
     width: 300px;
 }
 
+.productTableInCart {
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: center;
+}
+
+.tgEven {
+    background-color: #f1b8de;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 70px;
+    font-size: 16px;
+}
+
+.tg {
+    text-align: center;
+    vertical-align: middle;
+    min-width: 70px;
+    font-size: 16px;
+}
+
 .productList {
     display: flex;
     flex-direction: column;
@@ -354,9 +375,27 @@
     align-items: center;
 }
 
-.btnShowOrderItem { 
+.myOrderTable tr:nth-child(even) {
+    background: #FFF;
+}
+
+.myOrderTable tr:nth-child(odd) {
+    background: #F2FFFF;
+}
+
+.myOrderTable {
+    font-size: 16px;
+    text-align: center;
+}
+
+.ordreNoInMyOrder {
+    max-width: 100px;
+    word-wrap: break-word;
+}
+
+.btnShowOrderItem {
     width: 44px;
-    height: 30px;  
+    height: 30px;
     border: solid 1px #26C6DA;
     background-color: #E0F7FA;
     font-size: 15px;
@@ -475,6 +514,12 @@
   .productTable {
         width: 340px;
   }
+
+  .myOrderTable {
+        font-size: 16px;
+        width: 340px;
+  }
+
 }
 
 @media(min-width: 500px) {
@@ -567,8 +612,13 @@
     }
 
     .productTable {
-        width: 300px;
-    } 
+        width: 440px;
+    }
+
+    .myOrderTable {
+        font-size: 16px;
+        width: 440px;
+    }
 }
 
 @media(min-width: 720px) {
@@ -619,7 +669,11 @@
     }
 
     .productTable {
-        width: 490px;
+        width: 700px;
+    }
+
+    .myOrderBlock {
+        width: 700px;
     }
 }
 
