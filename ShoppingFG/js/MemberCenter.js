@@ -179,7 +179,6 @@ function OpenCartBlock() {
     } else {
         myCartItem = localStorage.getItem('cartItem');
         $('#cartBlock').show();
-        console.log('1 myCartItem', myCartItem);
         ReadProductInfoFromDB(myCartItem);
     }
 }
@@ -200,7 +199,6 @@ function OpenMyOrder() {
 
             if (data) {
                 var jsonResult = JSON.parse(data);
-                console.log('1.訂單資料fromDB', jsonResult);
 
                 if (RepeatedStuff(jsonResult)) {
                     return;

@@ -114,7 +114,7 @@ function AddToCart() {
         }
 
         //console.log('mycartlength', myCart.length);
-        var i;
+        //var i;
 
         //for (i = 0; i < localStorage.length; i++) {
 

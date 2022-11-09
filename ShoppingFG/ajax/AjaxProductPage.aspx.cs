@@ -328,25 +328,66 @@ namespace ShoppingFG.ajax
                 SqlParameter listParam = cmd.Parameters.AddWithValue("@item", items);
                 listParam.Direction = ParameterDirection.Input;
                 SqlDataReader reader = cmd.ExecuteReader();
+                JArray dataToFrontArray = new JArray();
 
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        int result = Convert.ToInt16(reader["result"]);
-                        if (result == 1)
+                        int result1 = Convert.ToInt16(reader["result1"]); 
+                        int result2 = Convert.ToInt16(reader["result2"]);
+                        int result3 = Convert.ToInt16(reader["result3"]);
+                        int result4 = Convert.ToInt16(reader["result4"]);
+
+                        if (result1 == 2)
                         {
-                            msgValue = ProductMsg.OrderCreated;
+                            JObject dataToFront = new JObject();
+                            dataToFront.Add("messageNo", 5);
+                            dataToFrontArray.Add(dataToFront);
                             break;
                         }
-                        else
+                        else if (result1 == 1)
                         {
-                            msgValue = ProductMsg.OrderNotCreated;
+                            JObject dataToFront = new JObject();
+                            dataToFront.Add("messageNo", 1);
+                            dataToFront.Add("productTitle", reader["f_title"].ToString());
+                            dataToFront.Add("productQtn", Convert.ToInt32(reader["f_quantity"]));
+                            dataToFront.Add("unitPrice", Convert.ToInt32(reader["f_unitPrice"]));
+                            dataToFrontArray.Add(dataToFront);
+                            break;
+                        }
+                        else if (result2 == 1)
+                        {
+                            JObject dataToFront = new JObject();
+                            dataToFront.Add("messageNo", 2);
+                            dataToFront.Add("productTitle", reader["f_title"].ToString());
+                            dataToFront.Add("productQtn", Convert.ToInt32(reader["f_quantity"]));
+                            dataToFront.Add("unitPrice", Convert.ToInt32(reader["f_unitPrice"]));
+                            dataToFrontArray.Add(dataToFront);
+                            break;
+                        }
+                        else if (result3 == 1)
+                        {
+                            JObject dataToFront = new JObject();
+                            dataToFront.Add("messageNo", 3);
+                            dataToFront.Add("productTitle", reader["f_title"].ToString());
+                            dataToFront.Add("productQtn", Convert.ToInt32(reader["f_quantity"]));
+                            dataToFront.Add("unitPrice", Convert.ToInt32(reader["f_unitPrice"]));
+                            dataToFrontArray.Add(dataToFront);
+                            break;
+                        }
+                        else if (result4 == 1)
+                        {
+                            JObject dataToFront = new JObject();
+                            dataToFront.Add("messageNo", 4);
+                            dataToFront.Add("points", Convert.ToInt32(reader["f_points"]));
+                            dataToFrontArray.Add(dataToFront);
+                            break;
                         }
                     }
                 }
 
-                Response.Write((int)msgValue);
+                Response.Write(dataToFrontArray);
               
             }
             catch (Exception ex)

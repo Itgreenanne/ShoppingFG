@@ -25,7 +25,7 @@
      <script type="text/javascript" src="/js/SignUp.js"> </script>
      <script type="text/javascript" src="/js/MemberCenter.js"> </script>
      <script type="text/javascript" src="/js/Cart.js"> </script>
-     <script type="text/javascript" src="/js/Order.js"> </script>
+     <script type="text/javascript" src="/js/OrderPreview.js"> </script>
      
 <body class="no-scroll">
     <div id="overlay"></div>

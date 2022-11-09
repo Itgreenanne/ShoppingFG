@@ -79,7 +79,7 @@
     <Content Include="js\HomePage.js" />
     <Content Include="js\Login.js" />
     <Content Include="js\MemberCenter.js" />
-    <Content Include="js\Order.js" />
+    <Content Include="js\OrderPreview.js" />
     <Content Include="js\ProductPage.js" />
     <Content Include="js\SignUp.js" />
     <Content Include="js\StartHomePage.js" />

@@ -272,18 +272,19 @@
     text-align: center;
 }
 
-.tgEven {
+.evenOrderNo {
     background-color: #f1b8de;
+    border: dashed grey;
     text-align: center;
     vertical-align: middle;
-    min-width: 70px;
     font-size: 16px;
+    color: white;
 }
 
-.tg {
+.orderNo {
     text-align: center;
+    border: dashed grey;
     vertical-align: middle;
-    min-width: 70px;
     font-size: 16px;
 }
 
@@ -317,7 +318,7 @@
 }
 
 .trashCanImg {
-    width: 40%;
+    width: 30px;
 }
 
 .totalBlock {
@@ -515,6 +516,10 @@
         width: 340px;
   }
 
+  .productTableInCart {
+      width: 320px;
+  }
+
   .myOrderTable {
         font-size: 16px;
         width: 340px;
@@ -623,7 +628,7 @@
 
 @media(min-width: 720px) {
     .memberCenter {
-     /*   height: 750px;*/
+        width: 720px;
     }
 
     .pwdModifyBox label {
@@ -668,6 +673,10 @@
     .cartBlock {
     }
 
+    .productTableInCart {
+        width: 710px;
+    }
+
     .productTable {
         width: 700px;
     }
@@ -680,5 +689,10 @@
 @media screen and (orientation: landscape) {
     .memberCenter {
         position: fixed;
-    }    
+        width: 650px;
+    }
+
+    .productTableInCart {
+        width: 630px;
+    }
 }

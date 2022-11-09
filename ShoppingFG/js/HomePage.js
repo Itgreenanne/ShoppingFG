@@ -98,7 +98,6 @@ function StatusVerify() {
                 if (data) {
                     var jsonResult = JSON.parse(data);
                     memberInfo = jsonResult;
-                    console.log('userinfo in statusverify', jsonResult);
 
                     if (RepeatedStuff(jsonResult)) {
                         return;
