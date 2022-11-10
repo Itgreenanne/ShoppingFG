@@ -319,6 +319,7 @@
 
 .trashCanImg {
     width: 30px;
+    vertical-align: middle;
 }
 
 .totalBlock {

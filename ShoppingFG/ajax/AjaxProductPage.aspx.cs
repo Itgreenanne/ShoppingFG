@@ -301,7 +301,7 @@ namespace ShoppingFG.ajax
             ///產生訂單代號
             Random rnd = new Random();
             string rn = rnd.Next(99 + 1).ToString().PadLeft(2, '0');
-            string dt = DateTime.Now.ToString("yyMMddHHmmss");
+            string dtString = DateTime.Now.ToString("yyMMddHHmmss");
             string idNostring = idNo;
 
             if (idNostring.Length >= 6)
@@ -313,7 +313,7 @@ namespace ShoppingFG.ajax
                 idNostring = idNostring.PadLeft(6, '0');
             }
 
-            string orderNumber = dt + idNostring + rn;
+            string orderNumber = dtString + idNostring + rn;
             string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("pro_shoppingFG_addAnOrder ", conn);
@@ -327,66 +327,44 @@ namespace ShoppingFG.ajax
                 cmd.Parameters.Add(new SqlParameter("@orderNo", orderNumber));
                 SqlParameter listParam = cmd.Parameters.AddWithValue("@item", items);
                 listParam.Direction = ParameterDirection.Input;
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                DataTable dt = new DataTable();
                 JArray dataToFrontArray = new JArray();
-
-                if (reader.HasRows)
+                for (int i = 0; i < ds.Tables.Count; i++)
                 {
-                    while (reader.Read())
+                    dt = ds.Tables[i];
+                    for (int j = 0; j < dt.Rows.Count; j++)
                     {
-                        int result1 = Convert.ToInt16(reader["result1"]); 
-                        int result2 = Convert.ToInt16(reader["result2"]);
-                        int result3 = Convert.ToInt16(reader["result3"]);
-                        int result4 = Convert.ToInt16(reader["result4"]);
-
-                        if (result1 == 2)
+                        DataRow row = dt.Rows[j];
+                        if (dt.Columns.Count == 1)
                         {
                             JObject dataToFront = new JObject();
-                            dataToFront.Add("messageNo", 5);
+                            dataToFront.Add("messageNo", Convert.ToInt16(row.ItemArray[0]));
                             dataToFrontArray.Add(dataToFront);
                             break;
+                        } else if(dt.Columns.Count == 5)
+                        {
+                            JObject dataToFront = new JObject();
+                            dataToFront.Add("messageNo", Convert.ToInt16(row.ItemArray[0]));
+                            dataToFront.Add("productId", Convert.ToInt32(row.ItemArray[1]));
+                            dataToFront.Add("productTitle", row.ItemArray[2].ToString());
+                            dataToFront.Add("unitPrice", Convert.ToInt32(row.ItemArray[3]));
+                            dataToFront.Add("productQtn", Convert.ToInt32(row.ItemArray[4]));
+                            dataToFrontArray.Add(dataToFront);
+                           
                         }
-                        else if (result1 == 1)
+                        else if (dt.Columns.Count == 2)
                         {
                             JObject dataToFront = new JObject();
-                            dataToFront.Add("messageNo", 1);
-                            dataToFront.Add("productTitle", reader["f_title"].ToString());
-                            dataToFront.Add("productQtn", Convert.ToInt32(reader["f_quantity"]));
-                            dataToFront.Add("unitPrice", Convert.ToInt32(reader["f_unitPrice"]));
-                            dataToFrontArray.Add(dataToFront);
-                            break;
-                        }
-                        else if (result2 == 1)
-                        {
-                            JObject dataToFront = new JObject();
-                            dataToFront.Add("messageNo", 2);
-                            dataToFront.Add("productTitle", reader["f_title"].ToString());
-                            dataToFront.Add("productQtn", Convert.ToInt32(reader["f_quantity"]));
-                            dataToFront.Add("unitPrice", Convert.ToInt32(reader["f_unitPrice"]));
-                            dataToFrontArray.Add(dataToFront);
-                            break;
-                        }
-                        else if (result3 == 1)
-                        {
-                            JObject dataToFront = new JObject();
-                            dataToFront.Add("messageNo", 3);
-                            dataToFront.Add("productTitle", reader["f_title"].ToString());
-                            dataToFront.Add("productQtn", Convert.ToInt32(reader["f_quantity"]));
-                            dataToFront.Add("unitPrice", Convert.ToInt32(reader["f_unitPrice"]));
-                            dataToFrontArray.Add(dataToFront);
-                            break;
-                        }
-                        else if (result4 == 1)
-                        {
-                            JObject dataToFront = new JObject();
-                            dataToFront.Add("messageNo", 4);
-                            dataToFront.Add("points", Convert.ToInt32(reader["f_points"]));
-                            dataToFrontArray.Add(dataToFront);
-                            break;
+                            dataToFront.Add("messageNo", Convert.ToInt16(row.ItemArray[0]));
+                            dataToFront.Add("points", Convert.ToInt32(row.ItemArray[1]));
+                            dataToFrontArray.Add(dataToFront);                           
                         }
                     }
-                }
 
+                }
                 Response.Write(dataToFrontArray);
               
             }

@@ -47,6 +47,8 @@ function OrderConfirm() {
         total += productInfoFromDB[i].QtnForBuy * productInfoFromDB[i].ProductUnitPrice;
     }
 
+    console.log('from orderconfirm()', productInfoFromDB);
+
     if (memberInfo.Points < total) {
         $('#orderPriviewBlock').hide();
         $('#orderNotCreated').show();
@@ -73,8 +75,12 @@ function OrderConfirm() {
                         $('#orderCreated').show();
                         $('#messageForOrderCreated').text('訂單建立成功');
                     } else {
+                        var resultString = '';
+                        var finalString = '';
+                        var ItemForSaveArray = [];
                         for (var i = 0; i < jsonResult.length; i++) {
-                            var resultString = '';
+                            var ItemForSave = {};
+
                             if (jsonResult[i].messageNo == 1)
                             {
                                 resultString = jsonResult[i].productTitle + '價格變動,目前價格為' + jsonResult[i].unitPrice + '<br>';
@@ -82,12 +88,18 @@ function OrderConfirm() {
                             } else if (jsonResult[i].messageNo == 2) {
                                 
                                 resultString = jsonResult[i].productTitle + '數量不足，剩餘數量為' + jsonResult[i].productQtn + '<br>';
+                                ItemForSave['ProductId'] = jsonResult[i].productId;
+                                ItemForSave['QtnForBuy'] = jsonResult[i].productQtn;
+                                ItemForSaveArray.push(ItemForSave);
 
                             } else if (jsonResult[i].messageNo == 3) {
 
                                 resultString = jsonResult[i].productTitle + '數量不足，剩餘數量為' +
                                                jsonResult[i].productQtn + '<br>' + jsonResult[i].productTitle +
                                                '價格變動,目前價格為' + jsonResult[i].unitPrice + '<br>';
+                                ItemForSave['ProductId'] = jsonResult[i].productId;
+                                ItemForSave['QtnForBuy'] = jsonResult[i].productQtn;
+                                ItemForSaveArray.push(ItemForSave);
 
                             }
                             else if (jsonResult[i].messageNo == 4) {
@@ -97,13 +109,32 @@ function OrderConfirm() {
                             } else {
                                 alert('資料錯誤');
                                 break;
-                            }
-
-                            $('#orderPriviewBlock').hide();
-                            $('#orderNotCreated').show();
-                            $('#messageForUser').html(resultString);
-
+                            }                            
+                            finalString += resultString;
                         }
+                        $('#orderPriviewBlock').hide();
+                        $('#orderNotCreated').show();
+                        $('#messageForUser').html(finalString);
+
+                        console.log('ItemForSaveArray', ItemForSaveArray);
+
+                        var cartItem = JSON.parse(localStorage.getItem('cartItem'));
+
+                        //更新localStorage這樣購物車的表格數量顯示才會正確
+                        for (var i = 0; i < ItemForSaveArray.length; i++) {
+                            for (var j = 0; j < cartItem.length; j++) {
+
+                                if (ItemForSaveArray[i].ProductId == cartItem[j].ProductId) {
+                                    cartItem[j].QtnForBuy = ItemForSaveArray[i].QtnForBuy;
+                                }
+                                console.log('cartItem[', j, '].QtnForBuy', cartItem[j].QtnForBuy);
+                            }
+                        }
+                        console.log('cartItem', cartItem);
+
+                        localStorage.setItem('cartItem', JSON.stringify(cartItem));
+                        console.log('after setItem in the orderconfirm()', productInfoFromDB);
+
                     }
                 } else {
                     alert('資料錯誤');

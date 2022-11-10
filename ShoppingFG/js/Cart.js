@@ -19,21 +19,17 @@ function ReadProductInfoFromDB(myCartItem) {
         },
         success: function (data) {
             if (data) {
+                console.log('1.data', data);
+
                 if (data == 2) {
                     alert('產品不存在');
                 }
                 else {
-                    var jsonResult = JSON.parse(data);
-                    //將讀庫出來後的資料加上新key QtnForBuy，預設值為1
-                    //jsonResult.map(function (jsonResult) {
-                    //    addKeyValue(jsonResult, 'QtnForBuy', ItemAfterParse.QtnForBuy);
-                    //});
-                    //將讀庫出來後的資料加上新key QtnForBuy，預設值為1
-                    //jsonResult.map(function (jsonResult) {
-                    //    return addKeyValue(jsonResult, 'SubTotal', jsonResult.ProductUnitPrice);
-                    //});
-                    //memberInfo.Points = jsonResult.MemberPoints;
-                    productInfoFromDB = jsonResult.ProductInfoList;
+                    var resultDB = JSON.parse(data);
+                    console.log('2.rsultDB', resultDB);
+                    //console.log('3.全域變數', productInfoFromDB);
+                    productInfoFromDB = resultDB.ProductInfoList;
+                    //console.log('4.全域變數 = resultDB', productInfoFromDB);
                     //列印購物車裡的產品表格
                     PrintAllItem();
                 }
@@ -50,13 +46,12 @@ function ReadProductInfoFromDB(myCartItem) {
     });
 }
 
-
-
 //購物車視窗
 function PrintAllItem() {
     $('#productTable').html('');
     $('#cartMessage').html('');
     var cartItem = JSON.parse(localStorage.getItem('cartItem'));
+    console.log('cartItem after orderPreview', cartItem);
     var tableRow = '';
 
     //判斷購物車裡是否有產品，沒有的話就秀'尚無產品'
@@ -65,77 +60,66 @@ function PrintAllItem() {
         total = 0;
 
         for (var i = 0; i < cartItem.length; i++) {
+            console.log('cartItem QtnForBuy', cartItem[i].QtnForBuy);
 
             var qtn = cartItem[i].QtnForBuy;
             productInfoFromDB[i].QtnForBuy = qtn;
+            console.log('productInfoFromDB[i]', productInfoFromDB[i]);
+            //console.log('cartItem QtnForBuy', cartItem[i].QtnForBuy);
 
-            if ((i + 1) % 2 === 0) {
-                tableRow +=
-                    '<tr>' +
-                    '<th class="evenOrderNo">項次</th>' +
-                    '<th class="evenOrderNo">產品標題</th>' +
-                    '<th class="evenOrderNo">數量</th>' +
-                    '<th class="evenOrderNo">單價</th>' +
-                    '<th class="evenOrderNo">操作</th>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td class="evenOrderNo" rowspan="3">' + (i + 1) + '</td>' +
-                    '<td class="evenOrderNo" rowspan="3">' + productInfoFromDB[i].ProductTitle + '</td>' +
-                    '<td class="evenOrderNo" rowspan="3"><input type="number" class="itemQtnInCart" id="itemQtnInCart' + i + '" onchange="PriceCal(' + productInfoFromDB[i].ProductId + ', ' + productInfoFromDB[i].ProductQtn + ', ' + i + ' )" value="' + qtn + '" min="1"  max="' + productInfoFromDB[i].ProductQtn + '"/></td>' +
-                    '<td class="evenOrderNo" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
-                    '<td class="evenOrderNo" rowspan="3"><img src="/images/trashcan.png" class="trashCanImg" onclick="DeleteProduct(\'' + productInfoFromDB[i].ProductId + '\')" /></td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<th class="evenOrderNo">小計</th>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td class="evenOrderNo" id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
-                    '</tr>';               
+            if (cartItem[i].QtnForBuy != 0) {
+                if ((i + 1) % 2 === 0) {
+                    tableRow +=
+                        '<tr>' +
+                        '<th class="evenOrderNo">項次</th>' +
+                        '<th class="evenOrderNo">產品標題</th>' +
+                        '<th class="evenOrderNo">數量</th>' +
+                        '<th class="evenOrderNo">單價</th>' +
+                        '<th class="evenOrderNo">操作</th>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td class="evenOrderNo" rowspan="3">' + (i + 1) + '</td>' +
+                        '<td class="evenOrderNo" rowspan="3">' + productInfoFromDB[i].ProductTitle + '</td>' +
+                        '<td class="evenOrderNo" rowspan="3"><input type="number" class="itemQtnInCart" id="itemQtnInCart' + i + '" onchange="PriceCal(' + productInfoFromDB[i].ProductId + ', ' + productInfoFromDB[i].ProductQtn + ', ' + i + ' )" value="' + qtn + '" min="1"  max="' + productInfoFromDB[i].ProductQtn + '"/></td>' +
+                        '<td class="evenOrderNo" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
+                        '<td class="evenOrderNo" rowspan="3"><img src="/images/trashcan.png" class="trashCanImg" onclick="DeleteProduct(\'' + productInfoFromDB[i].ProductId + '\')" /></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th class="evenOrderNo">小計</th>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td class="evenOrderNo" id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
+                        '</tr>';
+                } else {
+
+                    tableRow +=
+                        '<tr>' +
+                        '<th class="orderNo" colspan="2">項次</th>' +
+                        '<th class="orderNo" colspan="2">產品標題</th>' +
+                        '<th class="orderNo">數量</th>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td class="orderNo" colspan="2">' + (i + 1) + '</td>' +
+                        '<td class="orderNo" colspan="2">' + productInfoFromDB[i].ProductTitle + '</td>' +
+                        '<td class="orderNo"><input type="number" class="itemQtnInCart" id="itemQtnInCart' + i + '" onchange="PriceCal(' + productInfoFromDB[i].ProductId + ', ' + productInfoFromDB[i].ProductQtn + ', ' + i + ' )" value="' + qtn + '" min="1"  max="' + productInfoFromDB[i].ProductQtn + '"/></td>' +
+                        '<tr></tr>' +
+                        '<th class="orderNo" colspan="2">單價</th>' +
+                        '<th class="orderNo" colspan="2">小計</th>' +
+                        '<th class="orderNo">操作</th>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td class="orderNo" colspan="2" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
+                        '<td class="orderNo" colspan="2" id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
+                        '<td class="orderNo"><img src="/images/trashcan.png" class="trashCanImg" onclick="DeleteProduct(\'' + productInfoFromDB[i].ProductId + '\')" /></td>' +
+                        '</tr>';
+                }
+
             } else {
-                //tableRow +=
-                //    '<tr>' +
-                //    '<th class="tg">' + '項次' + '</th>' +
-                //    '<th class="tg">' + '產品標題' + '</th>' +
-                //    '<th class="tg">' + '數量' + '</th>' +
-                //    '</tr>' +
-                //    '<tr>' +
-                //    '<td class="tg">' + (i + 1) + '</td>' +
-                //    '<td class="tg">' + productInfoFromDB[i].ProductTitle + '</td>' +
-                //    '<td class="tg"><input type="number" class="itemQtnInCart" id="itemQtnInCart' + i + '" onchange="PriceCal(' + productInfoFromDB[i].ProductId + ', ' + productInfoFromDB[i].ProductQtn + ', ' + i + ' )" value="' + qtn + '" min="1"  max="' + productInfoFromDB[i].ProductQtn + '"/></td>' +
-                //    '<tr class="tg"></tr>' +
-                //    '<th class="tg">' + '單價' + '</th>' +
-                //    '<th class="tg">' + '小計' + '</th>' +
-                //    '<th class="tg">' + '操作' + '</th>' +
-                //    '</tr>' +
-                //    '<tr>' +
-                //    '<td class="tg" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
-                //    '<td class="tg" id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
-                //    '<td class="tg"><img src="/images/trashcan.png" class="trashCanImg" onclick="DeleteProduct(\'' + productInfoFromDB[i].ProductId + '\')" /></td>' +
-                //    '</tr>';
-
-                tableRow +=
-                    '<tr>' +
-                    '<th class="orderNo" colspan="2">項次</th>' +
-                    '<th class="orderNo" colspan="2">產品標題</th>' +
-                    '<th class="orderNo">數量</th>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td class="orderNo" colspan="2">' + (i + 1) + '</td>' +
-                    '<td class="orderNo" colspan="2">' + productInfoFromDB[i].ProductTitle + '</td>' +
-                    '<td class="orderNo"><input type="number" class="itemQtnInCart" id="itemQtnInCart' + i + '" onchange="PriceCal(' + productInfoFromDB[i].ProductId + ', ' + productInfoFromDB[i].ProductQtn + ', ' + i + ' )" value="' + qtn + '" min="1"  max="' + productInfoFromDB[i].ProductQtn + '"/></td>' +
-                    '<tr></tr>' +
-                    '<th class="orderNo" colspan="2">單價</th>' +
-                    '<th class="orderNo" colspan="2">小計</th>' +
-                    '<th class="orderNo">操作</th>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td class="orderNo" colspan="2" id="unitPriceInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice + '</td>' +
-                    '<td class="orderNo" colspan="2" id="subTotalInCart' + i + '">' + productInfoFromDB[i].ProductUnitPrice * qtn + '</td>' +
-                    '<td class="orderNo"><img src="/images/trashcan.png" class="trashCanImg" onclick="DeleteProduct(\'' + productInfoFromDB[i].ProductId + '\')" /></td>' +
-                    '</tr>';
-            }
                 
-            total += productInfoFromDB[i].ProductUnitPrice * qtn;
+                //DeleteProductForOrderPreview(cartItem[i].ProductId);
+            }
+
+                total += productInfoFromDB[i].ProductUnitPrice * qtn;
         }
         $('#productTable').append(tableRow);
         $('#totalInCart').text(total);
@@ -205,7 +189,7 @@ function PriceCal(id, maxQtn, row) {
         //price = qtn * unitPrice;
         var price = 0;
         for (var i = 0; i < productInfoFromDB.length; i++) {
-            productInfoFromDB[i].QtnForBuy = $('#itemQtnInCart' + i).val();
+            productInfoFromDB[i].QtnForBuy = parseInt($('#itemQtnInCart' + i).val());
             price = productInfoFromDB[i].QtnForBuy * productInfoFromDB[i].ProductUnitPrice;
             $('#subTotalInCart' + i).html(price);
             total += price;
@@ -268,6 +252,7 @@ function DeleteProduct(productId) {
     productInfoFromDB = productInfoFromDB.filter(function (item) {
         return item.ProductId != productId;
     });
+    console.log('1.from delete', productInfoFromDB);
 
     var ItemForSaveArray = [];
     for (var i = 0; i < productInfoFromDB.length; i++) {
@@ -276,6 +261,9 @@ function DeleteProduct(productId) {
         ItemForSave['QtnForBuy'] = productInfoFromDB[i].QtnForBuy;
         ItemForSaveArray.push(ItemForSave);
     }
+
+    console.log('2.from delete', ItemForSaveArray);
+    console.log('3 from delete after array', productInfoFromDB);
 
     localStorage.setItem('cartItem', JSON.stringify(ItemForSaveArray));
 
@@ -286,6 +274,27 @@ function DeleteProduct(productId) {
     } else {
         PrintAllItem();
     }
+}
+
+
+function DeleteProductForOrderPreview(productId) {
+    productInfoFromDB = productInfoFromDB.filter(function (item) {
+        return item.ProductId != productId;
+    });
+    console.log('1.from delete', productInfoFromDB);
+
+    var ItemForSaveArray = [];
+    for (var i = 0; i < productInfoFromDB.length; i++) {
+        var ItemForSave = {};
+        ItemForSave['ProductId'] = productInfoFromDB[i].ProductId;
+        ItemForSave['QtnForBuy'] = productInfoFromDB[i].ProductQtn;
+        ItemForSaveArray.push(ItemForSave);
+    }
+
+    console.log('2.from delete', ItemForSaveArray);
+    console.log('3 from delete after array', productInfoFromDB);
+
+    localStorage.setItem('cartItem', JSON.stringify(ItemForSaveArray));
 }
 
 //開啟訂單div
