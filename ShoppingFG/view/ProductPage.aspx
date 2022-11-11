@@ -242,7 +242,6 @@
                     <table class="myOrderTable" id="orderCreatedTable"></table>                           
                  <button class="btnCart" id="btnBackToMemberCenter" onclick="CancelContent()">確定</button>               
                  </div>
-
               </div>
 
             </div>
@@ -272,8 +271,8 @@
 
           <div class="orderBlock" id="orderPriviewBlock">
                 <span class="myOrderTitle">訂單</span>
-                <div class="productList" id="orderList">
-                    <table class="productTable" id="orderTable"></table>                
+                <div class="myProductList" id="orderList">
+                    <table class="myOrderTable" id="orderTable"></table>                
                 </div>
                 <span class="messageInPreviewOrder" id="messageInPreviewOrder"></span>
                 <div class="balanceBlock">
@@ -292,8 +291,8 @@
 
           <div class="orderBlock" id="orderItemBlock">
                 <span class="myOrderTitle">訂單細項</span>
-                <div class="productList" id="orderItemList">
-                    <table class="productTable" id="orderItemTable"></table>                
+                <div class="myProductList" id="orderItemList">
+                    <table class="myOrderTable" id="orderItemTable"></table>                
                 </div>
                 <div class="balanceBlock">
                         <div class="totalBlock">
@@ -312,7 +311,8 @@
             </div>
 
           <div class="orderMessage" id="orderNotCreated">               
-                <span class="messageInPreviewOrder" id="messageForUser"></span>           
+                <span class="messageInPreviewOrder" id="messageForUser"></span>
+                <table class="productTable" id="messageWhyCantAddOrderTable"></table>
                 <button class="btnCart" id="btnBacktoCartFromMessageBox" onclick="OpenCart()">回購物車</button>
             </div>
 

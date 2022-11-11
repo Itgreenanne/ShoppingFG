@@ -69,7 +69,7 @@
 .orderMessage {
     display: flex;
     position: absolute;
-    top: 0;
+    top: 15%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%);
@@ -86,7 +86,38 @@
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
+    overflow-x: hidden; 
+}
+
+.messageInPreviewOrder {
+    text-align: center;
+}
+
+.productTitleInMessageBlock {
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2; /*行數*/
+    -webkit-box-orient: vertical;
+    white-space: normal; /*多個空白會自動合併1個空白,超過欄位寬度部分自動判斷換行.*/
+}
+
+@media(min-width: 360px) {
+    .orderMessage {
+        width: 350px;
+    }
+    .messageInPreviewOrder {
+        width: 350px;
+    }
+}
+
+@media(min-width: 720px) {
+    .orderBlock {
+         width: 700px;
+    }
+    .orderMessage {
+        width: 710px;
+    }
 }
 
 @media screen and (orientation: landscape) {
@@ -110,17 +141,25 @@
         padding-right: 10px;
     }*/
 
+    .orderBlock {
+        width: 650px;
+    }
+
+    .productTable {
+        width: 650px;
+    }
+
     .orderMessage {
         display: flex;
         position: absolute;
-        top: 0;
-        left: 40%;
+        top: 15%;
+        left: 50%;
         margin-right: -50%;
         transform: translate(-50%);
         border: solid 1px black;
         font-size: 30px;
         color: #26C6DA;
-        width: 600px;
+        width: 650px;
         max-height: 100%;
         overflow: auto;
         background-color: white;

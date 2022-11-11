@@ -195,7 +195,6 @@
     font-size: 20px;
 }
 
-
 .setInputAddress {
     width: 300px;
     height: 30px;
@@ -212,6 +211,10 @@
     outline: solid 1px #00BCD4;
     color: #03A9F4;
     font-size: 20px;
+}
+
+.memberPoints {
+    display: flex;
 }
 
 .btnSettingGroup {
@@ -262,8 +265,24 @@
 }
 
 .productTable {
+    margin-top: 10px;
     font-size: 16px;
     width: 300px;
+    border: dashed grey;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.productList td {
+    border: dashed grey;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.productTable tr {
+    border: dashed grey;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 .productTableInCart {
@@ -404,6 +423,12 @@
     color: #0277BD;
 }
 
+.myProductList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media(min-width: 320px) {
     .memberCenter {
         width: 340px;
@@ -518,14 +543,13 @@
   }
 
   .productTableInCart {
-      width: 320px;
+        width: 320px;
   }
 
   .myOrderTable {
         font-size: 16px;
         width: 340px;
   }
-
 }
 
 @media(min-width: 500px) {
@@ -618,11 +642,15 @@
     }
 
     .productTable {
-        width: 440px;
+        width: 500px;
     }
 
     .myOrderTable {
         font-size: 16px;
+        width: 440px;
+    }
+
+    .productTableInCart {
         width: 440px;
     }
 }
@@ -685,6 +713,10 @@
     .myOrderBlock {
         width: 700px;
     }
+
+    .myOrderTable {
+        width: 720px;
+    }
 }
 
 @media screen and (orientation: landscape) {
@@ -695,5 +727,9 @@
 
     .productTableInCart {
         width: 630px;
+    }
+
+    .myOrderTable {
+        width: 650px;
     }
 }

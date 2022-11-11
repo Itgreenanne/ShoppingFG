@@ -2,38 +2,75 @@ declare @item productOrdered
 declare @memberIdNo char(10) = 'N123456789'
 declare @totalPrice int = '100'
 insert into @item
-values(2, 1, 50),(3,1,10)
+values(2, 1100,100),(3,200,100)
 --VALUES(3,3,100)
 
-IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE f_unitprice != TT.UnitPrice OR f_quantity < TT.QtnForBuy)) 
+DECLARE @ERROR INT =0
+
+--購買的產品單價與DB的產品單價不同且庫存數量大於購買數量，回傳參數result='10'
+IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE f_unitprice != TT.UnitPrice AND f_quantity >= TT.QtnForBuy )) 
 BEGIN
 
-DECLARE @A INT 
-SET @A=1
+SET @ERROR = 1
+SELECT '10' AS result, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_unitprice != TT.UnitPrice AND f_quantity >= TT.QtnForBuy
 
 END
 
-else IF EXISTS (SELECT f_id from t_frontendUser WHERE f_idNumber = @memberIdNo AND f_points - @totalPrice < 0 )
+--購買的產品單價與DB的產品單價相同且庫存數量小於於購買數量，回傳參數result='01'
+IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE f_unitprice = TT.UnitPrice AND f_quantity < TT.QtnForBuy)) 
 BEGIN
 
-DECLARE @b INT 
-SET @b=2
 
-END 
+SET @ERROR = 1
+SELECT '01' AS result, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_unitprice = TT.UnitPrice AND f_quantity < TT.QtnForBuy
 
---select f_points from t_frontendUser where f_idNumber = @memberIdNo
-select @b
- 
+END
 
---IF  EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE f_unitprice != TT.UnitPrice OR f_quantity < TT.QtnForBuy))
+--購買的產品單價與DB的產品單價不同且庫存數量小於購買數量，回傳參數result='11'
+ IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE  f_unitprice != TT.UnitPrice AND f_quantity < TT.QtnForBuy))
+BEGIN
+
+SET @ERROR = 1
+SELECT '11' AS result, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_unitprice != TT.UnitPrice AND f_quantity < TT.QtnForBuy
+
+END
+
+ IF @ERROR != 1
+	BEGIN
+	SELECT '00' AS result
+eND
+
+
+
+
+--IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE f_unitprice != TT.UnitPrice AND f_quantity >= TT.QtnForBuy )) 
 --BEGIN
 
---DECLARE @A INT 
---SET @A=1
+--SELECT 0 AS result, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_unitprice != TT.UnitPrice AND f_quantity >= TT.QtnForBuy
 
 --END
 
---SELECT @A
+------只要購買的產品購買數量比庫存數量多，就不會建立訂單
+--IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE f_unitprice = TT.UnitPrice AND f_quantity < TT.QtnForBuy)) 
+--BEGIN
 
+--SELECT 1 AS result, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_unitprice = TT.UnitPrice AND f_quantity < TT.QtnForBuy
+
+--END
+
+----只要購買的產品購買數量比庫存數量多，以及產品單價改變，就不會建立訂單
+-- IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE  f_unitprice != TT.UnitPrice AND f_quantity < TT.QtnForBuy))
+--BEGIN
+
+--SELECT 2 AS result, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_unitprice != TT.UnitPrice AND f_quantity < TT.QtnForBuy
+
+--END
+
+
+--IF EXISTS (SELECT f_id FROM t_product WHERE f_id IN (SELECT ProductId FROM @item AS TT WHERE f_quantity >= TT.QtnForBuy AND f_unitprice = TT.UnitPrice))
+--BEGIN
+
+--SELECT 3 AS result, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_quantity >= TT.QtnForBuy AND f_unitprice = TT.UnitPrice
+--END
 
 

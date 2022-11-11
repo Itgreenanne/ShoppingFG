@@ -155,6 +155,7 @@ function ClearMemberCenterAllBlock() {
     $('#orderPriviewBlock').hide();
     $('#orderNotCreated').hide();
     $('#orderCreated').hide();
+    $('#messageWhyCantAddOrderTable').html('');
 }
 
 //顯示產品
@@ -223,11 +224,12 @@ function CancelContent() {
 
 //關閉會員中心視窗
 function LeaveMemberCenter() {
-    $('#memberCenter').hide();
-    ClearMemberCenterAllBlock();
-    $('#overlay').hide();
-    $('.no-scroll').css('overflow', 'auto');
-    ResetAll()
+    //$('#memberCenter').hide();
+    //ClearMemberCenterAllBlock();
+    //$('#overlay').hide();
+    //$('.no-scroll').css('overflow', 'auto');
+    //ResetAll()
+    window.location.href = '/view/HomePage.aspx';
 }
 
 //離開註冊頁面

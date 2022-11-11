@@ -188,12 +188,7 @@ namespace ShoppingFG.ajax
                 SqlParameter listParam = cmd.Parameters.AddWithValue("@list", ids);
                 listParam.Direction = ParameterDirection.Input;
                 SqlDataReader reader = cmd.ExecuteReader();
-                InfoForCart infoForCart = new InfoForCart();
-                List<ProductForCart> productArray = new List<ProductForCart>();
-                //if(userInfo != null)
-                //{
-                //    infoForCart.MemberPoints = userInfo.Points;
-                //}
+                List<ProductForCart> productArray = new List<ProductForCart>();            
 
                 if (reader.HasRows)
                 {
@@ -208,8 +203,8 @@ namespace ShoppingFG.ajax
                         };
                         productArray.Add(productForCart);
                     }
-                    infoForCart.ProductInfoList = productArray;
-                    Response.Write(JsonConvert.SerializeObject(infoForCart));
+
+                    Response.Write(JsonConvert.SerializeObject(productArray));
                 }
                 else
                 {
@@ -343,7 +338,6 @@ namespace ShoppingFG.ajax
                             JObject dataToFront = new JObject();
                             dataToFront.Add("messageNo", Convert.ToInt16(row.ItemArray[0]));
                             dataToFrontArray.Add(dataToFront);
-                            break;
                         } else if(dt.Columns.Count == 5)
                         {
                             JObject dataToFront = new JObject();
