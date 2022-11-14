@@ -194,14 +194,17 @@ namespace ShoppingFG.ajax
                 {
                     while (reader.Read())
                     {
-                        ProductForCart productForCart = new ProductForCart()
-                        {
-                            ProductId = Convert.ToInt32(reader["f_id"]),
-                            ProductTitle = reader["f_title"].ToString(),
-                            ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]),
-                            ProductQtn = Convert.ToInt32(reader["f_quantity"])
-                        };
-                        productArray.Add(productForCart);
+                        //if (Convert.ToInt32(reader["f_quantity"]) > 0)
+                        //{
+                            ProductForCart productForCart = new ProductForCart()
+                            {
+                                ProductId = Convert.ToInt32(reader["f_id"]),
+                                ProductTitle = reader["f_title"].ToString(),
+                                ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]),
+                                ProductQtn = Convert.ToInt32(reader["f_quantity"])
+                            };
+                            productArray.Add(productForCart);
+                        //}
                     }
 
                     Response.Write(JsonConvert.SerializeObject(productArray));

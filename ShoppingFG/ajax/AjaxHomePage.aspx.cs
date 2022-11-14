@@ -104,16 +104,19 @@ namespace ShoppingFG.ajax
                 {
                     while (reader.Read())
                     {
-                        ProductDataArray productInfo = new ProductDataArray();
-                        productInfo.ProductId = Convert.ToInt32(reader["f_id"]);
-                        productInfo.ProductPic = reader["f_picturePath"].ToString();
-                        productInfo.ProductTitle = reader["f_title"].ToString();
-                        productInfo.ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]);
-                        productInfo.ProductQtn = Convert.ToInt32(reader["f_quantity"]);
-                        productInfo.ProductTypeId = Convert.ToInt32(reader["f_typeId"]);
-                        productInfo.ProductDetail = reader["f_detail"].ToString();
-                        productInfo.ProductTypeName = reader["f_name"].ToString();
-                        productArray.Add(productInfo);
+                        if (Convert.ToInt32(reader["f_quantity"]) > 0)
+                        {
+                            ProductDataArray productInfo = new ProductDataArray();
+                            productInfo.ProductId = Convert.ToInt32(reader["f_id"]);
+                            productInfo.ProductPic = reader["f_picturePath"].ToString();
+                            productInfo.ProductTitle = reader["f_title"].ToString();
+                            productInfo.ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]);
+                            productInfo.ProductQtn = Convert.ToInt32(reader["f_quantity"]);
+                            productInfo.ProductTypeId = Convert.ToInt32(reader["f_typeId"]);
+                            productInfo.ProductDetail = reader["f_detail"].ToString();
+                            productInfo.ProductTypeName = reader["f_name"].ToString();
+                            productArray.Add(productInfo);
+                        }
                     }
                 }
                 infoForHomePage.ProductInfo = productArray;               

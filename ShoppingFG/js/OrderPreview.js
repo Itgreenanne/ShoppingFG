@@ -86,7 +86,7 @@ function OrderConfirm() {
                                 resultString =
                                     '<tr>' +
                                     '<td class="productTitleInMessageBlock">' + jsonResult[i].productTitle + '</td>' +
-                                    '<td>價格變動, 目前價格為</td > ' +
+                                    '<td>價格變動, 目前價格為</td >' +
                                     '<td>' + jsonResult[i].unitPrice + '</td>' +
                                     '</tr> ';
                             //產生提示產品庫存數量少於購買數量的字串及物件

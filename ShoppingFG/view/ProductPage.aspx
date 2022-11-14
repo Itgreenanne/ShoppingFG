@@ -305,16 +305,18 @@
           </div>
 
 
-          <div class="orderMessage" id="orderCreated">               
+          <div class="orderMessage" id="orderCreated">
+                <span class="myOrderTitle">結帳訊息</span>
                 <span class="messageInPreviewOrder" id="messageForOrderCreated"></span>           
                 <button class="btnCart" id="btnBacktoHome" onclick="window.location.href = '/view/HomePage.aspx'">確定</button>
-            </div>
+          </div>
 
-          <div class="orderMessage" id="orderNotCreated">               
+          <div class="orderMessage" id="orderNotCreated">
+                <span class="myOrderTitle">結帳訊息</span>
                 <span class="messageInPreviewOrder" id="messageForUser"></span>
                 <table class="productTable" id="messageWhyCantAddOrderTable"></table>
                 <button class="btnCart" id="btnBacktoCartFromMessageBox" onclick="OpenCart()">回購物車</button>
-            </div>
+          </div>
 
         
     </div>
