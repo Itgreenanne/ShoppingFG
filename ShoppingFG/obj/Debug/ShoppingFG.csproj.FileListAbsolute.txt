@@ -23,3 +23,6 @@ D:\anne\ShoppingFG\ShoppingFG\bin\System.Buffers.xml
 D:\anne\ShoppingFG\ShoppingFG\bin\System.Memory.xml
 D:\anne\ShoppingFG\ShoppingFG\bin\System.Numerics.Vectors.xml
 D:\anne\ShoppingFG\ShoppingFG\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\anne\ShoppingFG\ShoppingFG\bin\NLog.config
+D:\anne\ShoppingFG\ShoppingFG\bin\System.Data.SqlClient.dll
+D:\anne\ShoppingFG\ShoppingFG\bin\System.Data.SqlClient.xml

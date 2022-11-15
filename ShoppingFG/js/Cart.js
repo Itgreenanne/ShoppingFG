@@ -135,7 +135,6 @@ function PrintAllItem() {
     }
 }
 
-
 //back up just in case i screw it
 //function PrintAllItem() {
 //    $('#productTable').html('');

@@ -9,11 +9,15 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using ShoppingFG.models;
 using Newtonsoft.Json;
+using NLog;
 
 namespace ShoppingFG.ajax
 {
     public partial class AjaxLogin : System.Web.UI.Page
     {
+        //private static Logger logger = LogManager.GetLogger("myLogger");
+        private static Logger myDblogger = LogManager.GetLogger("dbLogger");
+
         /// <summary>
         /// 回傳前端的訊息代號
         /// </summary>
@@ -66,7 +70,7 @@ namespace ShoppingFG.ajax
             /// 新增會員成功
             /// </summary>
             WellAdded
-        }
+        }     
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -84,7 +88,7 @@ namespace ShoppingFG.ajax
         }
 
         private void LoginVerify()
-        {
+        {            
             MsgType msgValue = MsgType.WrongLogin;
             string apiGetId = Request.Form["getId"];
             string apiGetPwd = Request.Form["getPwd"];
@@ -122,10 +126,12 @@ namespace ShoppingFG.ajax
                     cmd.Parameters.Add(new SqlParameter("@pwd", apiGetPwd));
                     SqlDataReader reader = cmd.ExecuteReader();
                     UserInfo userInfo = new UserInfo();
+                    LogEventInfo theEvent = new LogEventInfo();
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
+                            myDblogger.Info("dataId {dataId} type {type} function {function}", Convert.ToInt32(reader["f_id"]), Convert.ToInt16(reader["result"]), Convert.ToInt32(reader["f_points"]));
                             userInfo.Result = Convert.ToInt16(reader["result"]);
                             userInfo.MemberId = Convert.ToInt32(reader["f_id"]);
                             userInfo.IdNo = reader["f_idNumber"].ToString();
@@ -153,7 +159,6 @@ namespace ShoppingFG.ajax
                 }
             }
         }
-
 
         /// <summary>
         /// 新增會員
@@ -256,7 +261,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    throw ex.GetBaseException();
+                    throw ex.GetBaseException();                  
                 }
                 finally
                 {
