@@ -15,8 +15,8 @@ namespace ShoppingFG.ajax
 {
     public partial class AjaxLogin : System.Web.UI.Page
     {
-        //private static Logger logger = LogManager.GetLogger("myLogger");
-        private static Logger myDblogger = LogManager.GetLogger("dbLogger");
+        private Logger logger = LogManager.GetLogger("myLogger");
+        //private static Logger myDblogger = LogManager.GetLogger("dbLogger");
 
         /// <summary>
         /// 回傳前端的訊息代號
@@ -87,8 +87,12 @@ namespace ShoppingFG.ajax
             }
         }
 
+        /// <summary>
+        /// 身份驗証
+        /// </summary>
         private void LoginVerify()
-        {            
+        {
+            //Logger logger = LogManager.GetCurrentClassLogger();
             MsgType msgValue = MsgType.WrongLogin;
             string apiGetId = Request.Form["getId"];
             string apiGetPwd = Request.Form["getPwd"];
@@ -113,7 +117,7 @@ namespace ShoppingFG.ajax
             //}
             else
             {
-                string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
+                string strConnString = WebConfigurationManager.ConnectionStrings["ShoppingBG"].ConnectionString;
                 SqlConnection conn = new SqlConnection(strConnString);
                 SqlCommand cmd = new SqlCommand("pro_shoppingFG_getLogin", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -130,8 +134,7 @@ namespace ShoppingFG.ajax
                     if (reader.HasRows)
                     {
                         while (reader.Read())
-                        {
-                            myDblogger.Info("dataId {dataId} type {type} function {function}", Convert.ToInt32(reader["f_id"]), Convert.ToInt16(reader["result"]), Convert.ToInt32(reader["f_points"]));
+                        {                       
                             userInfo.Result = Convert.ToInt16(reader["result"]);
                             userInfo.MemberId = Convert.ToInt32(reader["f_id"]);
                             userInfo.IdNo = reader["f_idNumber"].ToString();
@@ -150,6 +153,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
+                    logger.Error(ex);
                     throw ex.GetBaseException();
                 }
                 finally
@@ -261,6 +265,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
+                    logger.Error(ex);
                     throw ex.GetBaseException();                  
                 }
                 finally

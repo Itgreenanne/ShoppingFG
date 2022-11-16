@@ -10,11 +10,14 @@ using System.Web.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ShoppingFG.models;
+using NLog;
 
 namespace ShoppingFG.ajax
 {
     public partial class AjaxProductPage : System.Web.UI.Page
     {
+        public Logger logger = LogManager.GetLogger("myLogger");
+
         public enum ProductMsg {
             /// <summary>
             /// 網路錯誤
@@ -132,6 +135,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
+                    logger.Error(ex);
                     throw ex.GetBaseException();
                 }
                 finally
@@ -218,6 +222,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                logger.Error(ex);
                 throw ex.GetBaseException();
             }
             finally
@@ -368,6 +373,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                logger.Error(ex);
                 throw ex.GetBaseException();
             }
             finally

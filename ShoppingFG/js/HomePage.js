@@ -288,9 +288,6 @@ function LoginOrSignUp() {
     }
 }
 
-
-
-
 //$('#productImg').click(function (event) {
 //    window.location.href = '/view/ProductPage.aspx';
 //})

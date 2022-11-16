@@ -10,13 +10,14 @@ using System.Web.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ShoppingFG.models;
+using NLog;
 
 
 namespace ShoppingFG.ajax
 {
     public partial class AjaxHomePage : System.Web.UI.Page
-    { 
-
+    {
+        private Logger logger = LogManager.GetLogger("myLogger");
         public enum ProductMsg
         {
             /// <summary>
@@ -89,6 +90,7 @@ namespace ShoppingFG.ajax
             {
                infoForHomePage.SessionIsNull = true;
             }
+            int qtn;
             string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("pro_shoppingFG_getAllProduct", conn);
@@ -104,14 +106,14 @@ namespace ShoppingFG.ajax
                 {
                     while (reader.Read())
                     {
-                        if (Convert.ToInt32(reader["f_quantity"]) > 0)
+                        if ((qtn = Convert.ToInt32(reader["f_quantity"])) > 0)
                         {
                             ProductDataArray productInfo = new ProductDataArray();
                             productInfo.ProductId = Convert.ToInt32(reader["f_id"]);
                             productInfo.ProductPic = reader["f_picturePath"].ToString();
                             productInfo.ProductTitle = reader["f_title"].ToString();
                             productInfo.ProductUnitPrice = Convert.ToInt32(reader["f_unitprice"]);
-                            productInfo.ProductQtn = Convert.ToInt32(reader["f_quantity"]);
+                            productInfo.ProductQtn = qtn;
                             productInfo.ProductTypeId = Convert.ToInt32(reader["f_typeId"]);
                             productInfo.ProductDetail = reader["f_detail"].ToString();
                             productInfo.ProductTypeName = reader["f_name"].ToString();
@@ -125,6 +127,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                logger.Error(ex);
                 throw ex.GetBaseException();
             }
             finally
@@ -193,6 +196,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
+                    logger.Error(ex);
                     throw ex.GetBaseException();
                 }
                 finally

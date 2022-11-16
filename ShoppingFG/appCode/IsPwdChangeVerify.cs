@@ -10,11 +10,14 @@ using System.Web.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ShoppingFG.models;
+using NLog;
 
 namespace ShoppingFG.appCode
 {
     public class IsPwdChangeVerify : System.Web.UI.Page
     {
+        public Logger logger = LogManager.GetLogger("myLogger");
+
         public enum ResultMsg
         {
             /// <summary>
@@ -74,6 +77,7 @@ namespace ShoppingFG.appCode
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                logger.Error(ex);
                 throw ex.GetBaseException();
             }
             finally

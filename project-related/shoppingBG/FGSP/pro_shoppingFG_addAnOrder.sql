@@ -65,7 +65,7 @@ SET f_quantity = f_quantity - QtnForBuy, f_updateTime = GETDATE() FROM @item WHE
 --將資料寫到訂單細項表格
 INSERT INTO t_orderItem(f_orderId, f_productId, f_productTitle, f_number, f_unitPrice)
 SELECT @@IDENTITY, TA.f_id, TA.f_title, TT.QtnForBuy, TT.UnitPrice FROM t_product AS TA RIGHT JOIN @item AS TT ON TA.f_id = TT.ProductId
-SELECT 5 AS result
+SELECT 5 AS result, f_id, f_title, f_unitprice, f_quantity FROM t_product AS TA LEFT JOIN @item AS TT ON TA.f_id = TT.ProductId WHERE f_unitprice != TT.UnitPrice AND f_quantity < TT.QtnForBuy
 
 END
 
