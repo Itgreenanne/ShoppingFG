@@ -11,12 +11,14 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ShoppingFG.models;
 using NLog;
+using NLog.Fluent;
 
 namespace ShoppingFG.ajax
 {
     public partial class AjaxProductPage : System.Web.UI.Page
     {
         public Logger logger = LogManager.GetLogger("myLogger");
+        public Logger orderLogger = LogManager.GetLogger("order");
 
         public enum ProductMsg {
             /// <summary>
@@ -341,12 +343,19 @@ namespace ShoppingFG.ajax
                     for (int j = 0; j < dt.Rows.Count; j++)
                     {
                         DataRow row = dt.Rows[j];
-                        if (dt.Columns.Count == 1)
+                        int messageNo = Convert.ToInt16(row.ItemArray[0]);
+                        if (messageNo == 5)
                         {
                             JObject dataToFront = new JObject();
-                            dataToFront.Add("messageNo", Convert.ToInt16(row.ItemArray[0]));
+                            dataToFront.Add("messageNo", messageNo);
+                            string orderNo = row.ItemArray[1].ToString();
+                            int productId = Convert.ToInt32(row.ItemArray[2]);
+                            int qtn = Convert.ToInt32(row.ItemArray[3]);
+                            int unitPrice = Convert.ToInt32(row.ItemArray[4]);
+                            orderLogger.Info("{orderNo}{productId}{qtn}{unitPrice}", orderNo, productId, qtn, unitPrice);
                             dataToFrontArray.Add(dataToFront);
-                        } else if(dt.Columns.Count == 5)
+                        }
+                        else if(messageNo == 1 || messageNo == 2 || messageNo == 3)
                         {
                             JObject dataToFront = new JObject();
                             dataToFront.Add("messageNo", Convert.ToInt16(row.ItemArray[0]));
@@ -354,10 +363,9 @@ namespace ShoppingFG.ajax
                             dataToFront.Add("productTitle", row.ItemArray[2].ToString());
                             dataToFront.Add("unitPrice", Convert.ToInt32(row.ItemArray[3]));
                             dataToFront.Add("productQtn", Convert.ToInt32(row.ItemArray[4]));
-                            dataToFrontArray.Add(dataToFront);
-                           
+                            dataToFrontArray.Add(dataToFront);                           
                         }
-                        else if (dt.Columns.Count == 2)
+                        else if (messageNo == 4)
                         {
                             JObject dataToFront = new JObject();
                             dataToFront.Add("messageNo", Convert.ToInt16(row.ItemArray[0]));
@@ -365,7 +373,6 @@ namespace ShoppingFG.ajax
                             dataToFrontArray.Add(dataToFront);                           
                         }
                     }
-
                 }
                 Response.Write(dataToFrontArray);
               

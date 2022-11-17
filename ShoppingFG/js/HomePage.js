@@ -2,8 +2,35 @@
 var productInfoGlobal;
 var memberInfo;
 
+window.onerror = (msg, url, row, col) => {
+
+    var filename = url.slice(23);
+    console.log({ msg, url, row, col});
+    $.ajax({
+        url: '/ajax/AjaxHomePage.aspx?fn=WriteLog',
+        type: 'POST',
+        data: {
+            getMsg: msg,
+            getFilename: filename,
+            getRow: row,
+            getCol: col
+        },
+    });
+};
+
+//window.addEventListener('error', (e) => {
+//    WriteLog();
+//    console.log(e);
+//}, true);
+
+////將錯誤訊息寫到後端日誌裡
+//function WriteLog(e) {
+    
+// 
+//}
+
 //讀取所有產品資訊並列印在產品div
-function GetAllProduct() {
+function GetAllProduct() {    
     $.ajax({
         url: '/ajax/AjaxHomePage.aspx?fn=LoginVerifyAndGetAllProduct',
         type: 'POST',
@@ -44,7 +71,6 @@ function addKeyValue(obj, key, data) {
 function SortProduct() {
     $('#productMessage').text('');
     var keyWord = $('#searchBar').val();
-
     if (!keyWord) {
         GetAllProduct();
     } else if (keyWord.length > 100) {
@@ -54,7 +80,7 @@ function SortProduct() {
             url: '/ajax/AjaxHomePage.aspx?fn=GetSearchProduct',
             type: 'POST',
             data: {
-                getProductTitle: keyWord,
+                getProductTitle: keyWord1,
             },
             success: function (data) {
                 if (data) {
@@ -88,7 +114,7 @@ function SortProduct() {
 
 setInterval(StatusVerify, 3000);
 
-//讀取DB資玖比較密碼是否被改變，是的話就強制會員登出
+//讀取DB資料比較密碼是否被改變，是的話就強制會員登出
 function StatusVerify() {
     if (!sessionBool) {
         $.ajax({

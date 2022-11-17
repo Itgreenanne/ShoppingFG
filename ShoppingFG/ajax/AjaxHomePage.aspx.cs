@@ -11,13 +11,15 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ShoppingFG.models;
 using NLog;
-
+using NLog.Fluent;
 
 namespace ShoppingFG.ajax
 {
     public partial class AjaxHomePage : System.Web.UI.Page
     {
         private Logger logger = LogManager.GetLogger("myLogger");
+        private Logger fLogger = LogManager.GetLogger("fLogger");
+
         public enum ProductMsg
         {
             /// <summary>
@@ -75,6 +77,9 @@ namespace ShoppingFG.ajax
                     break;
                 case "GetSearchProduct":
                     GetSearchProduct();
+                    break;
+                case "WriteLog":
+                    WriteLog();
                     break;
             }
         }
@@ -205,6 +210,22 @@ namespace ShoppingFG.ajax
                     conn.Dispose();
                 }
             }
+        }
+
+        /// <summary>
+        /// 將前端傳入的錯誤訊息寫到日詩裡
+        /// </summary>
+        private void WriteLog()
+        {
+            string filename = Request.Form["getFilename"];
+            string row = Request.Form["getRow"];
+            string col = Request.Form["getCol"];
+            string msg = Request.Form["getMsg"];
+            fLogger.Error("{filename}{row}{col}{msg}", filename, row, col, msg);
+            //theEvent.Properties["來源"] = filename;
+            //theEvent.Properties["列數"] = row;
+            //theEvent.Properties["行數"] = col;
+            //theEvent.Properties["錯誤訊息"] = msg;
         }
     }
 }
