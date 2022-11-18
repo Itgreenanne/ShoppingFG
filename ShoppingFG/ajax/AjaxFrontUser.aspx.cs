@@ -155,7 +155,6 @@ namespace ShoppingFG.ajax
                 {
                     Console.WriteLine(ex);
                     logger.Error(ex);
-                    throw ex.GetBaseException();
                 }
                 finally
                 {
@@ -265,7 +264,6 @@ namespace ShoppingFG.ajax
                 {
                     Console.WriteLine(ex);
                     logger.Error(ex);
-                    throw ex.GetBaseException();
                 }
                 finally
                 {
@@ -347,7 +345,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    throw ex.GetBaseException();
+                    logger.Error(ex);
                 }
                 finally
                 {

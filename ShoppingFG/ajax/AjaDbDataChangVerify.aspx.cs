@@ -10,11 +10,14 @@ using System.Web.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ShoppingFG.models;
+using NLog;
 
 namespace ShoppingFG.ajax
 {
     public partial class AjaDbDataChangVerify : System.Web.UI.Page
     {
+        public Logger logger = LogManager.GetLogger("myLogger");
+
         /// <summary>
         /// 回傳sesson與讀取DB比較後的結果訊息
         /// </summary>
@@ -90,7 +93,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                throw ex.GetBaseException();
+                logger.Error(ex);
             }
             finally
             {
