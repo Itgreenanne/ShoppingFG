@@ -92,10 +92,10 @@ namespace ShoppingFG.ajax
         /// </summary>
         private void LoginVerify()
         {
-            //Logger logger = LogManager.GetCurrentClassLogger();
             MsgType msgValue = MsgType.WrongLogin;
             string apiGetId = Request.Form["getId"];
             string apiGetPwd = Request.Form["getPwd"];
+            UserInfo userInfo = new UserInfo();
 
             //後端空字串驗証
             if (string.IsNullOrEmpty(apiGetId) || string.IsNullOrEmpty(apiGetPwd))
@@ -129,7 +129,6 @@ namespace ShoppingFG.ajax
                     cmd.Parameters.Add(new SqlParameter("@idNo", apiGetId));
                     cmd.Parameters.Add(new SqlParameter("@pwd", apiGetPwd));
                     SqlDataReader reader = cmd.ExecuteReader();
-                    UserInfo userInfo = new UserInfo();
                     LogEventInfo theEvent = new LogEventInfo();
                     if (reader.HasRows)
                     {
@@ -145,6 +144,7 @@ namespace ShoppingFG.ajax
                             userInfo.Phone = reader["f_phone"].ToString();
                             userInfo.Points = Convert.ToInt32(reader["f_points"]);
                             userInfo.Level = Convert.ToInt16(reader["f_level"]);
+                            userInfo.Ip = GetIp();
                         }
                         Session["userInfo"] = userInfo;
                     }
@@ -153,7 +153,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error(ex);
+                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
                 }
                 finally
                 {
@@ -168,6 +168,7 @@ namespace ShoppingFG.ajax
         /// </summary>
         private void AddMember()
         {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             MsgType msgValue = MsgType.WrongConnection;
             string idNo = Request.Form["getidNo"];
             string tel = Request.Form["getTel"];
@@ -264,7 +265,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error(ex);
+                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
                 }
                 finally
                 {
@@ -272,6 +273,21 @@ namespace ShoppingFG.ajax
                     conn.Dispose();
                 }
             }
+        }
+
+        /// <summary>
+        /// 取得用戶端的ip
+        /// </summary>
+        /// <returns></returns>
+        public string GetIp()
+        {
+            string ip =
+            HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            }
+            return ip;
         }
     }
 }

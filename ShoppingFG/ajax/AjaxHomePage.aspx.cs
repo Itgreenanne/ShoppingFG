@@ -132,7 +132,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error(ex);
+                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
             }
             finally
             {
@@ -146,6 +146,7 @@ namespace ShoppingFG.ajax
         /// </summary>
         private void GetSearchProduct()
         {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             ProductMsg msgValue = ProductMsg.WrongConnection;
             string apiProductTitle = Request.Form["getProductTitle"];
 
@@ -200,7 +201,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error(ex);
+                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
                 }
                 finally
                 {
@@ -219,11 +220,16 @@ namespace ShoppingFG.ajax
             string row = Request.Form["getRow"];
             string col = Request.Form["getCol"];
             string msg = Request.Form["getMsg"];
-            fLogger.Error("{filename}{row}{col}{msg}", filename, row, col, msg);
+            string localTime = Request.Form["getTime"];
+            string browserName = Request.Form["getBrowserName"];
+            string device = Request.Form["getDevice"];
+            fLogger.Error("{filename}{row}{col}{msg}{localTime}{browser}{deviceOs}", filename, row, col, msg, localTime, browserName, device);
             //theEvent.Properties["來源"] = filename;
             //theEvent.Properties["列數"] = row;
             //theEvent.Properties["行數"] = col;
             //theEvent.Properties["錯誤訊息"] = msg;
         }
+
+    
     }
 }

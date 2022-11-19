@@ -18,7 +18,7 @@ namespace ShoppingFG.ajax
     public partial class AjaxProductPage : System.Web.UI.Page
     {
         public Logger logger = LogManager.GetLogger("myLogger");
-        public Logger orderLogger = LogManager.GetLogger("order");
+        public Logger orderLogger = LogManager.GetLogger("orderAfterDB");
 
         public enum ProductMsg {
             /// <summary>
@@ -57,6 +57,8 @@ namespace ShoppingFG.ajax
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
+
             string fnselected = Request.QueryString["fn"];
             switch (fnselected) {
                 case "SearchProductByIdAndLoginVerify":
@@ -137,7 +139,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error(ex);
+                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
                 }
                 finally
                 {
@@ -150,8 +152,8 @@ namespace ShoppingFG.ajax
         /// <summary>
         /// 購物車用產品id從DB讀取產品資訊
         /// </summary>
-        private void SearchProductByIdForCart()
-        {
+        private void SearchProductByIdForCart()        {
+            
             UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             string cartItem = Request.Form["getIdArray"];
             JArray itemId = JArray.Parse(cartItem);
@@ -223,7 +225,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error(ex);
+                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
             }
             finally
             {
@@ -238,6 +240,7 @@ namespace ShoppingFG.ajax
         /// </summary>
         private void AddOrder()
         {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             string idNo = Request.Form["getMemberIdNo"];
             string orderItem = Request.Form["getItemArray"];
             JArray itemArray = JArray.Parse(orderItem);
@@ -378,7 +381,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error(ex);
+                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
             }
             finally
             {

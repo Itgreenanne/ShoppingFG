@@ -44,6 +44,10 @@ namespace ShoppingFG.models
         /// </summary>
         public int Level { get; set; }
         /// <summary>
+        /// 會員ip
+        /// </summary>
+        public string Ip { get; set; }
+        /// <summary>
         /// 是否新增會員成功
         /// </summary>
         public int Result { get; set; }

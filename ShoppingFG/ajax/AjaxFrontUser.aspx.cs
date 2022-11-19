@@ -103,6 +103,7 @@ namespace ShoppingFG.ajax
         /// 會員修改視窗中用來搜尋選中會員的資料
         /// </summary>     
         private void GetSearchMemberById() {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             MsgType msgValue = MsgType.WrongConnection;
             int apiMemberId = 0;
             bool idIsConvToInt = int.TryParse(Request.Form["getMemberId"], out apiMemberId);
@@ -154,7 +155,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error(ex);
+                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
                 }
                 finally
                 {
@@ -168,6 +169,7 @@ namespace ShoppingFG.ajax
         /// 帳號設定修改
         /// </summary>
         private void ModifyMember() {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             MsgType msgValue = MsgType.WrongConnection;
             string tel = Request.Form["getTel"];
             string pwd = Request.Form["getPwd"];
@@ -263,7 +265,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error(ex);
+                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
                 }
                 finally
                 {
@@ -273,11 +275,11 @@ namespace ShoppingFG.ajax
             }
         }
 
-
         /// <summary>
         /// 讀取此會員所有訂單
         /// </summary>
         private void GetOrder() {
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             int memberId = 0;
             bool idIsInt = int.TryParse(Request.Form["getMemberId"].ToString(), out memberId);
             MsgType msgValue = new MsgType();
@@ -345,7 +347,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error(ex);
+                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
                 }
                 finally
                 {

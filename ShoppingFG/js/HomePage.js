@@ -5,7 +5,11 @@ var memberInfo;
 window.onerror = (msg, url, row, col) => {
 
     var filename = url.slice(23);
-    console.log({ msg, url, row, col});
+    var localTime = new Date();
+    console.log(platform.os);
+    var device = platform.os.family + platform.os.version;
+    console.log(device);
+    
     $.ajax({
         url: '/ajax/AjaxHomePage.aspx?fn=WriteLog',
         type: 'POST',
@@ -13,7 +17,10 @@ window.onerror = (msg, url, row, col) => {
             getMsg: msg,
             getFilename: filename,
             getRow: row,
-            getCol: col
+            getCol: col,
+            getTime: localTime,
+            getBrowserName: platform.name,
+            getDevice: device
         },
     });
 };
@@ -30,7 +37,8 @@ window.onerror = (msg, url, row, col) => {
 //}
 
 //讀取所有產品資訊並列印在產品div
-function GetAllProduct() {    
+function GetAllProduct() {
+    write();
     $.ajax({
         url: '/ajax/AjaxHomePage.aspx?fn=LoginVerifyAndGetAllProduct',
         type: 'POST',
@@ -80,7 +88,7 @@ function SortProduct() {
             url: '/ajax/AjaxHomePage.aspx?fn=GetSearchProduct',
             type: 'POST',
             data: {
-                getProductTitle: keyWord1,
+                getProductTitle: keyWord,
             },
             success: function (data) {
                 if (data) {

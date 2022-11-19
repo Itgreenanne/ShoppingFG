@@ -77,7 +77,7 @@ namespace ShoppingFG.appCode
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error(ex);
+                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
             }
             finally
             {
