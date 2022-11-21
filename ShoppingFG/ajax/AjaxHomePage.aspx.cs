@@ -17,7 +17,7 @@ namespace ShoppingFG.ajax
 {
     public partial class AjaxHomePage : System.Web.UI.Page
     {
-        private Logger logger = LogManager.GetLogger("myLogger");
+        WriteLog writeLog = new WriteLog();
         private Logger fLogger = LogManager.GetLogger("fLogger");
 
         public enum ProductMsg
@@ -78,8 +78,8 @@ namespace ShoppingFG.ajax
                 case "GetSearchProduct":
                     GetSearchProduct();
                     break;
-                case "WriteLog":
-                    WriteLog();
+                case "WriteFrontErrorLog":
+                    WriteFrontErrorLog();
                     break;
             }
         }
@@ -132,7 +132,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                writeLog.Bglogger(ex.Message);
             }
             finally
             {
@@ -164,7 +164,7 @@ namespace ShoppingFG.ajax
             {
                 string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;
                 SqlConnection conn = new SqlConnection(strConnString);
-                SqlCommand cmd = new SqlCommand("pro_shoppingFG_getSearchProduct", conn);
+                SqlCommand cmd = new SqlCommand("pro_shoppingFG_getSearchProduct2", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 conn.Open();
 
@@ -201,7 +201,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                    writeLog.Bglogger(ex.Message);
                 }
                 finally
                 {
@@ -214,7 +214,7 @@ namespace ShoppingFG.ajax
         /// <summary>
         /// 將前端傳入的錯誤訊息寫到日詩裡
         /// </summary>
-        private void WriteLog()
+        private void WriteFrontErrorLog()
         {
             string filename = Request.Form["getFilename"];
             string row = Request.Form["getRow"];
@@ -223,7 +223,15 @@ namespace ShoppingFG.ajax
             string localTime = Request.Form["getTime"];
             string browserName = Request.Form["getBrowserName"];
             string device = Request.Form["getDevice"];
-            fLogger.Error("{filename}{row}{col}{msg}{localTime}{browser}{deviceOs}", filename, row, col, msg, localTime, browserName, device);
+            UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
+            if (Session["userInfo"] != null)
+            {
+                fLogger.Error("{userId}{userIp}{filename}{row}{col}{msg}{localTime}{browser}{deviceOs}", userInfo.MemberId, userInfo.Ip, filename, row, col, msg, localTime, browserName, device);
+            }
+            else {
+                fLogger.Error("{filename}{row}{col}{msg}{localTime}{browser}{deviceOs}", filename, row, col, msg, localTime, browserName, device);
+
+            }
             //theEvent.Properties["來源"] = filename;
             //theEvent.Properties["列數"] = row;
             //theEvent.Properties["行數"] = col;

@@ -15,8 +15,7 @@ namespace ShoppingFG.ajax
 {
     public partial class AjaxLogin : System.Web.UI.Page
     {
-        private Logger logger = LogManager.GetLogger("myLogger");
-        //private static Logger myDblogger = LogManager.GetLogger("dbLogger");
+        WriteLog writeLog = new WriteLog();
 
         /// <summary>
         /// 回傳前端的訊息代號
@@ -153,7 +152,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                    writeLog.Bglogger(ex.Message);
                 }
                 finally
                 {
@@ -265,7 +264,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                    writeLog.Bglogger(ex.Message);
                 }
                 finally
                 {

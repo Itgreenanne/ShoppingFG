@@ -16,8 +16,7 @@ namespace ShoppingFG.appCode
 {
     public class IsPwdChangeVerify : System.Web.UI.Page
     {
-        public Logger logger = LogManager.GetLogger("myLogger");
-
+        ajax.WriteLog writeLog = new ajax.WriteLog();
         public enum ResultMsg
         {
             /// <summary>
@@ -77,7 +76,7 @@ namespace ShoppingFG.appCode
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                writeLog.Bglogger(ex.Message);
             }
             finally
             {

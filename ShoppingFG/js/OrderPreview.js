@@ -36,6 +36,9 @@ function PrintPriviewOrder() {
 function OrderConfirm() {
     var orderItemArray = [];
     var total = 0;
+    var localTime = new Date();
+    var device = platform.os.family + platform.os.version;
+    console.log("OrderConfirm()", localTime, device, platform.name);
 
     for (var i = 0; i < productInfoFromDB.length; i++) {
         var orderItem = {};
@@ -59,8 +62,12 @@ function OrderConfirm() {
             url: '/ajax/AjaxProductPage.aspx?fn=AddOrder',
             type: 'POST',
             data: {
+
                 getMemberIdNo: memberInfo.IdNo,
-                getItemArray: JSON.stringify(orderItemArray)
+                getItemArray: JSON.stringify(orderItemArray),
+                getTime: localTime,
+                getBrowserName: platform.name,
+                getDevice: device
             },
             success: function (data) {
                 var jsonResult = JSON.parse(data);

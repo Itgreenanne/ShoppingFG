@@ -201,6 +201,9 @@
     <Compile Include="ajax\AjaxProductPage.aspx.designer.cs">
       <DependentUpon>AjaxProductPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ajax\WriteLog.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="appCode\IsPwdChangeVerify.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

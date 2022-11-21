@@ -16,6 +16,7 @@ namespace ShoppingFG.ajax
 {
     public partial class AjaxFrontUser : IsPwdChangeVerify
     {
+        WriteLog writeLog = new WriteLog();
         public enum MsgType
         {
             /// <summary>
@@ -155,7 +156,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                    writeLog.Bglogger(ex.Message);
                 }
                 finally
                 {
@@ -265,7 +266,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                    writeLog.Bglogger(ex.Message);
                 }
                 finally
                 {
@@ -347,7 +348,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                    writeLog.Bglogger(ex.Message);
                 }
                 finally
                 {

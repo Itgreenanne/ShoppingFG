@@ -16,8 +16,7 @@ namespace ShoppingFG.ajax
 {
     public partial class AjaDbDataChangVerify : System.Web.UI.Page
     {
-        public Logger logger = LogManager.GetLogger("myLogger");
-
+        WriteLog writeLog = new WriteLog();
         /// <summary>
         /// 回傳sesson與讀取DB比較後的結果訊息
         /// </summary>
@@ -93,7 +92,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                writeLog.Bglogger(ex.Message);
             }
             finally
             {

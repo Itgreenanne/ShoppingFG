@@ -17,7 +17,8 @@ namespace ShoppingFG.ajax
 {
     public partial class AjaxProductPage : System.Web.UI.Page
     {
-        public Logger logger = LogManager.GetLogger("myLogger");
+        WriteLog writeLog = new WriteLog();
+        public Logger previewOrderLogger = LogManager.GetLogger("orderBeforeDB");
         public Logger orderLogger = LogManager.GetLogger("orderAfterDB");
 
         public enum ProductMsg {
@@ -139,7 +140,7 @@ namespace ShoppingFG.ajax
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                    writeLog.Bglogger(ex.Message);
                 }
                 finally
                 {
@@ -225,7 +226,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                writeLog.Bglogger(ex.Message);
             }
             finally
             {
@@ -243,6 +244,9 @@ namespace ShoppingFG.ajax
             UserInfo userInfo = Session["userInfo"] != null ? (UserInfo)Session["userInfo"] : null;
             string idNo = Request.Form["getMemberIdNo"];
             string orderItem = Request.Form["getItemArray"];
+            string localTime = Request.Form["getTime"];
+            string browserName = Request.Form["getBrowserName"];
+            string device = Request.Form["getDevice"];
             JArray itemArray = JArray.Parse(orderItem);
             ProductMsg msgValue = ProductMsg.WrongConnection;
             string tempIdString = "";
@@ -301,8 +305,9 @@ namespace ShoppingFG.ajax
                 itemRow["ProductId"] = tempProductId;
                 itemRow["QtnForBuy"] = tempQtnForBuy;
                 itemRow["UnitPrice"] = tempUnitPrice;
+                previewOrderLogger.Info("{browser}{deviceOs}{localTime}{userId}{userIp}{productId}{qtn}{unitPrice}", browserName, device, localTime, userInfo.MemberId, userInfo.Ip, tempProductId, tempQtnForBuy, tempUnitPrice);
                 items.Rows.Add(itemRow);
-            }
+            }          
 
             ///產生訂單代號
             Random rnd = new Random();
@@ -353,7 +358,7 @@ namespace ShoppingFG.ajax
                             int productId = Convert.ToInt32(row.ItemArray[2]);
                             int qtn = Convert.ToInt32(row.ItemArray[3]);
                             int unitPrice = Convert.ToInt32(row.ItemArray[4]);
-                            orderLogger.Info("{orderNo}{productId}{qtn}{unitPrice}", orderNo, productId, qtn, unitPrice);
+                            orderLogger.Info("{browser}{deviceOs}{localTime}{userId}{userIp}{orderNo}{productId}{qtn}{unitPrice}", browserName, device, localTime, userInfo.MemberId, userInfo.Ip, orderNo, productId, qtn, unitPrice);
                             dataToFrontArray.Add(dataToFront);
                         }
                         else if(messageNo == 1 || messageNo == 2 || messageNo == 3)
@@ -381,7 +386,7 @@ namespace ShoppingFG.ajax
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                logger.Error("{userId}{userIp}{errorMessage}", userInfo.MemberId, userInfo.Ip, ex.Message);
+                writeLog.Bglogger(ex.Message);
             }
             finally
             {

@@ -3,15 +3,16 @@ var productInfoGlobal;
 var memberInfo;
 
 window.onerror = (msg, url, row, col) => {
-
-    var filename = url.slice(23);
+    var a = document.createElement('a');
+    a.href = url;
+    var filename = a.pathname;
     var localTime = new Date();
     console.log(platform.os);
     var device = platform.os.family + platform.os.version;
     console.log(device);
     
     $.ajax({
-        url: '/ajax/AjaxHomePage.aspx?fn=WriteLog',
+        url: '/ajax/AjaxHomePage.aspx?fn=WriteFrontErrorLog',
         type: 'POST',
         data: {
             getMsg: msg,
@@ -38,7 +39,7 @@ window.onerror = (msg, url, row, col) => {
 
 //讀取所有產品資訊並列印在產品div
 function GetAllProduct() {
-    write();
+    Write();
     $.ajax({
         url: '/ajax/AjaxHomePage.aspx?fn=LoginVerifyAndGetAllProduct',
         type: 'POST',

@@ -19,6 +19,7 @@
 </head>
      <script src="/js/jquery-2.1.4.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.5/platform.min.js"></script>
      <script type="text/javascript" src="/js/HomePage.js"> </script>
      <script type="text/javascript" src="/js/ProductPage.js"> </script>
      <script type="text/javascript" src="/js/Login.js"> </script>
