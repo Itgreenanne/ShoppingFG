@@ -10,6 +10,7 @@ function ReadProductInfoFromDB(myCartItem) {
     var ItemAfterMap = ItemAfterParse.map(function (x) {
         return x.ProductId;
     });
+    console.log('ItemAfterMap', ItemAfterMap);
 
     $.ajax({
         url: '/ajax/AjaxProductPage.aspx?fn=SearchProductByIdForCart',

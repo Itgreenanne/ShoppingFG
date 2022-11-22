@@ -39,7 +39,6 @@ window.onerror = (msg, url, row, col) => {
 
 //讀取所有產品資訊並列印在產品div
 function GetAllProduct() {
-    Write();
     $.ajax({
         url: '/ajax/AjaxHomePage.aspx?fn=LoginVerifyAndGetAllProduct',
         type: 'POST',
