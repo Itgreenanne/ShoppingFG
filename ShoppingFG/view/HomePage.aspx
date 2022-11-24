@@ -112,7 +112,7 @@
                    <input type="date" class="signUpInputBirth" id="signUpInputBirth"/><br/>
                </div>
                <div class="regBox">
-                   <label for="signUpMail" class="labelSignUpMail">E-Mail： </label>
+                   <label for="signUpMail" class="labelSignUpMail">E-mail： </label>
                    <input type="text" class="signUpInputMail" id="signUpInputMail" autocomplete="off" onchange="EmailVerify(this)" oninput="NoSpaceKey('signUpInputMail')" value=""/><br/>
                 </div>
                <div class="regBox">
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     <div class="setBox">
-                        <label for="setInputMail" class="labelSetMail">E-Mail： </label>
+                        <label for="setInputMail" class="labelSetMail">E-mail： </label>
                         <input type="text" class="setInputMail" id="setInputMail" autocomplete="off"  onchange="MemberCenterEmailVerify(this)" oninput="NoSpaceKey('setInputMail')" value=""/><br/>
                     </div>
                     <div class="setBox">

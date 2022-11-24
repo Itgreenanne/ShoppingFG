@@ -172,7 +172,8 @@ namespace ShoppingFG.ajax
             string idNo = Request.Form["getidNo"];
             string tel = Request.Form["getTel"];
             string pwd = Request.Form["getPwd"];
-            string gender = Request.Form["getGender"];
+            int gender;
+            bool genderIsConToInt = int.TryParse(Request.Form["getGender"], out gender);
             string lastName = Request.Form["getLastName"];
             string firstName = Request.Form["getFirstname"];
             string birth = Request.Form["getBirth"];
@@ -181,8 +182,7 @@ namespace ShoppingFG.ajax
 
             //空字串驗証
             if (string.IsNullOrEmpty(idNo) || string.IsNullOrEmpty(tel)
-                || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(gender)
-                || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName)
+                || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName)
                 || string.IsNullOrEmpty(birth) || string.IsNullOrEmpty(mail)
                 )
             {

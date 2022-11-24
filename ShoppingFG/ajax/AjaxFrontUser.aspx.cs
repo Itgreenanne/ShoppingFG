@@ -174,7 +174,6 @@ namespace ShoppingFG.ajax
             MsgType msgValue = MsgType.WrongConnection;
             string tel = Request.Form["getTel"];
             string pwd = Request.Form["getPwd"];
-            string gender = Request.Form["getGender"];
             string lastName = Request.Form["getLastName"];
             string firstName = Request.Form["getFirstname"];
             string birth = Request.Form["getBirth"];
@@ -182,6 +181,8 @@ namespace ShoppingFG.ajax
             string address = Request.Form["getAddress"];
             int apiId = 0;
             bool idIsConvToInt = int.TryParse(Request.Form["getId"], out apiId);
+            int gender = 0;
+            bool genderIsConvToInt = int.TryParse(Request.Form["getGender"], out gender);
             int apiLevel = 0;
             bool levelIsConvToInt = int.TryParse(Request.Form["getLevel"], out apiLevel);
             int apiPoints = 0;
@@ -189,8 +190,7 @@ namespace ShoppingFG.ajax
 
 
             //空字串驗証
-            if (string.IsNullOrEmpty(tel) || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(gender)
-                || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName)
+            if (string.IsNullOrEmpty(tel) || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName)
                 || string.IsNullOrEmpty(birth) || string.IsNullOrEmpty(mail))
             {
                 msgValue = MsgType.NullEmptyInput;
@@ -220,7 +220,7 @@ namespace ShoppingFG.ajax
             {
                 msgValue = MsgType.MailTooLong;
                 Response.Write((int)msgValue);
-            }
+            }       
             else
             {
                 string strConnString = WebConfigurationManager.ConnectionStrings["shoppingBG"].ConnectionString;

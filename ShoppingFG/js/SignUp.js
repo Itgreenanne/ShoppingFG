@@ -37,7 +37,7 @@ function SignUp() {
                 getidNo: idNo,
                 getTel: tel,
                 getPwd: pwd,
-                getGender: gender,
+                getGender: Number(gender),
                 getLastName: lastName,
                 getFirstname: firstName,
                 getBirth: birth,
@@ -68,6 +68,8 @@ function SignUp() {
                             break;
                         case '9':
                             alert('email長度太長');
+                        case '10':
+                            alert('此身份証字號已被註冊');
                         default:
                             alert('資料錯誤');
                     }
