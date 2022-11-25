@@ -6,8 +6,8 @@ BEGIN
 
 INSERT INTO t_product(f_picturePath, f_title,f_unitprice, f_quantity, f_typeId, f_detail)
 VALUES( @productPic, @productTitle, @unitPrice, @qtn , @productTypeId, @detail)
-INSERT INTO t_operationRecord(f_userId, f_dataId, f_type, f_function, f_before, f_after )
-VALUES(@userId, IDENT_CURRENT ('t_product'), 3, 1,'', CONCAT('新增', @productTitle))
+INSERT INTO t_operationRecord(f_userId, f_type, f_function, f_before, f_after )
+VALUES(@userId, 3, 1,'', CONCAT('新增', @productTitle))
 SELECT 1 AS result
 
 END

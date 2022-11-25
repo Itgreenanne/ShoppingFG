@@ -111,7 +111,6 @@ CREATE TABLE t_operationRecord
 (
 	f_id INT IDENTITY(1,1) PRIMARY KEY  NOT NULL,
 	f_userId INT,
-	f_dataId INT, 
 	f_type TINYINT, 
 	f_function TINYINT, 
 	f_before NVARCHAR(4000), 

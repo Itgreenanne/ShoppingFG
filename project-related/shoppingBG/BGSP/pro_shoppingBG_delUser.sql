@@ -4,8 +4,8 @@ ALTER PROCEDURE pro_shoppingBG_delUser @currentUserId INT, @userId INT
 AS 
 BEGIN
 
-	INSERT INTO t_operationRecord(f_userId, f_dataId, f_type, f_function, f_before, f_after )
-	VALUES(@currentUserId, @userId, 2, 2,'', (SELECT CONCAT('„h³ý', f_account) FROM t_backendUser WHERE f_id=@userId ))
+	INSERT INTO t_operationRecord(f_userId, f_type, f_function, f_before, f_after )
+	VALUES(@currentUserId, 2, 2,'', (SELECT CONCAT('„h³ý', f_account) FROM t_backendUser WHERE f_id=@userId ))
 
 	DELETE FROM t_backendUser WHERE f_id=@userId
 
