@@ -10,8 +10,8 @@ BEGIN
 INSERT INTO t_duty(f_name,f_manageDuty,f_manageUser,f_manageProductType,f_manageProduct, f_manageOrder, f_manageRecord)
 VALUES(@dutyName, @mangDuty, @mangUser, @mangProType, @mangProduct, @mangOrder, @mangRecord)
 INSERT INTO t_operationRecord(f_userId, f_type, f_function, f_before, f_after )
-VALUES(@userId, 1, 1,'', CONCAT('dutyName: ', @dutyName, ', 職責管理: ', @mangDuty, ', 人員管理: ', @mangUser, ', 產品類別管理: ', @mangProType,
-', 產品管理: ', @mangProduct, ', 訂單管理: ', @mangOrder, ', 操作紀錄管理: ', @mangRecord))
+VALUES(@userId, 1, 1,'', (SELECT f_name AS dutyName, f_manageDuty AS mangDuty, f_manageUser AS mangUser, f_manageProductType AS mangProType,
+	f_manageProduct AS mangProduct, f_manageOrder AS mangOrder, f_manageRecord AS mangRecord FROM t_duty WHERE f_id= @@IDENTITY FOR JSON PATH, WITHOUT_ARRAY_WRAPPER))
 
 SELECT 1 AS result
 
