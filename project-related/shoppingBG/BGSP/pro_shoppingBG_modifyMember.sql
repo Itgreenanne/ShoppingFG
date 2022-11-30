@@ -5,8 +5,6 @@ ALTER PROCEDURE pro_shoppingBG_modifyMember @userId INT, @id INT, @tel CHAR(10),
 AS
 BEGIN
 
-
-
 UPDATE t_frontendUser WITH(ROWLOCK)
 SET f_firstname = @firstName, f_lastname = @lastName, f_gender = @gender, f_birthday = @birth, f_pwd = @pwd, f_mail = @mail, 
 f_phone = @tel, f_address = @address, f_points = @points, f_level = @level, f_updateTime = GETDATE()
