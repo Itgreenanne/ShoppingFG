@@ -6,7 +6,7 @@ BEGIN
 
 --將修改前資料儲存到before變數
 DECLARE @before NVARCHAR(4000)
-SET @before = (SELECT TA.f_account AS userAccount, TA.f_nickname AS userNickname, TA.f_pwd AS serPwd, TB.f_name AS dutyName FROM t_backendUser AS TA 
+SET @before = (SELECT TA.f_account AS userAccount, TA.f_nickname AS userNickname, TA.f_pwd AS userPwd, TB.f_name AS dutyName FROM t_backendUser AS TA 
 LEFT JOIN t_duty AS TB ON TA.f_typeId = TB.f_id WHERE TA.f_id= @userId FOR JSON PATH, WITHOUT_ARRAY_WRAPPER)
 
 UPDATE t_backendUser WITH(ROWLOCK)
